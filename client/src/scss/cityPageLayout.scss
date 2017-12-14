@@ -1,0 +1,36 @@
+.cityPage {
+  overflow: hidden;
+  .main {
+    .cityHeader {
+      margin: 2em;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      text-align: center;
+      .logo {
+        border-radius: 10px;
+        height: 100px;
+        width: 200px;
+        float: left;
+        margin-bottom: 10px; 
+      }
+      .headerTitle {
+        width: 80%;
+        padding-top: 40px;
+        padding-left: 20px;
+        font-family: fantasy;
+      }
+    }
+    .cityNav {
+      margin: 2em;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+    }
+    .cityContent {
+      margin: 2em;
+    }
+  }
+}

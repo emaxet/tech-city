@@ -1,0 +1,75 @@
+.nav-item {
+  margin: 10px;
+}
+
+.active {
+  background-color: lightblue;
+}
+
+.city-box {
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+.city-link {
+  background-color: #ffffff;
+  position: relative;
+  display: block;
+  max-width: 400px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.city-link img {
+  height: 150px;
+  margin: auto;
+  display: block;
+}
+
+.city-hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: all ease 0.5s;
+  opacity: 0;
+  background: rgba(20, 23, 25, 0.9);
+}
+
+.city-link .city-hover:hover {
+  opacity: 1;
+}
+
+.city-link .city-hover .city-hover-content {
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 20px;
+  margin-top: -12px;
+  text-align: center;
+  color: white;
+}
+
+.city-link .city-hover .city-hover-content i {
+  margin-top: -12px;
+}
+
+.city-caption {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 25px;
+  text-align: center;
+  background-color: #fff;
+  text-decoration: none;
+}
+
+.city-caption h4 {
+  margin: 0;
+  text-transform: none;
+}
+
+.city-caption p {
+  font-size: 16px;
+  font-style: italic;
+  margin: 0;
+}
