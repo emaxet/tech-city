@@ -20,10 +20,10 @@ export const MainNavbar = (props) => {
               <NavLink exact to="/city" activeClassName="active">City</NavLink>
             </NavItem>
             <NavItem>
-              <a href="">Login</a>
+              <NavLink exact to="/login" activeClassName="active">Login</NavLink>
             </NavItem>
             <NavItem>
-              <a href="">Register</a>
+              <NavLink exact to="/register" activeClassName="active">Register</NavLink>
             </NavItem>
           </Nav>
       </Navbar>
