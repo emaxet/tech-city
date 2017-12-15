@@ -41,7 +41,7 @@ class Events extends Component {
             <Eventlist />
             <Eventlist />
             <Eventlist />
-            </div>
+          </div>
         </Collapse>    
       </div>
     );

@@ -1,13 +1,13 @@
 .event {
   text-align: center;
   width: 100%;
-  margin: auto;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: black;
+  height: 100%;
   .eventNav {
     border-collapse: collapse;
-    margin: 2em auto;
     table {
+      margin: 1em 0;
       text-align: left;
       width: 100%;
     }
@@ -32,25 +32,52 @@
     }
   }
   .eventItem {
-    margin: 2em auto;
-    padding: 0 10px;
-    width: 100%;
+    margin: 2em 0;
+    border: 5px solid lightblue;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
     img {
-      height: 100px;
-      width: 100px;
-      float: left;
+      height: 50%;
+      width: 50%
+    }
+    i {
+      float: right;
+      padding: 0 10px;
+    }
+    .panel-body {
+      border-top: 5px solid lightblue;
+      padding: 10px;
+      text-align: left;
+      align-content: center;
+      .panel-footer {
+        padding: 10px;
+        border-top: 5px solid lightblue;
+      }
     }
   }
 }
 
 @media screen and (min-width: 560px) {
   .event {
-    margin: 2em;
-    .eventNav {
-      margin: 2em;
-    }
+    padding: 0 5em;
     .eventItem {
-      margin: 2em;
+      img {
+        float: left;
+        height: 100px;
+        width: 100px;
+      }
+      .panel {
+        h2 {
+          margin-left: 2em;
+        }
+        .panel-body {
+          margin-top: 1em;
+          float: right;
+          text-align: left;
+          align-content: center;
+        }
+      }
     }
   }
 }

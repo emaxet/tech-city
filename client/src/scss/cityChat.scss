@@ -1,0 +1,13 @@
+.cityChat {
+  .inputBar {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 560px) {
+  .cityChat {
+    .inputBar {
+      padding: 0 5em;
+    }
+  }
+}
