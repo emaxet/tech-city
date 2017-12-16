@@ -16,7 +16,7 @@ DB_PORT=5432
 
 6. npm start to boot up app.
 
-7. Send a get request to localhost:3001/hello.
+7. Send a get request to localhost:5000/api/v1/users
 
 8. Check to make sure that the server responds with a JSON object containing two cities (Vancouver and Mountainview).
 
