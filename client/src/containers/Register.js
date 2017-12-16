@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 export default class Register extends React.Component {
@@ -6,7 +7,8 @@ export default class Register extends React.Component {
     super(props);
     this.state = {
       username: '',
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -15,16 +17,48 @@ export default class Register extends React.Component {
       bio: '',
       loggedIn: false
     };
+    this.validateForm = this.validateForm.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   validateForm() {
     return (
       this.state.username.length > 0 &&
       this.state.email.length > 0 &&
-      this.state.password.length >= 6 &&
+      this.state.password.length > 0 &&
       this.state.password === this.state.confirmPassword
-    );
+    )
   }
+
+  handleSubmit(e){
+    e.preventDefault();
+    const URL = "http://localhost:4000/api/v1/users/";
+    if(this.validateForm()) {
+      const payload = {
+        username: this.state.username,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password,
+        city: this.state.city,
+        // pic: this.state.pic,
+        bio: this.state.bio,
+        role_id: 1
+      }
+      axios.post(URL, payload)
+      .then(function (response) {
+        console.log(response);
+        if(response.data.code === 200){
+          console.log("registration successfull");
+          this.setState({loggedIn:true})
+        }
+      })
+    }
+    else {
+      alert("wrong")
+    }
+  }
+
 
   render() {
     console.log(this.state)
@@ -39,10 +73,15 @@ export default class Register extends React.Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="registerName" sm={2}>Name</Label>
-            <Col sm={10}>
-              <Input type="text" name="name" id="registerName" placeholder="Name"
-                      onKeyPress={e => this.setState({name: e.target.value})} />
+            <Label for="registerName" sm={2}>First Name</Label>
+            <Col sm={4}>
+              <Input type="text" name="firstName" id="registerFirstName" placeholder="First Name"
+                      onKeyPress={e => this.setState({firstName: e.target.value})} />
+            </Col>
+            <Label for="registerName" sm={2} className="text-center">Last Name</Label>
+            <Col sm={4}>
+              <Input type="text" name="lastName" id="registerLastName" placeholder="Last Name"
+                      onKeyPress={e => this.setState({lastName: e.target.value})} />
             </Col>
           </FormGroup>
           <FormGroup row>
@@ -60,7 +99,7 @@ export default class Register extends React.Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="registerConfirmPassword" sm={2}>Confirm Your Password*</Label>
+            <Label for="registerConfirmPassword" sm={2}>Confirm Password*</Label>
             <Col sm={10}>
               <Input type="password" name="confirmPassword" id="registerConfirmPassword" placeholder="Password" required
                       onKeyPress={e => this.setState({confirmPassword: e.target.value})} />
@@ -79,7 +118,7 @@ export default class Register extends React.Component {
           <FormGroup row>
             <Label for="registerPic" sm={2}>Profile Image</Label>
             <Col sm={10}>
-              <Input type="file" name="pic" id="registerPic" onKeyPress={e => this.setState({confirmPassword: e.target.value})} />
+              <Input type="file" name="pic" id="registerPic" onChange={e => this.setState({pic: e.target.value})} />
               <FormText color="muted">
                 example lalalalala
               </FormText>

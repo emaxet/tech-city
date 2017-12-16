@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Container, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default class Register extends React.Component {
   constructor(props) {
