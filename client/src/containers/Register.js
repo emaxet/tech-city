@@ -7,8 +7,8 @@ export default class Register extends React.Component {
     super(props);
     this.state = {
       username: '',
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -36,8 +36,8 @@ export default class Register extends React.Component {
     if(this.validateForm()) {
       const payload = {
         username: this.state.username,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
         email: this.state.email,
         password: this.state.password,
         city: this.state.city,
@@ -50,6 +50,7 @@ export default class Register extends React.Component {
         console.log(response);
         if(response.data.code === 200){
           console.log("registration successfull");
+
           this.setState({loggedIn:true})
         }
       })
@@ -75,13 +76,13 @@ export default class Register extends React.Component {
           <FormGroup row>
             <Label for="registerName" sm={2}>First Name</Label>
             <Col sm={4}>
-              <Input type="text" name="firstName" id="registerFirstName" placeholder="First Name"
-                      onKeyPress={e => this.setState({firstName: e.target.value})} />
+              <Input type="text" name="first_name" id="registerFirstName" placeholder="First Name"
+                      onKeyPress={e => this.setState({first_name: e.target.value})} />
             </Col>
             <Label for="registerName" sm={2} className="text-center">Last Name</Label>
             <Col sm={4}>
-              <Input type="text" name="lastName" id="registerLastName" placeholder="Last Name"
-                      onKeyPress={e => this.setState({lastName: e.target.value})} />
+              <Input type="text" name="last_name" id="registerLastName" placeholder="Last Name"
+                      onKeyPress={e => this.setState({last_name: e.target.value})} />
             </Col>
           </FormGroup>
           <FormGroup row>

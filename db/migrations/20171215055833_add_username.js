@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     knex.schema.table('users', (table) => {
       table.string('username');
     })
-  ])
+  ]);
 };
 
 exports.down = function(knex, Promise) {
@@ -12,5 +12,5 @@ exports.down = function(knex, Promise) {
     knex.schema.table('users', (table) => {
       table.dropColumn('username');
     })
-  ])
+  ]);
 };
