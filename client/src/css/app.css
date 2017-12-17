@@ -1206,3 +1206,16 @@
 @media screen and (min-width: 560px) {
   .cityChat .inputBar {
     padding: 0 5em; } }
+
+.registerTitle {
+  margin: 2%;
+  font-size: 2.5em; }
+
+.registerForm {
+  max-width: 900px;
+  border: 2px solid black;
+  padding: 30px 20px 0 20px; }
+  .registerForm .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 10px; }

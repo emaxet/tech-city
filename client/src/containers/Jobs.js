@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 import {JobBox} from '../components/JobBox'
 
 class Jobs extends Component {
+
   render() {
     const buttonStyle = {
       'text-align': 'center'
