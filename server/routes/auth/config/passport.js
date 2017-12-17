@@ -25,7 +25,7 @@ module.exports = (knex, passport) => {
     },
 
     (req, email, password, done) => {
-      console.log(req.body)
+      console.log(req.body);
       process.nextTick(() => {
 
         authHelpers.findUserByEmail(email, (user) => {

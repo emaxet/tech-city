@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { userRegistration } from '../actions/registrationActions';
 import { MainNavbar } from '../components/MainNavbar';
-import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { addFlashMessage } from '../actions/flashMessages';
+
 
 class Register extends React.Component {
   constructor(props) {
@@ -53,7 +55,13 @@ class Register extends React.Component {
       errors: {}
     }
     this.props.userRegistration(payload).then(
-      () => {},
+      () => {
+        this.props.addFlashMessage({
+          type: 'success',
+          text: 'You are logged in! Welcome!'
+        })
+        this.props.history.push('/');
+      },
       (err) => this.setState({ errors: err.response.data })
     )
   }
@@ -148,4 +156,4 @@ class Register extends React.Component {
 //   userRegistration: React.PropTypes.func.isRequired
 // }
 
-export default connect(null, { userRegistration }) (Register);
+export default connect(null, { userRegistration, addFlashMessage })(Register);
