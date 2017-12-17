@@ -4,6 +4,7 @@ import {JobBox} from '../components/JobBox'
 
 
 class Jobs extends Component {
+
   render() {
     return (
       <div>

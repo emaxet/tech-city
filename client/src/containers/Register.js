@@ -1,8 +1,10 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { userRegistration } from '../actions/registrationActions';
+import { MainNavbar } from '../components/MainNavbar';
 import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
-export default class Register extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,8 +19,13 @@ export default class Register extends React.Component {
       bio: '',
       loggedIn: false
     };
+    this.onChange = this.onChange.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value});
   }
 
   validateForm() {
@@ -30,113 +37,115 @@ export default class Register extends React.Component {
     )
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
+    this.setState({ errors: {} });
     e.preventDefault();
-    const URL = "http://localhost:4000/api/v1/users/";
-    if(this.validateForm()) {
-      const payload = {
-        username: this.state.username,
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        email: this.state.email,
-        password: this.state.password,
-        city: this.state.city,
-        // pic: this.state.pic,
-        bio: this.state.bio,
-        role_id: 1
-      }
-      axios.post(URL, payload)
-      .then(function (response) {
-        console.log(response);
-        if(response.data.code === 200){
-          console.log("registration successfull");
-
-          this.setState({loggedIn:true})
-        }
-      })
+    const payload = {
+      username: this.state.username,
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      email: this.state.email,
+      password: this.state.password,
+      city: this.state.city,
+      // pic: this.state.pic,
+      bio: this.state.bio,
+      role_id: 1,
+      errors: {}
     }
-    else {
-      alert("wrong")
-    }
+    this.props.userRegistration(payload).then(
+      () => {},
+      (err) => this.setState({ errors: err.response.data })
+    )
   }
 
 
   render() {
-    console.log(this.state)
+    // const {errors} = this.state;
+    console.log(this.state);
     return (
-      <Container>
-        <Form className="registerForm" onSubmit={this.handleSubmit}>
-          <FormGroup row>
-            <Label for="registerUsername" sm={2}>Username*</Label>
-            <Col sm={10}>
-              <Input type="text" name="username" id="registerUsername" placeholder="Username" required
-                      onKeyPress={e => this.setState({username: e.target.value})} />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="registerName" sm={2}>First Name</Label>
-            <Col sm={4}>
-              <Input type="text" name="first_name" id="registerFirstName" placeholder="First Name"
-                      onKeyPress={e => this.setState({first_name: e.target.value})} />
-            </Col>
-            <Label for="registerName" sm={2} className="text-center">Last Name</Label>
-            <Col sm={4}>
-              <Input type="text" name="last_name" id="registerLastName" placeholder="Last Name"
-                      onKeyPress={e => this.setState({last_name: e.target.value})} />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="registerEmail" sm={2}>Email*</Label>
-            <Col sm={10}>
-              <Input type="email" name="email" id="registerEmail" placeholder="Email" required
-                      onKeyPress={e => this.setState({email: e.target.value})} />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="registerPassword" sm={2}>Password*</Label>
-            <Col sm={10}>
-              <Input type="password" name="password" id="registerPassword" placeholder="Password" required
-                      onKeyPress={e => this.setState({password: e.target.value})} />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="registerConfirmPassword" sm={2}>Confirm Password*</Label>
-            <Col sm={10}>
-              <Input type="password" name="confirmPassword" id="registerConfirmPassword" placeholder="Password" required
-                      onKeyPress={e => this.setState({confirmPassword: e.target.value})} />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="registerCity" sm={2}>City*</Label>
-            <Col sm={10}>
-              <Input type="select" name="city" id="registerCity" onChange={e => this.setState({city: e.target.value})}>
-                <option>Vancouver</option>
-                <option>Toronto</option>
-                <option>Seattle</option>
-              </Input>
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="registerPic" sm={2}>Profile Image</Label>
-            <Col sm={10}>
-              <Input type="file" name="pic" id="registerPic" onChange={e => this.setState({pic: e.target.value})} />
-              <FormText color="muted">
-                example lalalalala
-              </FormText>
-            </Col>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleText">Bio</Label>
-            <Input type="textarea" name="text" id="exampleText" placeholder="Tell the community about yourself."
-                    onKeyPress={e => this.setState({bio: e.target.value})} />
-          </FormGroup>
-          <FormGroup row>
-            <Col sm={{ size: 10, offset: 2 }}>
-              <Button type="submit">Submit</Button>
-            </Col>
-          </FormGroup>
-        </Form>
-      </Container>
+      <div>
+        <MainNavbar />
+        <h2 className="registerTitle text-center">Register</h2>
+        <Container className="registerForm">
+          <Form onSubmit={this.handleSubmit}>
+            <FormGroup row>
+              <Label for="registerUsername" sm={2}>Username*</Label>
+              <Col sm={10}>
+                <Input type="text" name="username" id="registerUsername" placeholder="Username" required
+                        onChange={this.onChange} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="registerName" sm={2}>First Name</Label>
+              <Col sm={4}>
+                <Input type="text" name="first_name" id="registerFirstName" placeholder="First Name"
+                        onChange={this.onChange} />
+              </Col>
+              <Label for="registerName" sm={2}>Last Name</Label>
+              <Col sm={4}>
+                <Input type="text" name="last_name" id="registerLastName" placeholder="Last Name"
+                        onChange={this.onChange} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="registerEmail" sm={2}>Email*</Label>
+              <Col sm={10}>
+                <Input type="email" name="email" id="registerEmail" placeholder="Email" required
+                        onChange={this.onChange} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="registerPassword" sm={2}>Password*</Label>
+              <Col sm={10}>
+                <Input type="password" name="password" id="registerPassword" placeholder="Password" required
+                        onChange={this.onChange} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="registerConfirmPassword" sm={2}>Confirm Password*</Label>
+              <Col sm={10}>
+                <Input type="password" name="confirmPassword" id="registerConfirmPassword" placeholder="Password" required
+                        onChange={this.onChange} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="registerCity" sm={2}>City</Label>
+              <Col sm={10}>
+                <Input type="select" name="city" id="registerCity" onChange={this.onChange}>
+                  <option>Vancouver</option>
+                  <option>Toronto</option>
+                  <option>Seattle</option>
+                </Input>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="registerPic" sm={2}>Profile Image</Label>
+              <Col sm={10}>
+                <Input type="file" name="pic" id="registerPic" onChange={this.onChange} />
+                <FormText color="muted">
+                  example lalalalala
+                </FormText>
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Label for="exampleText">Bio</Label>
+              <Input type="textarea" name="text" id="exampleText" placeholder="Tell the community about yourself."
+                      onChange={this.onChange} />
+            </FormGroup>
+            <FormGroup row>
+              <Col className="text-center">
+                <Button type="submit">Submit</Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </Container>
+      </div>
     );
   }
 }
+
+// Register.propTypes = {
+//   userRegistration: React.PropTypes.func.isRequired
+// }
+
+export default connect(null, { userRegistration }) (Register);
