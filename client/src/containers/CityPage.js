@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { MainNavbar } from '../components/MainNavbar'
+import MainNavbar from './MainNavbar';
 import CityHeader from '../components/CityHeader';
 import CityNav from '../components/CityNav';
 import Events from './Events';
