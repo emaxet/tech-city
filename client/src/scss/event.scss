@@ -4,6 +4,7 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: black;
   height: 100%;
+  overflow: hidden;
   .eventNav {
     border-collapse: collapse;
     table {
@@ -35,23 +36,20 @@
     margin: 2em 0;
     border: 5px solid lightblue;
     border-radius: 10px;
-    overflow: hidden;
-    padding: 10px;
     img {
+      padding: 10px;
       height: 50%;
       width: 50%
     }
     i {
       float: right;
-      padding: 0 10px;
     }
     .panel-body {
       border-top: 5px solid lightblue;
-      padding: 10px;
       text-align: left;
       align-content: center;
+      overflow: hidden;
       .panel-footer {
-        padding: 10px;
         border-top: 5px solid lightblue;
       }
     }
@@ -73,7 +71,6 @@
         }
         .panel-body {
           margin-top: 1em;
-          float: right;
           text-align: left;
           align-content: center;
         }

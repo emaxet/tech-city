@@ -3,7 +3,8 @@
   width: 100%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: black;
-  height: 100%; }
+  height: 100%;
+  overflow: hidden; }
   .event .eventNav {
     border-collapse: collapse; }
     .event .eventNav table {
@@ -28,22 +29,19 @@
   .event .eventItem {
     margin: 2em 0;
     border: 5px solid lightblue;
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 10px; }
+    border-radius: 10px; }
     .event .eventItem img {
+      padding: 10px;
       height: 50%;
       width: 50%; }
     .event .eventItem i {
-      float: right;
-      padding: 0 10px; }
+      float: right; }
     .event .eventItem .panel-body {
       border-top: 5px solid lightblue;
-      padding: 10px;
       text-align: left;
-      align-content: center; }
+      align-content: center;
+      overflow: hidden; }
       .event .eventItem .panel-body .panel-footer {
-        padding: 10px;
         border-top: 5px solid lightblue; }
 
 @media screen and (min-width: 560px) {
@@ -57,6 +55,5 @@
       margin-left: 2em; }
     .event .eventItem .panel .panel-body {
       margin-top: 1em;
-      float: right;
       text-align: left;
       align-content: center; } }

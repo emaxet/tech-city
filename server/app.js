@@ -31,9 +31,9 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 app.use(session({
-    secret: process.env.SECRET_KEY,
-    resave: true,
-    saveUninitialized: true
+  secret: process.env.SECRET_KEY,
+  resave: true,
+  saveUninitialized: true
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Eventlist from '../components/Eventlist'
 import EventNav from '../components/EventNav'
 import { Collapse } from 'reactstrap';
+import axios from 'axios';
 
 class Events extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class Events extends Component {
     this.togglefilter = this.togglefilter.bind(this);
 
     this.state = {
-      'collapsed': false
+      'collapsed': false,
+      'eventlist': []
     };
   }
 
@@ -19,8 +21,23 @@ class Events extends Component {
       'collapsed': !this.state.collapsed
     });
   }
+
+  componentDidMount() {
+    axios.get('http://localhost:3000/api/v1/Vancouver/events')
+      .then((res) => {
+        this.setState({
+          'eventlist': res.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   
   render() {
+    const eventlist = this.state.eventlist.map((event, index) => {
+      return <Eventlist {...event} key={index}/>;
+    });
 
     return (
       <div className="event">
@@ -37,11 +54,7 @@ class Events extends Component {
         </Collapse>  
          
         <Collapse isOpen={!this.state.collapsed}> 
-          <div>
-            <Eventlist />
-            <Eventlist />
-            <Eventlist />
-          </div>
+            {eventlist}
         </Collapse>    
       </div>
     );

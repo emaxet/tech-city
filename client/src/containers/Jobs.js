@@ -6,7 +6,7 @@ class Jobs extends Component {
 
   render() {
     const buttonStyle = {
-      'text-align': 'center'
+      'textAlign': 'center'
     }
 
     return (
