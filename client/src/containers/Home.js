@@ -2,13 +2,14 @@ import React from 'react';
 import { Jumbotron, Container } from 'reactstrap';
 import { MainNavbar } from '../components/MainNavbar';
 import { CityBox } from '../components/CityBox';
+import FlashMessageList from './flash/FlashMessageList';
 
 export default class Home extends React.Component {
   render() {
     return (
       <div>
         <MainNavbar />
-
+        <FlashMessageList />
         <Jumbotron fluid>
           <Container className="text-center" fluid>
             <h1 className="display-3">TECH CITY BABY</h1>
