@@ -19,54 +19,54 @@ module.exports = (knex, passport) => {
   // LOCAL SIGNUP STRATEGY
 
   passport.use('local-signup', new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password',
-      passReqToCallback: true
-    },
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+  },
 
-    (req, email, password, done) => {
-      process.nextTick(() => {
+  (req, email, password, done) => {
+    process.nextTick(() => {
 
-        authHelpers.findUserByEmail(email, (user) => {
-          if (user.length) {
-            return done(null, false);
-          } else {
-            authHelpers.registerNewUser(req, (user) => {
-              done(null, user);
-            }, (err) => {
-              done(err, null);
-            });
-          }
-        }, (err) => {
-          done(err, null);
-        });
+      authHelpers.findUserByEmail(email, (user) => {
+        if (user.length) {
+          return done(null, false);
+        } else {
+          authHelpers.registerNewUser(req, (user) => {
+            done(null, user);
+          }, (err) => {
+            done(err, null);
+          });
+        }
+      }, (err) => {
+        done(err, null);
       });
-    }
+    });
+  }
   ));
 
   // LOCAL LOGIN STRATEGY
 
   passport.use('local-login', new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password',
-    },
+    usernameField: 'email',
+    passwordField: 'password'
+  },
 
-    (email, password, done) => {
+  (email, password, done) => {
 
-      authHelpers.findUserByEmail(email, (user) => {
-        console.log(user);
-        if (!user.length) {
-          return done(null, false);
-        }
-        if (authHelpers.validPassword(user, password)) {
-          return done(null, user);
-        }
+    authHelpers.findUserByEmail(email, (user) => {
+      console.log(user);
+      if (!user.length) {
         return done(null, false);
-      }, (err) => {
-        return done(err);
-      });
+      }
+      if (authHelpers.validPassword(user, password)) {
+        return done(null, user);
+      }
+      return done(null, false);
+    }, (err) => {
+      return done(err);
+    });
 
-    }
+  }
   ));
 
-}
+};
