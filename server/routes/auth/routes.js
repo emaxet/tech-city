@@ -10,8 +10,8 @@ module.exports = (knex, passport) => {
   passInit(knex, passport);
 
   router.post('/register', passport.authenticate('local-signup', {
-    successRedirect: '/',
-    failureRedirect: '/api/v1/users',
+    successRedirect: '/api/v1/users',
+    failureRedirect: '/',
     failureFlash: true
   }));
 
@@ -23,7 +23,7 @@ module.exports = (knex, passport) => {
 
   router.get('/logout', function (req, res){
     req.session.destroy(function (err) {
-      res.redirect('/'); //Inside a callback… bulletproof!
+      res.redirect('/api/v1/users');
     });
   });
 

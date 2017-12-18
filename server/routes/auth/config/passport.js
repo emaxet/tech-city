@@ -55,7 +55,6 @@ module.exports = (knex, passport) => {
     (email, password, done) => {
 
       authHelpers.findUserByEmail(email, (user) => {
-        console.log(user);
         if (!user.length) {
           return done(null, false);
         }

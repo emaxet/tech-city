@@ -42,9 +42,9 @@ app.use(passport.session());
 
 // mount routes
 
+app.use('/session', auth(knex, passport));
 app.use('/', index);
 app.use('/api/v1/users', users(knex));
-app.use('/session', auth(knex, passport));
 app.use('/api/v1', events(knex));
 app.use('/api/v1', jobs(knex));
 
