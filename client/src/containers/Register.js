@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { userRegistration } from '../actions/registrationActions';
-import { MainNavbar } from '../components/MainNavbar';
+import { userRegistration, doesValueExists } from '../actions/registrationActions';
+import MainNavbar from './MainNavbar';
 import { addFlashMessage } from '../actions/flashMessages';
 
 
@@ -30,6 +30,16 @@ class Register extends React.Component {
     this.setState({ [e.target.name]: e.target.value});
   }
 
+  // checkValueExists(e) {
+  //   const name = e.target.name;
+  //   const val = e.target.value;
+  //   if(val !== '') {
+  //     this.props.doesValueExists(val).then(res =>{
+
+  //     })
+  //   }
+  // }
+
   validateForm() {
     return (
       this.state.username.length > 0 &&
@@ -54,16 +64,18 @@ class Register extends React.Component {
       role_id: 1,
       errors: {}
     }
-    this.props.userRegistration(payload).then(
-      () => {
-        this.props.addFlashMessage({
-          type: 'success',
-          text: 'You are logged in! Welcome!'
-        })
-        this.props.history.push('/');
-      },
-      (err) => this.setState({ errors: err.response.data })
-    )
+    if(this.validateForm()){
+      this.props.userRegistration(payload).then(
+        () => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'You are logged in! Welcome!'
+          })
+          this.props.history.push('/');
+        },
+        (err) => this.setState({ errors: err.response.data })
+      )
+    }
   }
 
 
@@ -156,4 +168,4 @@ class Register extends React.Component {
 //   userRegistration: React.PropTypes.func.isRequired
 // }
 
-export default connect(null, { userRegistration, addFlashMessage })(Register);
+export default connect(null, { userRegistration, addFlashMessage, doesValueExists })(Register);

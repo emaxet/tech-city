@@ -1,18 +1,25 @@
 import React from 'react';
-import axios from 'axios';
-import { MainNavbar } from '../components/MainNavbar';
+import { connect } from 'react-redux';
+import { login } from '../actions/login'
+import MainNavbar from './MainNavbar';
 import { Container, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-export default class Register extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
+      errors: '',
       loggedIn: false
     };
+    this.onChange = this.onChange.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value});
   }
 
   validateForm() {
@@ -24,25 +31,14 @@ export default class Register extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    const URL = "http://localhost:3000/session/login"
-    if(this.validateForm()) {
-      const payload = {
-        email: this.state.email,
-        password: this.state.password
-      }
-      axios.post(URL, payload)
-      .then(function (response) {
-        console.log("hello")
-        console.log(response);
-      })
-      .catch(function(error){
-        console.log("bad")
-        console.log(error)
-      })
+    const payload = {
+      email: this.state.email,
+      password: this.state.password
     }
-    else {
-      alert("wrong")
-    }
+    this.props.login(payload).then(
+      (res) => this.props.history.push('/')
+      // (err) => this.setState({ errors: err.data.errors })
+    )
   }
 
 
@@ -59,14 +55,14 @@ export default class Register extends React.Component {
               <Label for="loginEmail" sm={2}>Email</Label>
               <Col sm={10}>
                 <Input type="email" name="email" id="loginEmail" placeholder="Email" required
-                        onKeyPress={e => this.setState({email: e.target.value})} />
+                        onChange={this.onChange} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="loginPassword" sm={2}>Password</Label>
               <Col sm={10}>
                 <Input type="password" name="password" id="loginPassword" placeholder="Password" required
-                        onKeyPress={e => this.setState({password: e.target.value})} />
+                        onChange={this.onChange} />
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -80,3 +76,5 @@ export default class Register extends React.Component {
     );
   }
 }
+
+export default connect(null, { login })(Login);

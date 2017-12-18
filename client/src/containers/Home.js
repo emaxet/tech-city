@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron, Container } from 'reactstrap';
-import { MainNavbar } from '../components/MainNavbar';
+import MainNavbar from './MainNavbar';
 import { CityBox } from '../components/CityBox';
 import FlashMessageList from './flash/FlashMessageList';
 
