@@ -11,10 +11,11 @@ const passport     = require('passport');
 const session      = require('express-session');
 const bodyParser   = require('body-parser');
 
-const index = require('./routes/api/index');
-const users = require('./routes/api/users');
-const auth  = require('./routes/auth/routes');
+const index  = require('./routes/api/index');
+const users  = require('./routes/api/users');
+const auth   = require('./routes/auth/routes');
 const events = require('./routes/api/events');
+const jobs   = require('./routes/api/jobs');
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -45,6 +46,7 @@ app.use('/', index);
 app.use('/api/v1/users', users(knex));
 app.use('/session', auth(knex, passport));
 app.use('/api/v1', events(knex));
+app.use('/api/v1', jobs(knex));
 
 
 // catch 404 and forward to error handler
