@@ -28,11 +28,11 @@ class Chat extends Component {
   }
 
   inputBarEnter(e) {
-    if (e.key == 'Enter') {
+    if (e.key === 'Enter') {
       this.submitMessage(e);
     }
   }
-  
+
   render() {
     const chatMessages = this.state.messages.map((e, index) => {
       return <ChatMessages {...e} key={index}/>
@@ -40,17 +40,17 @@ class Chat extends Component {
 
     return (
       <div className="cityChat">
-        <div className="inputBar">  
+        <div className="inputBar">
           <InputGroup className="cityChat">
             <Input type="text" id="chatBar" name="chatBar" placeholder="Left Your Message" onChange={this.newMessage} onKeyPress={this.inputBarEnter}></Input>
             <InputGroupButton type="submit"><Button onClick={this.submitMessage}>Submit</Button></InputGroupButton>
           </InputGroup>
-        </div> 
-        
+        </div>
+
         <div className="chatMessage">
           {chatMessages}
         </div>
-      </div>  
+      </div>
     )
   }
 }

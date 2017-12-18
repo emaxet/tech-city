@@ -1,6 +1,7 @@
 const express  = require('express');
 const router   = express.Router();
 const passInit = require('./config/passport');
+const logout   = require('express-passport-logout');
 
 
 module.exports = (knex, passport) => {
@@ -15,14 +16,15 @@ module.exports = (knex, passport) => {
   }));
 
   router.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/api/v1/users',
-        failureRedirect : '/',
-        failureFlash : true
-    }));
+    successRedirect : '/api/v1/users',
+    failureRedirect : '/',
+    failureFlash : true
+  }));
 
-  router.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
+  router.get('/logout', function (req, res){
+    req.session.destroy(function (err) {
+      res.redirect('/'); //Inside a callback… bulletproof!
+    });
   });
 
   return router;
