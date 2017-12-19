@@ -16,7 +16,7 @@ class CityPage extends Component{
         <div className="cityPage">
           <div className='header'></div>
           <div className='main'>
-            <CityHeader />
+            <CityHeader city_name={this.props.match.params.city_name}/>
             <CityNav city_name={this.props.match.params.city_name}/>
             <div className="cityContent">
               <Switch>

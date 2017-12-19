@@ -35,7 +35,7 @@ class Eventlist extends Component {
     const iconStyle = {
       color : 'red'
     }
-    
+    console.log(this.props);
     return (
       <Fade in={true} className="eventItem">
         <div className="panel panel-default">
@@ -45,14 +45,18 @@ class Eventlist extends Component {
           </div>  
 
           <div className="panel-body">
-            <p>{new Date(this.props.start_date).toDateString()} - {new Date(this.props.end_date).toDateString()}</p>
             <p>
-              {this.props.start_time} - {this.props.end_time}
+              Date: {new Date(this.props.start_date).toDateString()} - {new Date(this.props.end_date).toDateString()}
             </p>
             <p>
-              {this.props.description}
+              Time: {this.props.start_time} - {this.props.end_time}
             </p>
-            <p> {this.props.name} </p>
+            <p>
+              Description: {this.props.description}
+            </p>
+            <p> 
+            Location: {this.props.location} 
+            </p>
           </div>
           
           <div className="panel-footer">

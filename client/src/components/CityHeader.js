@@ -8,7 +8,7 @@ class CityHeader extends Component {
       <div className='cityHeader'>
           <Container>
             <img src={logo} alt='techcity' className='logo' />
-            <h2 className='headerTitle'>Discovery city : Vancouver</h2>
+            <h2 className='headerTitle'>Discovery city : {this.props.city_name.replace('_', ' ')}</h2>
           </ Container>
       </div>
     )

@@ -12,12 +12,14 @@ class Events extends Component {
     this.togglefilter = this.togglefilter.bind(this);
     this.toggleNewEvent = this.toggleNewEvent.bind(this);
 
+    const cityName = (this.props.location.pathname.split('/')[2]);
+
     this.state = {
       'filterCollapse': false,
       'eventsCollapse': true,
       'newEventCollapse': false,
       'eventlist': [],
-      'cityId': null
+      'cityName': cityName
     };
   }
 
@@ -35,11 +37,10 @@ class Events extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/api/v1/Vancouver/events')
+    axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/events`)
       .then((res) => {
         this.setState({
-          'eventlist': res.data,
-          'cityId': res.data[0].id
+          'eventlist': res.data
         });
       })
       .catch((error) => {
@@ -79,7 +80,7 @@ class Events extends Component {
             {eventlist}
         </Collapse>
 
-        <NewEvent newEventCollapse={this.state.newEventCollapse} toggleNewEvent={this.toggleNewEvent} cityId={this.state.cityId}/>
+        <NewEvent newEventCollapse={this.state.newEventCollapse} toggleNewEvent={this.toggleNewEvent} cityName={this.state.cityName}/>
       </div>
     );
   }
