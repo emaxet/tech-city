@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const CityBox = (props) => {
   return (
     <div className="col-md-4 col-sm-6 city-box">
-      <Link to='/city' className="city-link">
+      <Link to={`/city/${props.name.replace(' ', '_')}`} className="city-link">
         <div className="city-hover">
           <div className="city-hover-content">
             <i className="fa fa-plus fa-3x"></i>

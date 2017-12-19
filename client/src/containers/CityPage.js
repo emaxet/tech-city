@@ -17,13 +17,13 @@ class CityPage extends Component{
           <div className='header'></div>
           <div className='main'>
             <CityHeader />
-            <CityNav />
+            <CityNav city_name={this.props.match.params.city_name}/>
             <div className="cityContent">
               <Switch>
-                <Route exact path={"/city"} render={props => <Events {...props} />} />
-                <Route exact path={"/city/events"} render={props => <Events {...props} />} />
-                <Route exact path={"/city/jobs"} render={props => <Jobs {...props} />} />
-                <Route exact path={"/city/chat"} render={props => <Chat {...props} />} />
+                <Route exact path={`/city/${this.props.match.params.city_name}`} render={props => <Events {...props} />} />
+                <Route exact path={`/city/${this.props.match.params.city_name}/events`} render={props => <Events {...props} />} />
+                <Route exact path={`/city/${this.props.match.params.city_name}/jobs`} render={props => <Jobs {...props} />} />
+                <Route exact path={`/city/${this.props.match.params.city_name}/chat`} render={props => <Chat {...props} />} />
               </Switch>
             </div>
           </div>

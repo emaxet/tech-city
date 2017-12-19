@@ -28,13 +28,13 @@ class CityNav extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink exact to="/city/events" activeClassName="active">Events</NavLink>
+                <NavLink exact to={`/city/${this.props.city_name}/events`} activeClassName="active">Events</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink exact to="/city/jobs" activeClassName="active">Jobs</NavLink>
+                <NavLink exact to={`/city/${this.props.city_name}/jobs`} activeClassName="active">Jobs</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink exact to="/city/chat" activeClassName="active">Chat</NavLink>
+                <NavLink exact to={`/city/${this.props.city_name}/chat`} activeClassName="active">Chat</NavLink>
               </NavItem>
               <InputGroup>
                   <Input type="location" name="location" placeholder="search location" />
