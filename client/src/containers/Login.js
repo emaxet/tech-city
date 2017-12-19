@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { loginValidation } from '../actions/formValidations';
-import { login } from '../actions/login'
+import { login } from '../actions/authenticationActions'
 import MainNavbar from './MainNavbar';
 import { Container, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
