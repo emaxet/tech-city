@@ -1,21 +1,16 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import { connect } from 'react-redux';
+import Logo from '../images/logo.png';
 
 class MainNavbar extends React.Component {
   render(){
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/">Tech City</NavbarBrand>
+          <NavbarBrand href="/"><Link to="/"><img src={Logo} alt="Logo" style={{'height': '70px'}}/></Link></NavbarBrand>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink exact to="/" activeClassName="active">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink exact to="/city" activeClassName="active">City</NavLink>
-              </NavItem>
               <NavItem>
                 <NavLink exact to="/login" activeClassName="active">Login</NavLink>
               </NavItem>

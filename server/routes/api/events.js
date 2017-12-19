@@ -11,9 +11,12 @@ module.exports = (knex) => {
     });
   });
 
-  return events;
+  events.post('/:city_name/events', (req, res) => {
+    console.log(req.body);
+  });
 
-}
+  return events;
+};
 
 
 

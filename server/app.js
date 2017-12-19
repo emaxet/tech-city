@@ -16,6 +16,7 @@ const users  = require('./routes/api/users');
 const auth   = require('./routes/auth/routes');
 const events = require('./routes/api/events');
 const jobs   = require('./routes/api/jobs');
+const cities = require('./routes/api/cities');
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -31,9 +32,9 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 app.use(session({
-    secret: process.env.SECRET_KEY,
-    resave: true,
-    saveUninitialized: true
+  secret: process.env.SECRET_KEY,
+  resave: true,
+  saveUninitialized: true
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,6 +48,7 @@ app.use('/', index);
 app.use('/api/v1/users', users(knex));
 app.use('/api/v1', events(knex));
 app.use('/api/v1', jobs(knex));
+app.use('/api/v1', cities(knex));
 
 
 // catch 404 and forward to error handler

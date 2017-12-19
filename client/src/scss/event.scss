@@ -1,15 +1,23 @@
-.event {
+  .event {
   text-align: center;
   width: 100%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: black;
   height: 100%;
+  overflow: hidden;
+  .buttonGroup{
+    padding: 10px;
+    button{
+      margin: 0 10px; 
+    }
+  }
   .eventNav {
     border-collapse: collapse;
     table {
       margin: 1em 0;
       text-align: left;
       width: 100%;
+      border: 5px solid lightblue;
     }
     tr:nth-child(even) {
       background-color: #9cd0f3;
@@ -36,23 +44,25 @@
     border: 5px solid lightblue;
     border-radius: 10px;
     overflow: hidden;
-    padding: 10px;
-    img {
-      height: 50%;
-      width: 50%
-    }
-    i {
-      float: right;
-      padding: 0 10px;
+    .panel-header{
+      img {
+        padding: 10px;
+        height: 50%;
+        width: 50%
+      }
     }
     .panel-body {
       border-top: 5px solid lightblue;
-      padding: 10px;
+      border-bottom: 5px solid lightblue;
       text-align: left;
       align-content: center;
-      .panel-footer {
+      overflow: hidden;
+      padding: 10px;
+    }
+    .panel-footer {
+      text-align: right;
+      i {
         padding: 10px;
-        border-top: 5px solid lightblue;
       }
     }
   }
@@ -62,21 +72,23 @@
   .event {
     padding: 0 5em;
     .eventItem {
-      img {
-        float: left;
-        height: 100px;
-        width: 100px;
-      }
-      .panel {
+      .panel-header {
+        text-align: center;
+        overflow: hidden;
+        img {
+          padding: 10px;
+          border-radius: 10px;
+          height: 100px;
+          width: 100px;
+        }
         h2 {
-          margin-left: 2em;
+          padding: 10px;
         }
-        .panel-body {
-          margin-top: 1em;
-          float: right;
-          text-align: left;
-          align-content: center;
-        }
+      }
+      .panel-body {
+        margin-top: 1em;
+        text-align: left;
+        align-content: center;
       }
     }
   }

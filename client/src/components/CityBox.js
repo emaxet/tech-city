@@ -1,21 +1,21 @@
 import React from "react";
-import picture from "../images/vancouver.jpg";
+import { Link } from 'react-router-dom';
 
 export const CityBox = (props) => {
   return (
     <div className="col-md-4 col-sm-6 city-box">
-      <a className="city-link">
+      <Link to='/city' className="city-link">
         <div className="city-hover">
           <div className="city-hover-content">
             <i className="fa fa-plus fa-3x"></i>
           </div>
         </div>
-        <img className="img-thumbnail" src={picture} alt="Vancouver"/>
+        <img className="img-thumbnail" src={props.image} alt="Vancouver"/>
         <div className="city-caption">
-          <h4>Vancouver</h4>
-          <p className="text-muted">Vancouver info</p>
+          <h4>{props.name}</h4>
+          <p className="text-muted">{props.tagline}</p>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

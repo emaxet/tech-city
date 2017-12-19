@@ -25,11 +25,12 @@ module.exports = (knex, passport) => {
     },
 
     (req, email, password, done) => {
+      console.log(req.body);
       process.nextTick(() => {
 
         authHelpers.findUserByEmail(email, (user) => {
           if (user.length) {
-            return done(err, false);
+            return done(null, false);
           } else {
             authHelpers.registerNewUser(req, (user) => {
               done(null, user);
@@ -55,16 +56,12 @@ module.exports = (knex, passport) => {
 
       authHelpers.findUserByEmail(email, (user) => {
         if (!user.length) {
-          const error = new Error('Incorrect email or password');
-          error.name = 'IncorrectCredentialsError';
-          return done(error, false);
+          return done(null, false);
         }
-        if (!authHelpers.validPassword(user, password)) {
-          const error = new Error('Incorrect email or password');
-          error.name = 'IncorrectCredentialsError';
-          return done(error, false);
+        if (authHelpers.validPassword(user, password)) {
+          return done(null, user);
         }
-        return done(null, user);
+        return done(null, false);
       }, (err) => {
         return done(err);
       });
