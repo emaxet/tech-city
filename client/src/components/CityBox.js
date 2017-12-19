@@ -1,5 +1,4 @@
 import React from "react";
-import picture from "../images/vancouver.jpg";
 
 export const CityBox = (props) => {
   return (
@@ -10,10 +9,10 @@ export const CityBox = (props) => {
             <i className="fa fa-plus fa-3x"></i>
           </div>
         </div>
-        <img className="img-thumbnail" src={picture} alt="Vancouver"/>
+        <img className="img-thumbnail" src={props.image} alt="Vancouver"/>
         <div className="city-caption">
-          <h4>Vancouver</h4>
-          <p className="text-muted">Vancouver info</p>
+          <h4>{props.name}</h4>
+          <p className="text-muted">{props.tagline}</p>
         </div>
       </a>
     </div>

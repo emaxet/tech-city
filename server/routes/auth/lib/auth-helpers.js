@@ -35,7 +35,7 @@ module.exports = {
   },
 
   validPassword: (user, password) => {
-    return bcrypt.compareSync(password, user[0].password)
+    return bcrypt.compareSync(password, user[0].password);
   }
 
 }
