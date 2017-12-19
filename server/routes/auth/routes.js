@@ -63,7 +63,7 @@ module.exports = (knex, passport) => {
       });
     }
 
-    return passport.authenticate('local-login', (err, user) => {
+    return passport.authenticate('local-login', (err, token, data) => {
       if (err) {
         if (err.name === 'IncorrectCredentialsError') {
           return res.status(400).json({
@@ -78,20 +78,18 @@ module.exports = (knex, passport) => {
         });
       }
 
-
       return res.json({
         success: true,
         message: 'You have successfully logged in!',
-        user_id: user[0].id,
-        username: user[0].username
+        token: token,
+        data: data
       });
     })(req, res, next);
   });
 
   router.get('/logout', function (req, res){
-    req.session.destroy(function (err) {
-      res.redirect('/api/v1/users');
-    });
+    res.clearCookie("connect.sid");
+    res.redirect('/api/v1/users');
   });
 
   return router;
