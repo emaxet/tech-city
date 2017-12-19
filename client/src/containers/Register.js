@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import classnames from 'classnames';
 import { registerValidation } from '../actions/formValidations';
 import { userRegistration, doesValueExists } from '../actions/registrationActions';
 import MainNavbar from './MainNavbar';
@@ -21,8 +20,7 @@ class Register extends React.Component {
       city: 'Vancouver',
       pic: '',
       bio: '',
-      errors: {},
-      isLoading: false
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.isValid = this.isValid.bind(this);
@@ -43,8 +41,8 @@ class Register extends React.Component {
 
 
   handleSubmit(e) {
-    this.setState({ errors: {} });
     e.preventDefault();
+    this.setState({ errors: {} });
     const payload = {
       username: this.state.username,
       first_name: this.state.first_name,
@@ -56,7 +54,6 @@ class Register extends React.Component {
       bio: this.state.bio,
       role_id: 1,
     }
-    this.setState({errors: {}, isLoading: true});
     if(this.isValid()){
       this.props.userRegistration(payload).then(
         () => {
@@ -66,7 +63,7 @@ class Register extends React.Component {
           })
           this.props.history.push('/');
         },
-        (err) => this.setState({ errors: err.response.data, isLoading: false })
+        (err) => this.setState({ errors: err.response.data})
       )
     }
   }
@@ -81,45 +78,42 @@ class Register extends React.Component {
         <h2 className="registerTitle text-center">Register</h2>
         <Container className="registerForm">
           <Form onSubmit={this.handleSubmit}>
-            <FormGroup row className={classnames({'has-error': errors.username})}>
+            <FormGroup row>
               <Label for="registerUsername" sm={2}>Username*</Label>
               <Col sm={10}>
-                <Input type="text" name="username" id="registerUsername" placeholder="Username"
-                        onChange={this.onChange} />
-                {errors.username && <span className="form-text text-muted">{errors.username}</span>}
+                <Input type="text" name="username" id="registerUsername" placeholder="Username" onChange={this.onChange} />
+                {errors.username && <span className="form-text">{errors.username}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="registerName" sm={2}>First Name</Label>
               <Col sm={4}>
-                <Input type="text" name="first_name" id="registerFirstName" placeholder="First Name"
-                        onChange={this.onChange} />
+                <Input type="text" name="first_name" id="registerFirstName" placeholder="First Name" onChange={this.onChange} />
               </Col>
               <Label for="registerName" sm={2}>Last Name</Label>
               <Col sm={4}>
-                <Input type="text" name="last_name" id="registerLastName" placeholder="Last Name"
-                        onChange={this.onChange} />
+                <Input type="text" name="last_name" id="registerLastName" placeholder="Last Name" onChange={this.onChange} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="registerEmail" sm={2}>Email*</Label>
               <Col sm={10}>
-                <Input type="email" name="email" id="registerEmail" placeholder="Email"
-                        onChange={this.onChange} />
+                <Input type="email" name="email" id="registerEmail" placeholder="Email" onChange={this.onChange} />
+                {errors.email && <span className="form-text">{errors.email}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="registerPassword" sm={2}>Password*</Label>
               <Col sm={10}>
-                <Input type="password" name="password" id="registerPassword" placeholder="Password"
-                        onChange={this.onChange} />
+                <Input type="password" name="password" id="registerPassword" placeholder="Password" onChange={this.onChange} />
+                {errors.password && <span className="form-text">{errors.password}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="registerConfirmPassword" sm={2}>Confirm Password*</Label>
               <Col sm={10}>
-                <Input type="password" name="confirmPassword" id="registerConfirmPassword" placeholder="Password"
-                        onChange={this.onChange} />
+                <Input type="password" name="confirmPassword" id="registerConfirmPassword" placeholder="Password" onChange={this.onChange} />
+                {errors.confirmPassword && <span className="form-text">{errors.confirmPassword}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -135,20 +129,19 @@ class Register extends React.Component {
             <FormGroup row>
               <Label for="registerPic" sm={2}>Profile Image</Label>
               <Col sm={10}>
-                <Input type="file" name="pic" id="registerPic" onChange={this.onChange} />
+                <Input type="text" name="pic" id="registerPic" placeholder="Image URL" onChange={this.onChange} />
                 <FormText color="muted">
-                  example lalalalala
+                  Example: https://i.imgur.com/ABC123.png
                 </FormText>
               </Col>
             </FormGroup>
             <FormGroup>
               <Label for="exampleText">Bio</Label>
-              <Input type="textarea" name="text" id="exampleText" placeholder="Tell the community about yourself."
-                      onChange={this.onChange} />
+              <Input type="textarea" name="text" id="exampleText" placeholder="Tell the community about yourself." onChange={this.onChange} />
             </FormGroup>
             <FormGroup row>
               <Col className="text-center">
-                <Button disabled={this.state.isLoading} type="submit">Submit</Button>
+                <Button type="submit">Submit</Button>
               </Col>
             </FormGroup>
           </Form>

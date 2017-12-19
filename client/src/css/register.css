@@ -6,6 +6,8 @@
   max-width: 900px;
   border: 2px solid black;
   padding: 30px 20px 0 20px; }
+  .registerForm .form-text {
+    color: red; }
   .registerForm .btn {
     width: 150px;
     height: 40px;
