@@ -6,13 +6,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    text-align: center; }
-    .cityPage .main .cityHeader .logo {
-      border-radius: 10px;
-      height: 100px;
-      width: 200px;
-      float: left;
-      margin-bottom: 10px; }
+    text-align: center;
+    justify-content: center; }
     .cityPage .main .cityHeader .headerTitle {
       width: 80%;
       padding-top: 40px;
