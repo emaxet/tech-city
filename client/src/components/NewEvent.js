@@ -18,7 +18,8 @@ class NewEvent extends Component{
       'timeStart': moment().format('hh:mm'),
       'timeEnd': moment().format('hh:mm'),
       'imageUrl': '',
-      'keyword': ''
+      'keyword': '',
+      'cityName': this.props.cityName
     }
 
     this.setDateStart = this.setDateStart.bind(this);
@@ -30,7 +31,7 @@ class NewEvent extends Component{
   }
 
   submitForm(){
-    axios.post('http://localhost:3000/api/v1/Vancouver/events', {
+    axios.post(`http://localhost:3000/api/v1/${this.state.cityName}/events`, {
       'creator_id' : this.state.creatorId,
       'type_id'    : this.state.typeId,
       'city_id'    : this.props.cityId,
@@ -42,7 +43,8 @@ class NewEvent extends Component{
       'end_date'   : this.state.dateEnd.format('YYYY-MM-DD'),
       'start_time' : this.state.timeStart,
       'end_time'   : this.state.timeEnd,
-      'location'   : this.state.location
+      'location'   : this.state.location,
+      'cityName'   : this.state.cityName
     })
     .then(() => {
       window.location.reload();

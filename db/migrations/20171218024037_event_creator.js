@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     knex.schema.table('events', (table) => {
       table.string('location');
     }),
-    knex.schema.table('evetns', (table) => {
+    knex.schema.table('events', (table) => {
       table.string('like');
     })
   ]);
@@ -15,7 +15,7 @@ exports.down = function(knex, Promise) {
     knex.schema.table('events', (table) => {
       table.dropColumn('location');
     }),
-    knex.schema.table('evetns', (table) => {
+    knex.schema.table('events', (table) => {
       table.dropColumn('like');
     })
   ]);
