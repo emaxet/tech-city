@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { loginValidation } from '../actions/formValidations';
 import { login } from '../actions/login'
 import MainNavbar from './MainNavbar';
 import { Container, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -10,11 +11,10 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      errors: '',
-      loggedIn: false
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
-    this.validateForm = this.validateForm.bind(this);
+    this.isValid = this.isValid.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -22,11 +22,12 @@ class Login extends React.Component {
     this.setState({ [e.target.name]: e.target.value});
   }
 
-  validateForm() {
-    return (
-      this.state.email.length > 0 &&
-      this.state.password.length > 0
-    );
+  isValid(){
+    const { errors, isValid } = this.props.loginValidation(this.state);
+    if (!isValid) {
+      this.setState({errors});
+    }
+    return isValid;
   }
 
   handleSubmit(e){
@@ -35,16 +36,19 @@ class Login extends React.Component {
       email: this.state.email,
       password: this.state.password
     }
-    this.props.login(payload).then(
-      (res) => this.props.history.push('/')
-      // (err) => this.setState({ errors: err.data.errors })
-    )
+    if(this.isValid()){
+      this.props.login(payload).then(
+        (res) => this.props.history.push('/')
+        // (err) => this.setState({ errors: err.data.errors })
+      )
+    }
   }
 
 
 
   render() {
     console.log(this.state)
+    const {errors} = this.state;
     return (
       <div>
         <MainNavbar />
@@ -54,19 +58,19 @@ class Login extends React.Component {
             <FormGroup row>
               <Label for="loginEmail" sm={2}>Email</Label>
               <Col sm={10}>
-                <Input type="email" name="email" id="loginEmail" placeholder="Email" required
-                        onChange={this.onChange} />
+                <Input type="email" name="email" id="loginEmail" placeholder="Email" onChange={this.onChange} />
+                {errors.email && <span className="form-text">{errors.email}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="loginPassword" sm={2}>Password</Label>
               <Col sm={10}>
-                <Input type="password" name="password" id="loginPassword" placeholder="Password" required
-                        onChange={this.onChange} />
+                <Input type="password" name="password" id="loginPassword" placeholder="Password" onChange={this.onChange} />
+                {errors.password && <span className="form-text">{errors.password}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Col sm={{ size: 10, offset: 2 }}>
+              <Col className="text-center">
                 <Button type="submit">Submit</Button>
               </Col>
             </FormGroup>
@@ -77,4 +81,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null, { login })(Login);
+export default connect(null, { login, loginValidation })(Login);

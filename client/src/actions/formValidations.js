@@ -6,7 +6,7 @@ export function registerValidation(data) {
     let errors = {};
 
     if(Validator.isEmpty(data.username)) {
-      errors.username = 'This field is required';
+      errors.username = 'Username is required';
     }
 
     if(!Validator.isEmail(data.email)) {
@@ -14,19 +14,42 @@ export function registerValidation(data) {
     }
 
     if(Validator.isEmpty(data.email)) {
-      errors.email = 'This field is required';
+      errors.email = 'Email is required';
     }
 
     if(Validator.isEmpty(data.password)) {
-      errors.password = 'This field is required';
+      errors.password = 'Password is required';
     }
 
-    if(Validator.equals(data.password, data.confirmPassword)) {
-      errors.confirmPassword = 'Password must match';
+    if(!Validator.equals(data.password, data.confirmPassword)) {
+      errors.confirmPassword = 'Passwords do not match';
     }
 
     if(Validator.isEmpty(data.confirmPassword)) {
-      errors.confirmPassword = 'This field is required';
+      errors.confirmPassword = 'Comfirm password';
+    }
+
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    }
+  }
+}
+
+export function loginValidation(data) {
+  return dispatch => {
+    let errors = {};
+
+    if(!Validator.isEmail(data.email)) {
+      errors.email = 'Email is invalid';
+    }
+
+    if(Validator.isEmpty(data.email)) {
+      errors.email = 'Email is required';
+    }
+
+    if(Validator.isEmpty(data.password)) {
+      errors.password = 'Password is required';
     }
 
     return {
