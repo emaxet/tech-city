@@ -104,12 +104,17 @@
   color: black;
   height: 100%;
   overflow: hidden; }
+  .event .buttonGroup {
+    padding: 10px; }
+    .event .buttonGroup button {
+      margin: 0 10px; }
   .event .eventNav {
     border-collapse: collapse; }
     .event .eventNav table {
       margin: 1em 0;
       text-align: left;
-      width: 100%; }
+      width: 100%;
+      border: 5px solid lightblue; }
     .event .eventNav tr:nth-child(even) {
       background-color: #9cd0f3; }
     .event .eventNav tr:hover {
@@ -128,31 +133,38 @@
   .event .eventItem {
     margin: 2em 0;
     border: 5px solid lightblue;
-    border-radius: 10px; }
-    .event .eventItem img {
+    border-radius: 10px;
+    overflow: hidden; }
+    .event .eventItem .panel-header img {
       padding: 10px;
       height: 50%;
       width: 50%; }
-    .event .eventItem i {
-      float: right; }
     .event .eventItem .panel-body {
       border-top: 5px solid lightblue;
+      border-bottom: 5px solid lightblue;
       text-align: left;
       align-content: center;
-      overflow: hidden; }
-      .event .eventItem .panel-body .panel-footer {
-        border-top: 5px solid lightblue; }
+      overflow: hidden;
+      padding: 10px; }
+    .event .eventItem .panel-footer {
+      text-align: right; }
+      .event .eventItem .panel-footer i {
+        padding: 10px; }
 
 @media screen and (min-width: 560px) {
   .event {
     padding: 0 5em; }
-    .event .eventItem img {
-      float: left;
-      height: 100px;
-      width: 100px; }
-    .event .eventItem .panel h2 {
-      margin-left: 2em; }
-    .event .eventItem .panel .panel-body {
+    .event .eventItem .panel-header {
+      text-align: center;
+      overflow: hidden; }
+      .event .eventItem .panel-header img {
+        padding: 10px;
+        border-radius: 10px;
+        height: 100px;
+        width: 100px; }
+      .event .eventItem .panel-header h2 {
+        padding: 10px; }
+    .event .eventItem .panel-body {
       margin-top: 1em;
       text-align: left;
       align-content: center; } }
