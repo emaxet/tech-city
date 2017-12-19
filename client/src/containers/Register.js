@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import classnames from 'classnames';
+import { registerValidation } from '../actions/formValidations';
 import { userRegistration, doesValueExists } from '../actions/registrationActions';
 import MainNavbar from './MainNavbar';
 import { addFlashMessage } from '../actions/flashMessages';
@@ -19,10 +21,11 @@ class Register extends React.Component {
       city: 'Vancouver',
       pic: '',
       bio: '',
-      loggedIn: false
+      errors: {},
+      isLoading: false
     };
     this.onChange = this.onChange.bind(this);
-    this.validateForm = this.validateForm.bind(this);
+    this.isValid = this.isValid.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -30,24 +33,14 @@ class Register extends React.Component {
     this.setState({ [e.target.name]: e.target.value});
   }
 
-  // checkValueExists(e) {
-  //   const name = e.target.name;
-  //   const val = e.target.value;
-  //   if(val !== '') {
-  //     this.props.doesValueExists(val).then(res =>{
-
-  //     })
-  //   }
-  // }
-
-  validateForm() {
-    return (
-      this.state.username.length > 0 &&
-      this.state.email.length > 0 &&
-      this.state.password.length > 0 &&
-      this.state.password === this.state.confirmPassword
-    )
+  isValid(){
+    const { errors, isValid } = this.props.registerValidation(this.state);
+    if (!isValid) {
+      this.setState({errors});
+    }
+    return isValid;
   }
+
 
   handleSubmit(e) {
     this.setState({ errors: {} });
@@ -62,9 +55,9 @@ class Register extends React.Component {
       // pic: this.state.pic,
       bio: this.state.bio,
       role_id: 1,
-      errors: {}
     }
-    if(this.validateForm()){
+    this.setState({errors: {}, isLoading: true});
+    if(this.isValid()){
       this.props.userRegistration(payload).then(
         () => {
           this.props.addFlashMessage({
@@ -73,14 +66,14 @@ class Register extends React.Component {
           })
           this.props.history.push('/');
         },
-        (err) => this.setState({ errors: err.response.data })
+        (err) => this.setState({ errors: err.response.data, isLoading: false })
       )
     }
   }
 
 
   render() {
-    // const {errors} = this.state;
+    const {errors} = this.state;
     console.log(this.state);
     return (
       <div>
@@ -88,11 +81,12 @@ class Register extends React.Component {
         <h2 className="registerTitle text-center">Register</h2>
         <Container className="registerForm">
           <Form onSubmit={this.handleSubmit}>
-            <FormGroup row>
+            <FormGroup row className={classnames({'has-error': errors.username})}>
               <Label for="registerUsername" sm={2}>Username*</Label>
               <Col sm={10}>
-                <Input type="text" name="username" id="registerUsername" placeholder="Username" required
+                <Input type="text" name="username" id="registerUsername" placeholder="Username"
                         onChange={this.onChange} />
+                {errors.username && <span className="form-text text-muted">{errors.username}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -110,21 +104,21 @@ class Register extends React.Component {
             <FormGroup row>
               <Label for="registerEmail" sm={2}>Email*</Label>
               <Col sm={10}>
-                <Input type="email" name="email" id="registerEmail" placeholder="Email" required
+                <Input type="email" name="email" id="registerEmail" placeholder="Email"
                         onChange={this.onChange} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="registerPassword" sm={2}>Password*</Label>
               <Col sm={10}>
-                <Input type="password" name="password" id="registerPassword" placeholder="Password" required
+                <Input type="password" name="password" id="registerPassword" placeholder="Password"
                         onChange={this.onChange} />
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="registerConfirmPassword" sm={2}>Confirm Password*</Label>
               <Col sm={10}>
-                <Input type="password" name="confirmPassword" id="registerConfirmPassword" placeholder="Password" required
+                <Input type="password" name="confirmPassword" id="registerConfirmPassword" placeholder="Password"
                         onChange={this.onChange} />
               </Col>
             </FormGroup>
@@ -154,7 +148,7 @@ class Register extends React.Component {
             </FormGroup>
             <FormGroup row>
               <Col className="text-center">
-                <Button type="submit">Submit</Button>
+                <Button disabled={this.state.isLoading} type="submit">Submit</Button>
               </Col>
             </FormGroup>
           </Form>
@@ -168,4 +162,4 @@ class Register extends React.Component {
 //   userRegistration: React.PropTypes.func.isRequired
 // }
 
-export default connect(null, { userRegistration, addFlashMessage, doesValueExists })(Register);
+export default connect(null, { registerValidation, userRegistration, addFlashMessage, doesValueExists })(Register);

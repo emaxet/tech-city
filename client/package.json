@@ -6,6 +6,7 @@
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta.2",
     "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
     "moment": "^2.20.0",
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
@@ -21,7 +22,8 @@
     "reactstrap": "^5.0.0-alpha.4",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "shortid": "^2.2.8"
+    "shortid": "^2.2.8",
+    "validator": "^9.2.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/scss -o src/css",
