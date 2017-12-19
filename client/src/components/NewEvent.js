@@ -44,8 +44,8 @@ class NewEvent extends Component{
       'end_time'   : this.state.timeEnd,
       'location'   : this.state.location
     })
-    .then(function (response) {
-      console.log(response);
+    .then(() => {
+      window.location.reload();
     })
     .catch(function (error) {
       console.log(error);
@@ -118,7 +118,7 @@ class NewEvent extends Component{
             <Input type="test" name="eventImage" id="eventImage" placeholder="Image Url" 
             onChange={(e) => {
               this.setState({
-                'eventImage': e.target.value
+                'imageUrl': e.target.value
               })
             }}
             />
