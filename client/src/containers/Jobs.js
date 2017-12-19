@@ -1,29 +1,62 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import {JobBox} from '../components/JobBox'
+import {JobBox} from '../components/JobBox';
+import axios from 'axios';
+import NewJob from '../components/NewJob'
 
 class Jobs extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      'jobs' : [],
+      'addJob' : false
+    };
+    this.toogleAddJob = this.toogleAddJob.bind(this);
+  }
+  
+  componentDidMount(){
+    axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/jobs`)
+      .then((res) => {
+        this.setState({
+          'jobs': res.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  toogleAddJob(e){
+    this.setState({
+      'addJob' : !this.state.addJob
+    });
+  }
 
   render() {
     const buttonStyle = {
       'textAlign': 'center'
     }
 
+    const jobs = this.state.jobs
+      .map((job, index) => {
+        return <JobBox {...job} key={index}/>
+      })
+      .reverse();
+
     return (
       <div>
         <div className="row">
           <div className="col-sm-12" style={buttonStyle}>
-            <Button color="primary">Add Job</Button>
+            <Button color="primary" 
+            onClick={this.toogleAddJob}>
+            Add Job</Button>
           </div>  
           <div className="col-sm-12">
             <div className="row row-eq-height">
-              <JobBox />
-              <JobBox />
-              <JobBox />
-              <JobBox />
-              <JobBox />
-              <JobBox />
+              {jobs}
             </div>
+
+            <NewJob {...this.state} toogleAddJob={this.toogleAddJob}/>
           </div>
         </div>
       </div>

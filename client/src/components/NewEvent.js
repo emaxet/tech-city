@@ -92,7 +92,7 @@ class NewEvent extends Component{
         <Form>
           <FormGroup>
             <Label for="eventTitle">Title</Label>
-            <Input type="test" name="eventTitle" id="eventTitle" placeholder="Title" 
+            <Input type="text" name="eventTitle" id="eventTitle" placeholder="Title" 
             onChange={(e) => {
               this.setState({
                 'title': e.target.value
@@ -103,7 +103,7 @@ class NewEvent extends Component{
 
           <FormGroup>
             <Label for="eventKey">Key</Label>
-            <Input type="test" name="eventKey" id="eventKey" placeholder="Key" 
+            <Input type="text" name="eventKey" id="eventKey" placeholder="Key" 
             onChange={(e) => {
               this.setState({
                 'keyword': e.target.value
@@ -114,7 +114,7 @@ class NewEvent extends Component{
 
           <FormGroup>
             <Label for="eventImage">Image URL</Label>
-            <Input type="test" name="eventImage" id="eventImage" placeholder="Image Url" 
+            <Input type="text" name="eventImage" id="eventImage" placeholder="Image Url" 
             onChange={(e) => {
               this.setState({
                 'imageUrl': e.target.value
@@ -125,7 +125,7 @@ class NewEvent extends Component{
 
           <FormGroup>
             <Label for="eventDes">Description</Label>
-            <Input type="textarea" maxLength="200" name="eventDes" id="eventDes" placeholder="Event Description" 
+            <Input type="textarea" maxLength="250" name="eventDes" id="eventDes" placeholder="Event Description" 
             onChange={(e) => {
               this.setState({
                 'description': e.target.value
