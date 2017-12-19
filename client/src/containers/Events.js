@@ -51,6 +51,9 @@ class Events extends Component {
   render() {
     const eventlist = this.state.eventlist
       .map((event, index) => {
+        if(event.image === ''){
+          event.image = 'https://picsum.photos/500/100/?random';
+        }
         return <Eventlist {...event} key={index}/>;
       })
       .reverse();
