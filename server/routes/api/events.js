@@ -32,6 +32,8 @@ module.exports = (knex) => {
       });
   });
 
+  
+
   return events;
 };
 

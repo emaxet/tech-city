@@ -48,9 +48,11 @@ class Events extends Component {
   }
   
   render() {
-    const eventlist = this.state.eventlist.map((event, index) => {
-      return <Eventlist {...event} key={index}/>;
-    });
+    const eventlist = this.state.eventlist
+      .map((event, index) => {
+        return <Eventlist {...event} key={index}/>;
+      })
+      .reverse();
 
     return (
       <div className="event">

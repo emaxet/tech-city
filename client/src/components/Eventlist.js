@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Fade } from "reactstrap";
 
 class Eventlist extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class Eventlist extends Component {
     }
     
     return (
-      <div className="eventItem">
+      <Fade in={true} className="eventItem">
         <div className="panel panel-default">
           <div className="panel-header">
             <img src={this.props.image} alt='techcity' className='logo' />
@@ -60,7 +61,7 @@ class Eventlist extends Component {
             <i className="fa fa-heartbeat" aria-hidden="true" onClick={this.heartClick} style={this.state.heart ? iconStyle : null}></i>
           </div>
         </div>
-      </div>
+      </Fade>
     )
   }
 }

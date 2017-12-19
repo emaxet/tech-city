@@ -46,9 +46,6 @@ class NewEvent extends Component{
     })
     .then(() => {
       window.location.reload();
-    })
-    .catch(function (error) {
-      console.log(error);
     });
 
     this.props.toggleNewEvent();
