@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import { Navbar, Nav, NavItem } from 'reactstrap';
 import { connect } from 'react-redux';
 import Logo from '../images/logo.png';
 
@@ -9,7 +9,7 @@ class MainNavbar extends React.Component {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/"><Link to="/"><img src={Logo} alt="Logo" style={{'height': '70px'}}/></Link></NavbarBrand>
+          <Link to="/"><img src={Logo} alt="Logo" style={{'height': '70px'}}/></Link>
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink exact to="/login" activeClassName="active">Login</NavLink>
