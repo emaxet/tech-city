@@ -8,13 +8,7 @@
       flex-direction: row;
       flex-wrap: wrap;
       text-align: center;
-      .logo {
-        border-radius: 10px;
-        height: 100px;
-        width: 200px;
-        float: left;
-        margin-bottom: 10px; 
-      }
+      justify-content: center;
       .headerTitle {
         width: 80%;
         padding-top: 40px;

@@ -4,9 +4,9 @@ module.exports = {
     knex('cities')
       .join('jobs', 'jobs.city_id', 'cities.id')
       .join('users', 'jobs.user_id', 'users.id')
-      .select('users.username', 'jobs.title', 'jobs.description', 'jobs.url')
+      .select('users.username', 'jobs.title', 'jobs.description', 'jobs.url', 'jobs.company')
       .where({ 'cities.name': cityName})
       .then(cb);
-  },
+  }
 
-}
+};

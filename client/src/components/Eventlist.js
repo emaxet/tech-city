@@ -35,7 +35,6 @@ class Eventlist extends Component {
     const iconStyle = {
       color : 'red'
     }
-    console.log(this.props);
     return (
       <Fade in={true} className="eventItem">
         <div className="panel panel-default">

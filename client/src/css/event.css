@@ -38,6 +38,7 @@
     overflow: hidden; }
     .event .eventItem .panel-header img {
       padding: 10px;
+      border-radius: 15px;
       height: 50%;
       width: 50%; }
     .event .eventItem .panel-body {
@@ -60,9 +61,8 @@
       overflow: hidden; }
       .event .eventItem .panel-header img {
         padding: 10px;
-        border-radius: 10px;
         height: 100px;
-        width: 100px; }
+        width: 500px; }
       .event .eventItem .panel-header h2 {
         padding: 10px; }
     .event .eventItem .panel-body {

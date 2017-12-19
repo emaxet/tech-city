@@ -12,7 +12,7 @@ export const CityBox = (props) => {
         </div>
         <img className="img-thumbnail" src={props.image} alt="Vancouver"/>
         <div className="city-caption">
-          <h4>{props.name}</h4>
+          <h4>{props.name.replace('_', ' ')}</h4>
           <p className="text-muted">{props.tagline}</p>
         </div>
       </Link>
