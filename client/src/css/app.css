@@ -138,8 +138,7 @@
     .event .eventItem .panel-header img {
       padding: 10px;
       border-radius: 15px;
-      height: 50%;
-      width: 50%; }
+      height: 50%; }
     .event .eventItem .panel-body {
       border-top: 5px solid lightblue;
       border-bottom: 5px solid lightblue;
@@ -160,8 +159,7 @@
       overflow: hidden; }
       .event .eventItem .panel-header img {
         padding: 10px;
-        height: 100px;
-        width: 500px; }
+        height: 100px; }
       .event .eventItem .panel-header h2 {
         padding: 10px; }
     .event .eventItem .panel-body {
