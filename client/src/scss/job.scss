@@ -1,8 +1,18 @@
 .job-box {
-  margin: 15px;
+  margin: 2em;
+  overflow: hidden;
 
   .job-title {
     color: red;
   }
 
+  .card-text{
+    overflow: auto;
+  }
+
+  button{
+    margin: 10px auto;
+  }
+
 }
+

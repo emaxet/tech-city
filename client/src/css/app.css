@@ -88,9 +88,14 @@
     margin: 2em; }
 
 .job-box {
-  margin: 15px; }
+  margin: 2em;
+  overflow: hidden; }
   .job-box .job-title {
     color: red; }
+  .job-box .card-text {
+    overflow: auto; }
+  .job-box button {
+    margin: 10px auto; }
 
 .event {
   text-align: center;

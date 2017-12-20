@@ -47,10 +47,9 @@ class NewEvent extends Component{
       'cityName'   : this.state.cityName
     })
     .then(() => {
+      this.props.toggleNewEvent();
       window.location.reload();
     });
-
-    this.props.toggleNewEvent();
   }
 
   setDateStart(event){
@@ -92,7 +91,7 @@ class NewEvent extends Component{
         <Form>
           <FormGroup>
             <Label for="eventTitle">Title</Label>
-            <Input type="text" name="eventTitle" id="eventTitle" placeholder="Title" 
+            <Input type="text" maxLength={50} name="eventTitle" id="eventTitle" placeholder="Title" 
             onChange={(e) => {
               this.setState({
                 'title': e.target.value
@@ -103,7 +102,7 @@ class NewEvent extends Component{
 
           <FormGroup>
             <Label for="eventKey">Key</Label>
-            <Input type="text" name="eventKey" id="eventKey" placeholder="Key" 
+            <Input type="text" maxLength={50} name="eventKey" id="eventKey" placeholder="Key" 
             onChange={(e) => {
               this.setState({
                 'keyword': e.target.value
@@ -114,7 +113,7 @@ class NewEvent extends Component{
 
           <FormGroup>
             <Label for="eventImage">Image URL</Label>
-            <Input type="text" name="eventImage" id="eventImage" placeholder="Image Url" 
+            <Input type="text" maxLength={100} name="eventImage" id="eventImage" placeholder="Image Url" 
             onChange={(e) => {
               this.setState({
                 'imageUrl': e.target.value
