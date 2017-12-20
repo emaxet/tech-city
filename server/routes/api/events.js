@@ -37,7 +37,17 @@ module.exports = (knex) => {
       });
   });
 
+  events.put('/:city_name/events/:event_id', (req, res) => {
+    eventHelpers.updateEventsInCity(knex, req, (newEvent) => {
+      res.send(200);
+    });
+  });
 
+  events.delete('/:city_name/events/:event_id', (req, res) => {
+    eventHelpers.deleteEvent(knex, req.params.event_id, () => {
+      res.send(200);
+    });
+  });
 
   return events;
 };

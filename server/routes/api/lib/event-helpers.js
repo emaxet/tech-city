@@ -7,6 +7,36 @@ module.exports = {
       .select('users.username', 'events.title', 'events.description', 'events.image', 'events.keyword', 'events.start_date', 'events.end_date', 'events.start_time', 'events.end_time', 'events.location', 'cities.name', 'cities.id')
       .where({ 'cities.name': cityName})
       .then(cb);
+  },
+
+  updateEventsInCity: (knex, req, cb) => {
+    knex('events')
+    .where({'events.id': req.params.event_id})
+    .then((data) => {
+      knex('events')
+      .where({'events.id': data[0].id})
+        .update({
+          'type_id': req.body.type_id,
+          'city_id': data[0].city_id,
+          'title': req.body.title,
+          'description': req.body.description,
+          'image': req.body.image,
+          'keyword': req.body.keyword,
+          'start_date': req.body.start_date,
+          'end_date': req.body.end_date,
+          'start_time': req.body.start_time,
+          'end_time': req.body.end_time,
+          'location': req.body.location
+        })
+      .then(cb);
+    });
+  },
+
+  deleteEvent: (knex, eventId, cb) => {
+    knex('events')
+    .where({'events.id': eventId})
+    .del()
+    .then(cb);
   }
 
 };
