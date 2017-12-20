@@ -35,6 +35,10 @@ class Eventlist extends Component {
     const iconStyle = {
       color : 'red'
     }
+    function enforce_line_breaks(text){
+      var many_strings = text.split('\n');
+      return many_strings.map(s => (<p>{s}</p>));
+    }
     return (
       <Fade in={true} className="eventItem">
         <div className="panel panel-default">
@@ -51,7 +55,8 @@ class Eventlist extends Component {
               Time: {this.props.start_time} - {this.props.end_time}
             </p>
             <p>
-              Description: {this.props.description}
+              Description: <br/>
+              {enforce_line_breaks(this.props.description)}
             </p>
             <p> 
             Location: {this.props.location} 

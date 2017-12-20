@@ -6,12 +6,14 @@
     color: red;
   }
 
-  .card-text{
-    overflow: auto;
-  }
-
   button{
     margin: 10px auto;
+  }
+
+  .job-body {
+    p {
+      margin: 0
+    }
   }
 
 }

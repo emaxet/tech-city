@@ -42,7 +42,7 @@ class Chat extends Component {
       <div className="cityChat">
         <div className="inputBar">
           <InputGroup className="cityChat">
-            <Input type="text" id="chatBar" name="chatBar" placeholder="Left Your Message" onChange={this.newMessage} onKeyPress={this.inputBarEnter}></Input>
+            <Input type="text" id="chatBar" name="chatBar" placeholder="Leave Your Message" onChange={this.newMessage} onKeyPress={this.inputBarEnter}></Input>
             <InputGroupButton type="submit"><Button onClick={this.submitMessage}>Submit</Button></InputGroupButton>
           </InputGroup>
         </div>

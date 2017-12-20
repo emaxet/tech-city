@@ -47,6 +47,8 @@
       align-content: center;
       overflow: hidden;
       padding: 10px; }
+      .event .eventItem .panel-body p {
+        margin: 0; }
     .event .eventItem .panel-footer {
       text-align: right; }
       .event .eventItem .panel-footer i {

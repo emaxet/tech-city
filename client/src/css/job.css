@@ -3,7 +3,7 @@
   overflow: hidden; }
   .job-box .job-title {
     color: red; }
-  .job-box .card-text {
-    overflow: auto; }
   .job-box button {
     margin: 10px auto; }
+  .job-box .job-body p {
+    margin: 0; }

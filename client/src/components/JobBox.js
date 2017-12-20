@@ -1,42 +1,59 @@
 import React, { Component } from 'react';
-import { Card, Button, CardHeader, CardBody, CardText, Col, Collapse } from 'reactstrap';
+import { Card, Button, CardHeader, CardBody, CardText, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class JobBox extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      collapse: false
+      modal: false
     };
-    this.setCollapse = this.setCollapse.bind(this);
+    this.setmodal = this.setmodal.bind(this);
   }
 
-  setCollapse(e){
+  setmodal(e){
     this.setState({
-      collapse : !this.state.collapse
+      modal : !this.state.modal
     });
   }
 
   render(){
+    function enforce_line_breaks(text){
+      var many_strings = text.split('\n');
+      return many_strings.map(s => (<p>{s}</p>));
+    }
+    
+    function shorten(text) {
+      return text.length > 100 ? text.substring(0, 100) + "..." : text;
+    }
+
+    
     return (
       <Col sm="6" md="6" xl="4">
         <Card className="job-box" body>
           <CardHeader tag="h3" className="text-center">{this.props.company}</CardHeader>
           <CardBody className="job-body">
             <h5 className="job-title">{this.props.title}</h5>
-            <Collapse isOpen={this.state.collapse}>
               <CardText>
-                <Button onClick={this.setCollapse}>Close</Button>
-                <br/>
-                {this.props.description} 
-                <br/>
-                <a target='_blank' href={'http://' + this.props.url}>{this.props.url}</a>
-                <br/>
-                <Button onClick={this.setCollapse}>Close</Button>
+                {shorten(this.props.description)}
               </CardText>
-            </Collapse>
-            <Button onClick={this.setCollapse}>More Info</Button>
+            <Button onClick={this.setmodal}>More Info</Button>
           </CardBody>
         </Card>
+
+        <Modal isOpen={this.state.modal} toggle={this.setmodal} style={{'maxWidth': '70%'}}>
+          <ModalHeader toggle={this.setmodal}>{this.props.company}</ModalHeader>
+          <ModalBody>
+            <h3>Title: {this.props.title}</h3><br/>
+            <h5>Description:</h5> <br/>
+            {enforce_line_breaks(this.props.description)}
+            <br/>
+            <br/>
+            <h5>Link: <br/><a target='_blank' href={'http://' + this.props.url}>{this.props.url}</a></h5>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={this.setmodal}>Close</Button>
+          </ModalFooter>
+        </Modal>
       </Col>
     );
   }

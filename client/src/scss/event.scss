@@ -58,6 +58,9 @@
       align-content: center;
       overflow: hidden;
       padding: 10px;
+      p {
+        margin: 0
+      }
     }
     .panel-footer {
       text-align: right;
