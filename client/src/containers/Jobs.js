@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import {JobBox} from '../components/JobBox';
+import JobBox from '../components/JobBox';
 import axios from 'axios';
 import NewJob from '../components/NewJob'
 
@@ -9,7 +9,8 @@ class Jobs extends Component {
     super(props);
     this.state={
       'jobs' : [],
-      'addJob' : false
+      'addJob' : false,
+      'cityName': this.props.location.pathname.split('/')[2]
     };
     this.toogleAddJob = this.toogleAddJob.bind(this);
   }
