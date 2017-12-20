@@ -18,7 +18,7 @@ class MainNavbar extends React.Component {
     const loggedInLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <a href="#" onClick={this.logout.bind(this)}>Logout</a>
+          <a href="/" onClick={this.logout.bind(this)}>Logout</a>
         </NavItem>
       </Nav>
     )
