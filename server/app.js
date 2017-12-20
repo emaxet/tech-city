@@ -1,6 +1,7 @@
 const ENV = process.env.ENV || "development";
 
 const express      = require('express');
+const app          = express();
 const path         = require('path');
 const favicon      = require('serve-favicon');
 const logger       = require('morgan');
@@ -11,6 +12,27 @@ const passport     = require('passport');
 const session      = require('express-session');
 const bodyParser   = require('body-parser');
 
+app.use(express.static('../client/public'));
+
+// SETTING UP SOCKET.IO SERVER
+
+const server = require('http').createServer(app);
+server.listen(8080, () => console.log('Chat server running on port 4000...'))
+const io = require('socket.io').listen(server);
+let chatUsers = [];
+let connections = [];
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+
+  socket.on('chat message', (msg) => {
+     io.emit('chat message', msg);
+  });
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
 const index  = require('./routes/api/index');
 const users  = require('./routes/api/users');
 const auth   = require('./routes/auth/routes');
@@ -18,7 +40,6 @@ const events = require('./routes/api/events');
 const jobs   = require('./routes/api/jobs');
 const cities = require('./routes/api/cities');
 
-const app = express();
 app.set('port', (process.env.PORT || 5000));
 
 // view engine setup
@@ -30,7 +51,6 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(cookieParser());
 
-app.use(express.static('public'));
 app.use(session({
   secret: process.env.SECRET_KEY,
   resave: true,
