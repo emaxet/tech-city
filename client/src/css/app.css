@@ -1215,13 +1215,25 @@
   margin: 2%;
   font-size: 2.5em; }
 
-.registerForm, .loginForm {
+.registerForm {
   max-width: 900px;
   border: 2px solid black;
   padding: 30px 20px 0 20px; }
-  .registerForm .form-text, .loginForm .form-text {
+  .registerForm .form-text {
     color: red; }
-  .registerForm .btn, .loginForm .btn {
+  .registerForm .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 10px; }
+
+.loginForm {
+  margin: auto;
+  max-width: 550px;
+  border: 2px solid black;
+  padding: 30px 20px 0 20px; }
+  .loginForm .form-text {
+    color: red; }
+  .loginForm .btn {
     width: 150px;
     height: 40px;
     margin-top: 10px; }

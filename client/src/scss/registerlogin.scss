@@ -2,7 +2,7 @@
   margin: 2%;
   font-size: 2.5em;
 }
-.registerForm, .loginForm {
+.registerForm {
   max-width: 900px;
   border: 2px solid black;
   padding: 30px 20px 0 20px;
@@ -16,3 +16,17 @@
   }
 }
 
+.loginForm {
+  margin: auto;
+  max-width: 550px;
+  border: 2px solid black;
+  padding: 30px 20px 0 20px;
+  .form-text {
+    color: red;
+  }
+  .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 10px;
+  }
+}
