@@ -17,6 +17,10 @@ export function registerValidation(data) {
       errors.email = 'Email is required';
     }
 
+    if(!Validator.isLength(data.password, {min:6, max: undefined})) {
+      errors.password = 'Password must be at least 6 characters';
+    }
+
     if(Validator.isEmpty(data.password)) {
       errors.password = 'Password is required';
     }

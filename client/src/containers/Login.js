@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { loginValidation } from '../actions/formValidations';
 import { login } from '../actions/authenticationActions'
 import MainNavbar from './MainNavbar';
+import { addFlashMessage } from '../actions/flashMessages';
 import { Container, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class Login extends React.Component {
@@ -11,7 +12,8 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      errors: {}
+      errors: {},
+      serverError: ''
     };
     this.onChange = this.onChange.bind(this);
     this.isValid = this.isValid.bind(this);
@@ -38,8 +40,14 @@ class Login extends React.Component {
     }
     if(this.isValid()){
       this.props.login(payload).then(
-        (res) => this.props.history.push('/')
-        // (err) => this.setState({ errors: err.data.errors })
+        (res) => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'You are logged in! Welcome!'
+          });
+          this.props.history.push('/')
+        },
+        (err) => this.setState({serverError: err.response.data.message})
       )
     }
   }
@@ -47,8 +55,8 @@ class Login extends React.Component {
 
 
   render() {
-    console.log(this.state)
     const {errors} = this.state;
+    const {serverError} = this.state;
     return (
       <div>
         <MainNavbar />
@@ -67,6 +75,7 @@ class Login extends React.Component {
               <Col sm={10}>
                 <Input type="password" name="password" id="loginPassword" placeholder="Password" onChange={this.onChange} />
                 {errors.password && <span className="form-text">{errors.password}</span>}
+                {serverError.length > 0 && <span className="form-text">{serverError}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -81,4 +90,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null, { login, loginValidation })(Login);
+export default connect(null, { login, loginValidation, addFlashMessage })(Login);

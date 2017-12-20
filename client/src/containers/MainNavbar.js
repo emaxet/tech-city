@@ -1,11 +1,25 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Navbar, Nav, NavItem } from 'reactstrap';
+import { Collapse, Navbar, Nav, NavItem, NavbarToggler } from 'reactstrap';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authenticationActions'
 import Logo from '../images/logo.png';
 
 class MainNavbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   logout(e) {
     e.preventDefault();
     this.props.logout();
@@ -38,7 +52,10 @@ class MainNavbar extends React.Component {
       <div>
         <Navbar color="faded" light expand="md">
           <Link to="/"><img src={Logo} alt="Logo" style={{'height': '70px'}}/></Link>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
               { isAuthenticated ? loggedInLinks : loggedOutLinks }
+          </Collapse>
         </Navbar>
       </div>
     );

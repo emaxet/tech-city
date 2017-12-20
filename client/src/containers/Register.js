@@ -63,7 +63,7 @@ class Register extends React.Component {
           })
           this.props.history.push('/');
         },
-        (err) => this.setState({ errors: err.response.data})
+        (err) => console.log(err.response.data.message)
       )
     }
   }
@@ -71,7 +71,6 @@ class Register extends React.Component {
 
   render() {
     const {errors} = this.state;
-    console.log(this.state);
     return (
       <div>
         <MainNavbar />
