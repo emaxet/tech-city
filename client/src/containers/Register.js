@@ -65,8 +65,7 @@ class Register extends React.Component {
           this.props.history.push('/');
         },
         (err) => {
-          console.log(err.response)
-          this.setState({serverError: err.response.data.errors.error})
+          this.setState({serverError: err.response.data.errors})
         }
       )
     }
@@ -88,7 +87,7 @@ class Register extends React.Component {
               <Col sm={10}>
                 <Input type="text" name="username" id="registerUsername" placeholder="Username" onChange={this.onChange} />
                 {errors.username && <span className="form-text">{errors.username}</span>}
-                {serverError && <span className="form-text">{serverError}</span>}
+                {serverError.username && <span className="form-text">{serverError.username}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -106,6 +105,7 @@ class Register extends React.Component {
               <Col sm={10}>
                 <Input type="email" name="email" id="registerEmail" placeholder="Email" onChange={this.onChange} />
                 {errors.email && <span className="form-text">{errors.email}</span>}
+                {serverError.email && <span className="form-text">{serverError.email}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
