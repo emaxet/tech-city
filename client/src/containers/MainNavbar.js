@@ -26,6 +26,7 @@ class MainNavbar extends React.Component {
   }
 
   render(){
+    console.log(this.props);
 
     const { isAuthenticated } = this.props.authentication;
 
