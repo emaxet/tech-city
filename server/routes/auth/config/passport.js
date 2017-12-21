@@ -31,18 +31,43 @@ module.exports = (knex, passport) => {
       console.log(req.body);
       process.nextTick(() => {
 
-        authHelpers.findUserByEmail(email, (user) => {
-          if (user.length) {
-            return done(null, false);
+        authHelpers.findUserByUsername(req.body.username, (user) => {
+          if(user.length) {
+            const error = new Error('Username Already Exists');
+            error.name = 'CredentialsExist';
+            return done(error, false);
           } else {
-            authHelpers.registerNewUser(req, (user) => {
-              done(null, user);
-            }, (err) => {
-              done(err, null);
-            });
+            authHelpers.findUserByEmail(email, (user) => {
+            if (user.length) {
+              const error = new Error('Email Already Exists');
+              error.name = 'CredentialsExist';
+              return done(error, false);
+            } else {
+              authHelpers.registerNewUser(req, (user) => {
+                const payload = {
+                sub: user[0].id,
+                username: user[0].name,
+                image: user[0].image,
+                bio: user[0].bio,
+                firstName: user[0].first_name,
+                lastName: user[0].last_name
+
+              };
+              const token = jwt.sign(payload, config.jwtSecret);
+              const data = {
+                name: user[0].username
+              }
+              return done(null, token, data);
+              }, (err) => {
+                done(err, null);
+              });
+            }
+          }, (err) => {
+            done(err, null);
+          });
           }
         }, (err) => {
-          done(err, null);
+           return done(error, null)
         });
       });
     }
@@ -71,7 +96,13 @@ module.exports = (knex, passport) => {
           return done(error, false);
         }
         const payload = {
-          sub: user[0].id
+          sub: user[0].id,
+          username: user[0].name,
+          image: user[0].image,
+          bio: user[0].bio,
+          firstName: user[0].first_name,
+          lastName: user[0].last_name
+
         };
         const token = jwt.sign(payload, config.jwtSecret);
         const data = {

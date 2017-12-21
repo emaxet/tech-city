@@ -23,16 +23,14 @@ module.exports = (knex, passport) => {
         });
       }
 
-    return passport.authenticate('local-signup', (err) => {
+    return passport.authenticate('local-signup', (err, token, data) => {
       if (err) {
-        if (users.length) {
-          // the 11000 Mongo code is for a duplication email error
-          // the 409 HTTP status code is for conflict error
+        if (err.name === 'CredentialsExist') {
           return res.status(409).json({
             success: false,
             message: 'Check the form for errors.',
             errors: {
-              email: 'This email is already taken.'
+              error: err.message
             }
           });
         }
@@ -45,7 +43,10 @@ module.exports = (knex, passport) => {
 
       return res.status(200).json({
         success: true,
-        message: 'You have successfully signed up! Now you should be able to log in.',
+        message: 'Welcome! You have successfully signed up!',
+        token: token,
+        data: data
+
       });
     })(req, res, next);
 

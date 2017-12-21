@@ -8,18 +8,18 @@ const validator  = require('validator');
 
 module.exports = {
 
-  findFirstUserById: (id, cb1, err) => {
-    knex('users')
-    .where({id}).first()
-    .then(cb1)
-    .catch(err)
-  },
-
   findUserByEmail: (email, cb, err) => {
      knex('users')
      .where({email: email})
      .then(cb)
      .catch(err)
+  },
+
+  findUserByUsername: (username, cb, err) => {
+    knex('users')
+    .where({username: username})
+    .then(cb)
+    .catch(err)
   },
 
   registerNewUser: (req, cb, err) => {
