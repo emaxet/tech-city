@@ -20,7 +20,8 @@ class Register extends React.Component {
       city: 'Vancouver',
       pic: '',
       bio: '',
-      errors: {}
+      errors: {},
+      serverError: ''
     };
     this.onChange = this.onChange.bind(this);
     this.isValid = this.isValid.bind(this);
@@ -50,20 +51,23 @@ class Register extends React.Component {
       email: this.state.email,
       password: this.state.password,
       city: this.state.city,
-      // pic: this.state.pic,
+      pic: this.state.pic,
       bio: this.state.bio,
       role_id: 1,
     }
     if(this.isValid()){
       this.props.userRegistration(payload).then(
-        () => {
+        (res) => {
           this.props.addFlashMessage({
             type: 'success',
             text: 'You are logged in! Welcome!'
           })
           this.props.history.push('/');
         },
-        (err) => console.log(err.response.data.message)
+        (err) => {
+          console.log(err.response)
+          this.setState({serverError: err.response.data.errors.error})
+        }
       )
     }
   }
@@ -71,6 +75,8 @@ class Register extends React.Component {
 
   render() {
     const {errors} = this.state;
+    const {serverError} = this.state;
+
     return (
       <div>
         <MainNavbar />
@@ -82,6 +88,7 @@ class Register extends React.Component {
               <Col sm={10}>
                 <Input type="text" name="username" id="registerUsername" placeholder="Username" onChange={this.onChange} />
                 {errors.username && <span className="form-text">{errors.username}</span>}
+                {serverError && <span className="form-text">{serverError}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
