@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Fade } from "reactstrap";
+import axios from 'axios';
 
 class Eventlist extends Component {
   constructor(props) {
@@ -27,18 +28,22 @@ class Eventlist extends Component {
   }
 
   trashClick() {
-    this.setState({
-      trash: !this.state.trash
-    })
+    axios.delete(`http://localhost:3000/api/v1/${this.props.name}/events/${this.props.eventId}`)
+    .catch((error) => {
+      console.log(error);
+    });
   }
+
   render() {
     const iconStyle = {
       color : 'red'
     }
+
     function enforce_line_breaks(text){
       var many_strings = text.split('\n');
-      return many_strings.map(s => (<p>{s}</p>));
+      return many_strings.map((s,index) => (<p key={index}> {s} </p>));
     }
+
     return (
       <Fade in={true} className="eventItem">
         <div className="panel panel-default">
@@ -54,17 +59,19 @@ class Eventlist extends Component {
             <p>
               Time: {this.props.start_time} - {this.props.end_time}
             </p>
-            <p>
+            <div>
               Description: <br/>
-              {enforce_line_breaks(this.props.description)}
-            </p>
+              <div className="container">
+                {enforce_line_breaks(this.props.description)}
+              </div>
+            </div>
             <p> 
             Location: {this.props.location} 
             </p>
           </div>
           
           <div className="panel-footer">
-            <i className="fa fa-trash-o" aria-hidden="true" onClick={this.trashClick} style={this.state.trash ? iconStyle : null}></i>
+            <i className="fa fa-trash-o" aria-hidden="true" onClick={this.trashClick}></i>
             <i className="fa fa-share-alt" aria-hidden="true" onClick={this.shareClick} style={this.state.share ? iconStyle : null}></i>
             <i className="fa fa-heartbeat" aria-hidden="true" onClick={this.heartClick} style={this.state.heart ? iconStyle : null}></i>
           </div>

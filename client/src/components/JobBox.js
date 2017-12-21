@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Button, CardHeader, CardBody, CardText, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import axios from 'axios';
 
 class JobBox extends Component{
   constructor(props) {
@@ -8,6 +9,7 @@ class JobBox extends Component{
       modal: false
     };
     this.setmodal = this.setmodal.bind(this);
+    this.trashClick = this.trashClick.bind(this);
   }
 
   setmodal(e){
@@ -16,10 +18,22 @@ class JobBox extends Component{
     });
   }
 
+  trashClick(){
+    axios.delete(`http://localhost:3000/api/v1/${this.props.name}/jobs/${this.props.id}`)
+    .then(() => {
+      this.setState({
+        modal : !this.state.modal
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
   render(){
     function enforce_line_breaks(text){
       var many_strings = text.split('\n');
-      return many_strings.map(s => (<p>{s}</p>));
+      return many_strings.map((s, index) => (<p key={index}>{s}</p>));
     }
     
     function shorten(text) {
@@ -33,9 +47,9 @@ class JobBox extends Component{
           <CardHeader tag="h3" className="text-center">{this.props.company}</CardHeader>
           <CardBody className="job-body">
             <h5 className="job-title">{this.props.title}</h5>
-              <CardText>
-                {shorten(this.props.description)}
-              </CardText>
+            <CardText>
+              {shorten(this.props.description)}
+            </CardText>
             <Button onClick={this.setmodal}>More Info</Button>
           </CardBody>
         </Card>
@@ -52,6 +66,7 @@ class JobBox extends Component{
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.setmodal}>Close</Button>
+            <i className="fa fa-trash-o" aria-hidden="true" onClick={this.trashClick}></i>
           </ModalFooter>
         </Modal>
       </Col>

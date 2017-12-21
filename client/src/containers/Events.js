@@ -4,6 +4,7 @@ import EventNav from '../components/EventNav'
 import { Collapse } from 'reactstrap';
 import axios from 'axios';
 import NewEvent from '../components/NewEvent';
+import { connect } from 'react-redux';
 
 class Events extends Component {
   constructor(props) {
@@ -47,6 +48,20 @@ class Events extends Component {
         console.log(error);
       });
   }
+
+  componentDidUpdate() {
+    axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/events`)
+      .then((res) => {
+        this.setState({
+          'eventlist': res.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      }); 
+  }
+
+
   
   render() {
     const eventlist = this.state.eventlist
@@ -54,7 +69,7 @@ class Events extends Component {
         if(event.image === ''){
           event.image = 'https://picsum.photos/500/100/?random';
         }
-        return <Eventlist {...event} key={index}/>;
+        return <Eventlist {...event} key={event.eventId}/>;
       })
       .reverse();
 
@@ -67,10 +82,13 @@ class Events extends Component {
             Filter
           </button>  
 
-          <button type="button" className="btn btn-primary navbar-btn" onClick={this.toggleNewEvent}>
-            <i className="glyphicon glyphicon-align-left"></i>
-            New
-          </button>  
+          {
+            this.props.auth &&
+            <button type="button" className="btn btn-primary navbar-btn" onClick={this.toggleNewEvent}>
+              <i className="glyphicon glyphicon-align-left"></i>
+              New
+            </button> 
+          } 
         </div>        
         
         <Collapse isOpen={this.state.filterCollapse}>
@@ -89,4 +107,10 @@ class Events extends Component {
   }
 }
 
-export default Events;
+function mapStateToProps(state) {
+  return {
+    auth: state.authentication.isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(Events);

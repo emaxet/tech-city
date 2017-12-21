@@ -4,12 +4,13 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class NewEvent extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      'creatorId': 1,
+      'creatorId': this.props.userId.sub || null,
       'typeId': 1,
       'title': '',
       'description': '',
@@ -49,7 +50,6 @@ class NewEvent extends Component{
     })
     .then(() => {
       this.props.toggleNewEvent();
-      window.location.reload();
     });
   }
 
@@ -84,7 +84,6 @@ class NewEvent extends Component{
   }
   
   render() {
-    
     return (
       <Modal isOpen={this.props.newEventCollapse} toggle={this.props.toggleNewEvent} className={this.props.className}>
       <ModalHeader toggle={this.props.toggleNewEvent}>New Event</ModalHeader>
@@ -169,4 +168,10 @@ class NewEvent extends Component{
   }
 }
 
-export default NewEvent;
+function mapStateToProps(state) {
+  return {
+    userId: state.authentication.user
+  };
+}
+
+export default connect(mapStateToProps)(NewEvent);

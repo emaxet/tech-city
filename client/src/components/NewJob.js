@@ -26,7 +26,6 @@ class NewJob extends Component{
     })
     .then(() => {
       this.props.toogleAddJob();
-      window.location.reload();
     });    
   }
 

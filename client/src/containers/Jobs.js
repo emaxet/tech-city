@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import JobBox from '../components/JobBox';
 import axios from 'axios';
-import NewJob from '../components/NewJob'
+import NewJob from '../components/NewJob';
+import { connect } from 'react-redux';
 
 class Jobs extends Component {
   constructor(props) {
@@ -16,6 +17,18 @@ class Jobs extends Component {
   }
   
   componentDidMount(){
+    axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/jobs`)
+      .then((res) => {
+        this.setState({
+          'jobs': res.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  componentDidUpdate(){
     axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/jobs`)
       .then((res) => {
         this.setState({
@@ -47,11 +60,14 @@ class Jobs extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-sm-12" style={buttonStyle}>
-            <Button color="primary" 
-            onClick={this.toogleAddJob}>
-            Add Job</Button>
-          </div>  
+          {
+            this.props.auth &&
+            <div className="col-sm-12" style={buttonStyle}>
+              <Button color="primary" 
+              onClick={this.toogleAddJob}>
+              Add Job</Button>
+            </div>
+          }  
           <div className="col-sm-12">
             <div className="row row-eq-height">
               {jobs}
@@ -65,4 +81,11 @@ class Jobs extends Component {
   }
 }
 
-export default Jobs;
+
+function mapStateToProps(state) {
+  return {
+    auth: state.authentication.isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(Jobs);

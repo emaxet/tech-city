@@ -47,7 +47,7 @@
       align-content: center;
       overflow: hidden;
       padding: 10px; }
-      .event .eventItem .panel-body p {
+      .event .eventItem .panel-body .container p {
         margin: 0; }
     .event .eventItem .panel-footer {
       text-align: right; }
