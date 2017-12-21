@@ -50,6 +50,7 @@ class NewEvent extends Component{
     })
     .then(() => {
       this.props.toggleNewEvent();
+      this.props.updateApiEvents();
     });
   }
 

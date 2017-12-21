@@ -1,6 +1,8 @@
 const express = require('express');
 const jobs = express.Router();
 const jobHelpers = require('./lib/job-helpers');
+const jwt = require('jsonwebtoken');
+const config = require('../auth/config/config');
 
 module.exports = (knex) => {
 

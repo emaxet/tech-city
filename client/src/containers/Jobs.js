@@ -14,21 +14,14 @@ class Jobs extends Component {
       'cityName': this.props.location.pathname.split('/')[2]
     };
     this.toogleAddJob = this.toogleAddJob.bind(this);
+    this.updateJobsFromAPI = this.updateJobsFromAPI.bind(this);
   }
   
   componentDidMount(){
-    axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/jobs`)
-      .then((res) => {
-        this.setState({
-          'jobs': res.data
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.updateJobsFromAPI();
   }
 
-  componentDidUpdate(){
+  updateJobsFromAPI() {
     axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/jobs`)
       .then((res) => {
         this.setState({
@@ -53,7 +46,7 @@ class Jobs extends Component {
 
     const jobs = this.state.jobs
       .map((job, index) => {
-        return <JobBox {...job} key={index}/>
+        return <JobBox updateJobsFromAPI={this.updateJobsFromAPI} {...job} key={index}/>
       })
       .reverse();
 
@@ -73,7 +66,7 @@ class Jobs extends Component {
               {jobs}
             </div>
 
-            <NewJob {...this.state} toogleAddJob={this.toogleAddJob}/>
+            <NewJob {...this.state} updateJobsFromAPI={this.updateJobsFromAPI} toogleAddJob={this.toogleAddJob}/>
           </div>
         </div>
       </div>

@@ -24,6 +24,7 @@ class JobBox extends Component{
       this.setState({
         modal : !this.state.modal
       });
+      this.props.updateJobsFromAPI();
     })
     .catch((error) => {
       console.log(error);

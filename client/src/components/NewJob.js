@@ -26,13 +26,14 @@ class NewJob extends Component{
     })
     .then(() => {
       this.props.toogleAddJob();
+      this.props.updateJobsFromAPI();
     });    
   }
 
   render() {
     return (
       <Modal isOpen={this.props.addJob} toggle={this.props.toogleAddJob} className={this.props.className}>
-      <ModalHeader toggle={this.props.toogleAddJob}>New Event</ModalHeader>
+      <ModalHeader toggle={this.props.toogleAddJob}>New Job</ModalHeader>
       <ModalBody>
         <Form>
           <FormGroup>

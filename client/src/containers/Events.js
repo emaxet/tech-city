@@ -12,6 +12,7 @@ class Events extends Component {
 
     this.togglefilter = this.togglefilter.bind(this);
     this.toggleNewEvent = this.toggleNewEvent.bind(this);
+    this.updateApiEvents = this.updateApiEvents.bind(this);
 
     const cityName = (this.props.location.pathname.split('/')[2]);
 
@@ -38,6 +39,10 @@ class Events extends Component {
   }
 
   componentDidMount() {
+    this.updateApiEvents();
+  }
+
+  updateApiEvents(){
     axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/events`)
       .then((res) => {
         this.setState({
@@ -49,25 +54,13 @@ class Events extends Component {
       });
   }
 
-  componentDidUpdate() {
-    axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/events`)
-      .then((res) => {
-        this.setState({
-          'eventlist': res.data
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      }); 
-  }
-
   render() {
     const eventlist = this.state.eventlist
       .map((event, index) => {
         if(event.image === ''){
           event.image = 'https://picsum.photos/500/100/?random';
         }
-        return <Eventlist {...event} key={event.eventId}/>;
+        return <Eventlist updateApiEvents={this.updateApiEvents} {...event} key={event.eventId}/>;
       })
       .reverse();
 
@@ -99,7 +92,7 @@ class Events extends Component {
             {eventlist}
         </Collapse>
 
-        <NewEvent newEventCollapse={this.state.newEventCollapse} toggleNewEvent={this.toggleNewEvent} cityName={this.state.cityName}/>
+        <NewEvent newEventCollapse={this.state.newEventCollapse} toggleNewEvent={this.toggleNewEvent} cityName={this.state.cityName} updateApiEvents={this.updateApiEvents}/>
       </div>
     );
   }
