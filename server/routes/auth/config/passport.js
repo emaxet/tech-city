@@ -34,13 +34,13 @@ module.exports = (knex, passport) => {
         authHelpers.findUserByUsername(req.body.username, (user) => {
           if(user.length) {
             const error = new Error('Username Already Exists');
-            error.name = 'CredentialsExist';
+            error.name = 'UsernameExists';
             return done(error, false);
           } else {
             authHelpers.findUserByEmail(email, (user) => {
             if (user.length) {
               const error = new Error('Email Already Exists');
-              error.name = 'CredentialsExist';
+              error.name = 'EmailExists';
               return done(error, false);
             } else {
               authHelpers.registerNewUser(req, (user) => {
