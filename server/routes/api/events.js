@@ -1,6 +1,8 @@
 const express = require('express');
 const events = express.Router();
 const eventHelpers = require('./lib/event-helpers');
+const jwt = require('jsonwebtoken');
+const config = require('../auth/config/config');
 
 module.exports = (knex) => {
 
@@ -12,13 +14,15 @@ module.exports = (knex) => {
   });
 
   events.post('/:city_name/events', (req, res) => {
-    new Promise((resolve, reject) => {
+    const token = req.headers.authorization.split(' ')[1];
+    jwt.verify(token, config.jwtSecret, (err, decoded) => {
+      new Promise((resolve, reject) => {
       resolve(knex('cities').select('id').where('name', req.body.cityName));
-    })
+      })
       .then((data) => {
         knex('events')
           .insert({
-            'creator_id': req.body.creator_id,
+            'creator_id': decoded.sub,
             'type_id': req.body.type_id,
             'city_id': data[0].id,
             'title': req.body.title,
@@ -35,6 +39,7 @@ module.exports = (knex) => {
             res.send(200);
           });
       });
+    });
   });
 
   events.put('/:city_name/events/:event_id', (req, res) => {
