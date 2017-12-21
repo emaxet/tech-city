@@ -47,7 +47,10 @@ class Login extends React.Component {
           });
           this.props.history.push('/')
         },
-        (err) => this.setState({serverError: err.response.data.message})
+        (err) => {
+          console.log(err.response)
+          this.setState({serverError: err.response.data.message})
+        }
       )
     }
   }

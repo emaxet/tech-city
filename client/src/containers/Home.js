@@ -32,7 +32,7 @@ export default class Home extends React.Component {
         <FlashMessageList />
         <Jumbotron fluid>
           <Container className="text-center" fluid>
-            <h1 className="display-3">TECH CITY BABY</h1>
+            <h1 className="title">TECH CITY BABY</h1>
             <p className="lead">Find your city, find your event, find your job, find your community.</p>
           </Container>
         </Jumbotron>
