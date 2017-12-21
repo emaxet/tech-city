@@ -25,14 +25,22 @@ module.exports = (knex, passport) => {
 
     return passport.authenticate('local-signup', (err, token, data) => {
       if (err) {
-        if (err.name === 'CredentialsExist') {
+        if (err.name === 'UsernameExists') {
           return res.status(409).json({
             success: false,
             message: 'Check the form for errors.',
             errors: {
-              error: err.message
+              username: err.message
             }
           });
+        } else if (err.name === 'EmailExists') {
+          return res.status(409).json({
+            success: false,
+            message: 'Check the form for errors.',
+            errors: {
+              email: err.message
+            }
+          })
         }
 
         return res.status(400).json({

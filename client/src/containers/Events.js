@@ -61,8 +61,6 @@ class Events extends Component {
       }); 
   }
 
-
-  
   render() {
     const eventlist = this.state.eventlist
       .map((event, index) => {
@@ -80,7 +78,7 @@ class Events extends Component {
           <button type="button" className="btn btn-primary navbar-btn" onClick={this.togglefilter}>
             <i className="glyphicon glyphicon-align-left"></i>
             Filter
-          </button>  
+          </button>
 
           {
             this.props.auth &&
@@ -95,9 +93,9 @@ class Events extends Component {
           <div className="eventNav">
             <EventNav {...this.state} toggleSideNav={this.toggleSideNav} />
           </div>
-        </Collapse>  
-         
-        <Collapse isOpen={this.state.eventsCollapse}> 
+        </Collapse>
+
+        <Collapse isOpen={this.state.eventsCollapse}>
             {eventlist}
         </Collapse>
 

@@ -82,8 +82,9 @@ class NewEvent extends Component{
       'timeEnd': event.target.value
     })
   }
-  
+
   render() {
+
     return (
       <Modal isOpen={this.props.newEventCollapse} toggle={this.props.toggleNewEvent} className={this.props.className}>
       <ModalHeader toggle={this.props.toggleNewEvent}>New Event</ModalHeader>
@@ -91,7 +92,7 @@ class NewEvent extends Component{
         <Form>
           <FormGroup>
             <Label for="eventTitle">Title</Label>
-            <Input type="text" maxLength={50} name="eventTitle" id="eventTitle" placeholder="Title" 
+            <Input type="text" maxLength={50} name="eventTitle" id="eventTitle" placeholder="Title"
             onChange={(e) => {
               this.setState({
                 'title': e.target.value
@@ -102,7 +103,7 @@ class NewEvent extends Component{
 
           <FormGroup>
             <Label for="eventKey">Key</Label>
-            <Input type="text" maxLength={50} name="eventKey" id="eventKey" placeholder="Key" 
+            <Input type="text" maxLength={50} name="eventKey" id="eventKey" placeholder="Key"
             onChange={(e) => {
               this.setState({
                 'keyword': e.target.value
@@ -113,7 +114,7 @@ class NewEvent extends Component{
 
           <FormGroup>
             <Label for="eventImage">Image URL</Label>
-            <Input type="text" maxLength={100} name="eventImage" id="eventImage" placeholder="Image Url" 
+            <Input type="text" maxLength={100} name="eventImage" id="eventImage" placeholder="Image Url"
             onChange={(e) => {
               this.setState({
                 'imageUrl': e.target.value
@@ -124,14 +125,14 @@ class NewEvent extends Component{
 
           <FormGroup>
             <Label for="eventDes">Description</Label>
-            <Input type="textarea" maxLength="250" name="eventDes" id="eventDes" placeholder="Event Description" 
+            <Input type="textarea" maxLength="250" name="eventDes" id="eventDes" placeholder="Event Description"
             onChange={(e) => {
               this.setState({
                 'description': e.target.value
               })
             }}
             />
-          </FormGroup>  
+          </FormGroup>
 
           <FormGroup>
             <Label for="dateStart">Date Start</Label>
