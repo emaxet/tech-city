@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Fade } from "reactstrap";
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class Eventlist extends Component {
   constructor(props) {
@@ -74,7 +75,7 @@ class Eventlist extends Component {
           </div>
           
           <div className="panel-footer">
-            <i className="fa fa-trash-o" aria-hidden="true" onClick={this.trashClick}></i>
+            {this.props.user.sub === this.props.userId && <i className="fa fa-trash-o" aria-hidden="true" onClick={this.trashClick}></i>}
             <i className="fa fa-share-alt" aria-hidden="true" onClick={this.shareClick} style={this.state.share ? iconStyle : null}></i>
             <i className="fa fa-heartbeat" aria-hidden="true" onClick={this.heartClick} style={this.state.heart ? iconStyle : null}></i>
           </div>
@@ -84,4 +85,10 @@ class Eventlist extends Component {
   }
 }
 
-export default Eventlist;
+function mapStateToProps(state) {
+  return {
+    user: state.authentication.user
+  };
+}
+
+export default connect(mapStateToProps)(Eventlist);

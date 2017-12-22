@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button, CardHeader, CardBody, CardText, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class JobBox extends Component{
   constructor(props) {
@@ -41,7 +42,6 @@ class JobBox extends Component{
       return text.length > 100 ? text.substring(0, 100) + "..." : text;
     }
 
-    
     return (
       <Col sm="6" md="6" xl="4">
         <Card className="job-box" body>
@@ -67,7 +67,7 @@ class JobBox extends Component{
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.setmodal}>Close</Button>
-            <i className="fa fa-trash-o" aria-hidden="true" onClick={this.trashClick}></i>
+            { this.props.user.sub === this.props.userId && <i className="fa fa-trash-o" aria-hidden="true" onClick={this.trashClick}></i>}
           </ModalFooter>
         </Modal>
       </Col>
@@ -76,4 +76,10 @@ class JobBox extends Component{
   
 }
 
-export default JobBox;
+function mapStateToProps(state) {
+  return {
+    user: state.authentication.user
+  };
+}
+
+export default connect(mapStateToProps)(JobBox);
