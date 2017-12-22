@@ -1,6 +1,5 @@
 import React, {Component}from 'react';
 import { connect } from 'react-redux';
-import { logout } from '../actions/authenticationActions'
 
 
 
@@ -17,7 +16,7 @@ class Profile extends Component {
 		return (
 			<div className="container">
 	      <div className="row header" >
-	        <img src={this.state.img} className="media-photo img-circle"/>
+	        <img src={this.state.img} className="media-photo img-circle" alt=""/>
 	        <h3>@username</h3>
 	      </div>
 	      <div className="row">
