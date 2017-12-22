@@ -1,0 +1,9 @@
+{
+  "name": "Tech City",
+  "description": "Community for tech people.",
+  "env": {
+    "DB_HOST": "localhost",
+    "JWT_SECRET": "1234567890abcdefghijklmnopqrstuvwxyz"
+    }
+  }
+}

@@ -9,7 +9,7 @@ class Profile extends Component {
 		const image = this.props.user.image ? this.props.user.image : "https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg";
 		this.state = {
 			img: image,
-		} 
+		}
 	}
 
 	render () {
@@ -39,8 +39,8 @@ class Profile extends Component {
 		              <td>City</td>
 		              <td>{this.props.user.city}</td>
 		            </tr>
-		          </tbody>  
-	          </table>  
+		          </tbody>
+	          </table>
 	        </div>
 	      </div>
 	      <div className="row">
