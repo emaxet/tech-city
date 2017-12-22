@@ -7,50 +7,49 @@ import { logout } from '../actions/authenticationActions'
 class Profile extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {} 
+		const image = this.props.user.image ? this.props.user.image : "https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg";
+		this.state = {
+			img: image,
+		} 
 	}
 
-	 // componentDidMount(){
-  //   axios.get(`http://localhost:3000/api/v1/users/(to do :userid)`)
-  //     .then((res) => {
-  //       this.setState({
-  //         'user': res.data
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
-
 	render () {
-		console.log(this.props);
-
 		return (
 			<div className="container">
 	      <div className="row header" >
-	        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" className="media-photo img-circle"/>
+	        <img src={this.state.img} className="media-photo img-circle"/>
 	        <h3>@username</h3>
 	      </div>
 	      <div className="row">
-	        <div className="col-md-2">
-	          <h4>First Name</h4>
-	          <h4>Last Name</h4>
-	          <h4>E-mail</h4>
-	          <h4>City</h4>  
-	        </div>
-	        <div className="col-md-10">
-	          <h4>Bhav</h4>
-	          <h4>Bains</h4>
-	          <h4>Bhav@bains.com</h4>
-	          <h4>Vancouver</h4>
+	        <div className="table-responsive">
+	          <table className="table table-hover">
+	          	<tbody>
+		            <tr>
+		              <td>First Name</td>
+		              <td>{this.props.user.firstName}</td>
+		            </tr>
+		            <tr>
+		              <td>Last Name</td>
+		              <td>{this.props.user.lastName}</td>
+		            </tr>
+		            <tr>
+		              <td>E-mail</td>
+		              <td>{this.props.user.email}</td>
+		            </tr>
+		            <tr>
+		              <td>City</td>
+		              <td>{this.props.user.city}</td>
+		            </tr>
+		          </tbody>  
+	          </table>  
 	        </div>
 	      </div>
 	      <div className="row">
 	        <div className="col-md-2">
-	          <h4>Bio</h4>
+	          <h2>Bio</h2>
 	        </div>
 	        <div className="col-md-10">
-	          <h4>Bacon ipsum dolor sit amet salami ham hock ham, hamburger corned beef short ribs kielbasa biltong t-bone drumstick tri-tip tail sirloin pork chop. Kielbasa turducken turkey cow shoulder pig prosciutto hamburger corned beef short loin, meatloaf tri-tip drumstick. Shankle sirloin ground round fatback, cow pancetta boudin t-bone pig. Ham short ribs cow tri-tip ribeye beef ribs boudin. Short ribs pork belly leberkas salami chuck, pork loin ball tip tenderloin turkey chicken pork chop filet mignon biltong.</h4>
+	          <h4>{this.props.user.bio}</h4>
 	        </div>
 	      </div>
 	    </div>
