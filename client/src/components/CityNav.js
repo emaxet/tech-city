@@ -4,7 +4,6 @@ import { Collapse, Navbar, NavbarToggler, Nav, NavItem, InputGroupButton, InputG
 
 class CityNav extends Component {
 
-
   constructor(props) {
     super(props);
 
