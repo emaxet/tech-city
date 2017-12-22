@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { registerValidation } from '../actions/formValidations';
-import { userRegistration, doesValueExists } from '../actions/registrationActions';
+import { userRegistration } from '../actions/authenticationActions';
 import MainNavbar from './MainNavbar';
 import { addFlashMessage } from '../actions/flashMessages';
 
@@ -60,7 +60,7 @@ class Register extends React.Component {
         (res) => {
           this.props.addFlashMessage({
             type: 'success',
-            text: 'You are logged in! Welcome!'
+            text: 'You are signed up! Welcome!'
           })
           this.props.history.push('/');
         },
@@ -157,8 +157,4 @@ class Register extends React.Component {
   }
 }
 
-// Register.propTypes = {
-//   userRegistration: React.PropTypes.func.isRequired
-// }
-
-export default connect(null, { registerValidation, userRegistration, addFlashMessage, doesValueExists })(Register);
+export default connect(null, { registerValidation, userRegistration, addFlashMessage })(Register);

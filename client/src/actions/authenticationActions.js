@@ -10,6 +10,17 @@ export function setCurrentUser(user) {
   }
 }
 
+export function userRegistration(payload) {
+  return dispatch => {
+    return axios.post("http://localhost:3000/session/register", payload).then(res => {
+      const token = res.data.token;
+      localStorage.setItem('jwtToken', token);
+      setAuthorizationToken(token);
+      dispatch(setCurrentUser(jwt.decode(token)));
+    });
+  }
+}
+
 export function login(payload) {
   return dispatch => {
     return axios.post('/session/login', payload).then(res => {

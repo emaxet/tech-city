@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { loginValidation } from '../actions/formValidations';
-import { login } from '../actions/authenticationActions'
+import { login } from '../actions/authenticationActions';
 import MainNavbar from './MainNavbar';
 import { addFlashMessage } from '../actions/flashMessages';
 import { Container, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -48,7 +48,6 @@ class Login extends React.Component {
           this.props.history.push('/')
         },
         (err) => {
-          console.log(err.response)
           this.setState({serverError: err.response.data.message})
         }
       )
