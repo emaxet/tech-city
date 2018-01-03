@@ -87,7 +87,11 @@ class Register extends React.Component {
               <Col sm={10}>
                 <Input type="text" name="username" id="registerUsername" placeholder="Username" onChange={this.onChange} />
                 {errors.username && <span className="form-text">{errors.username}</span>}
-                {serverError.username && <span className="form-text">{serverError.username}</span>}
+                {
+                  serverError? 
+                  serverError.username && <span className="form-text">{serverError.username}</span>
+                  : null
+                }
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -105,7 +109,11 @@ class Register extends React.Component {
               <Col sm={10}>
                 <Input type="email" name="email" id="registerEmail" placeholder="Email" onChange={this.onChange} />
                 {errors.email && <span className="form-text">{errors.email}</span>}
-                {serverError.email && <span className="form-text">{serverError.email}</span>}
+                {
+                  serverError?
+                  serverError.email && <span className="form-text">{serverError.email}</span>
+                  :null
+                }
               </Col>
             </FormGroup>
             <FormGroup row>

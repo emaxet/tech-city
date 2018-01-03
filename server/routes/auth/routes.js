@@ -14,7 +14,7 @@ module.exports = (knex, passport) => {
 
     authHelpers.emailExists(req.body.email, (users) => {
 
-    const validationResult = authHelpers.validateRegisterForm(req.body);
+      const validationResult = authHelpers.validateRegisterForm(req.body);
       if (!validationResult.success) {
         return res.status(400).json({
           success: false,
@@ -23,40 +23,40 @@ module.exports = (knex, passport) => {
         });
       }
 
-    return passport.authenticate('local-signup', (err, token, data) => {
-      if (err) {
-        if (err.name === 'UsernameExists') {
-          return res.status(409).json({
+      return passport.authenticate('local-signup', (err, token, data) => {
+        if (err) {
+          if (err.name === 'UsernameExists') {
+            return res.status(409).json({
+              success: false,
+              message: 'Check the form for errors.',
+              errors: {
+                username: err.message
+              }
+            });
+          } else if (err.name === 'EmailExists') {
+            return res.status(409).json({
+              success: false,
+              message: 'Check the form for errors.',
+              errors: {
+                email: err.message
+              }
+            });
+          }
+
+          return res.status(400).json({
             success: false,
-            message: 'Check the form for errors.',
-            errors: {
-              username: err.message
-            }
+            message: 'Could not process the form.'
           });
-        } else if (err.name === 'EmailExists') {
-          return res.status(409).json({
-            success: false,
-            message: 'Check the form for errors.',
-            errors: {
-              email: err.message
-            }
-          })
         }
 
-        return res.status(400).json({
-          success: false,
-          message: 'Could not process the form.'
+        return res.status(200).json({
+          success: true,
+          message: 'Welcome! You have successfully signed up!',
+          token: token,
+          data: data
+
         });
-      }
-
-      return res.status(200).json({
-        success: true,
-        message: 'Welcome! You have successfully signed up!',
-        token: token,
-        data: data
-
-      });
-    })(req, res, next);
+      })(req, res, next);
 
     });
   });
@@ -103,4 +103,4 @@ module.exports = (knex, passport) => {
 
   return router;
 
-}
+};
