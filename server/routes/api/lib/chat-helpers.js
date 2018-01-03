@@ -7,7 +7,7 @@ module.exports = {
 			knex('forums')
 			.insert({
 			'city_id': data[0].id,
-			'user_id': 1,
+			'user_id': req.body.userId,
 			'name': req.body.name,
 			'subject': req.body.subject
 			})

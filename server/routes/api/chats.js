@@ -8,7 +8,7 @@ module.exports = (knex) => {
 
 	chats.post('/:city_name/chats', (req, res) => {
 		chatHelpers.createChat(knex, req, (chats) => {
-			console.log('Chat Added!');
+			res.json('Chat Added!');
 		});
 	});
 
