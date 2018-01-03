@@ -5,7 +5,8 @@ import CityHeader from '../components/CityHeader';
 import CityNav from '../components/CityNav';
 import Events from './Events';
 import Jobs from './Jobs';
-import Chat from './Chat';
+import ChatList from './ChatList';
+import ChatFeed from '../components/Chat';
 
 
 class CityPage extends Component{
@@ -23,7 +24,8 @@ class CityPage extends Component{
                 <Route exact path={`/city/${this.props.match.params.city_name}`} render={props => <Events {...props} />} />
                 <Route exact path={`/city/${this.props.match.params.city_name}/events`} render={props => <Events {...props} />} />
                 <Route exact path={`/city/${this.props.match.params.city_name}/jobs`} render={props => <Jobs {...props} />} />
-                <Route exact path={`/city/${this.props.match.params.city_name}/chat`} render={props => <Chat {...props} />} />
+                <Route exact path={`/city/${this.props.match.params.city_name}/chat`} render={props => <ChatList {...props} />} />
+                <Route exact path={`/city/${this.props.match.params.city_name}/chat/:chatId`} render={props => <ChatFeed {...props} />} />
               </Switch>
             </div>
           </div>

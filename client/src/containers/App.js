@@ -19,7 +19,6 @@ class App extends Component {
           <Route path={"/register"} render={props => <Register {...props} />} />
           <Route path={"/login"} render={props => <Login {...props} />} />
           <Route path={"/profile"} render={props => <Profile {...props} />} />
-
         </Switch>
       </BrowserRouter>
     );

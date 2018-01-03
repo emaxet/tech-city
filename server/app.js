@@ -11,13 +11,14 @@ const knex         = require('knex')(knexConfig[ENV]);
 const passport     = require('passport');
 const session      = require('express-session');
 const bodyParser   = require('body-parser');
+const chatHelpers  = require('./routes/api/lib/chat-helpers');
 
 app.use(express.static('../client/public'));
 
 // SETTING UP SOCKET.IO SERVER
 
 const server = require('http').createServer(app);
-server.listen(8080, () => console.log('Chat server running on port 4000...'))
+server.listen(8080, () => console.log('Chat server running on port 8080...'))
 const io = require('socket.io').listen(server);
 let chatUsers = [];
 let connections = [];
@@ -25,8 +26,10 @@ let connections = [];
 io.on('connection', function(socket){
   console.log('a user connected');
 
-  socket.on('chat message', (msg) => {
-     io.emit('chat message', msg);
+  socket.on('chat message', (data) => {
+    chatHelpers.addNewPost(knex, data, () => {
+      io.emit(`chat message ${data.chatId}`, data.message);
+    })
   });
   socket.on('disconnect', function(){
     console.log('user disconnected');
@@ -39,6 +42,7 @@ const auth   = require('./routes/auth/routes');
 const events = require('./routes/api/events');
 const jobs   = require('./routes/api/jobs');
 const cities = require('./routes/api/cities');
+const chats  = require('./routes/api/chats');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -69,6 +73,7 @@ app.use('/api/v1/users', users(knex));
 app.use('/api/v1', events(knex));
 app.use('/api/v1', jobs(knex));
 app.use('/api/v1', cities(knex));
+app.use('/api/v1', chats(knex));
 
 
 // catch 404 and forward to error handler

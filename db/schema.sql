@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS "posts" (
   "forum_id" INTEGER,
   "user_id" INTEGER,
   "header" VARCHAR(1000),
-  "content" TEXT,
+  "content" TEXT, 
   "created_at" TIMESTAMP NOT NULL DEFAULT current_timestamp,
   "updated_at" TIMESTAMP NOT NULL DEFAULT current_timestamp
 );

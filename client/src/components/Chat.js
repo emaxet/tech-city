@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Input, InputGroup, InputGroupButton, Button } from 'reactstrap';
 import ChatMessages from '../components/ChatMessages';
 import io from 'socket.io-client';
+import axios from 'axios';
 
 
 class Chat extends Component {
@@ -10,7 +11,9 @@ class Chat extends Component {
     this.state = {
       messages: [],
       newMessage: '',
-      endpoint: 'http://localhost:8080'
+      endpoint: 'http://localhost:8080',
+      chatId: this.props.location.pathname.split('/')[4],
+      initialLoad: false
     };
     this.newMessage = this.newMessage.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
@@ -25,8 +28,8 @@ class Chat extends Component {
 
   submitMessage(e) {
     const socket = io(this.state.endpoint);
-    const message = this.state.newMessage;
-    socket.emit('chat message', message);
+    const data = {message: this.state.newMessage, chatId: this.state.chatId};
+    socket.emit('chat message', data);
   }
 
   inputBarEnter(e) {
@@ -35,9 +38,25 @@ class Chat extends Component {
     }
   }
 
+  fetchApiMessages() {
+    axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/chats/${this.state.chatId}`)
+    .then((res) => {
+      this.setState ({
+        'messages': res.data,
+        'initialLoad': true
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
   componentDidMount() {
+    if (!this.state.initialLoad) {
+      this.fetchApiMessages();
+    }
     const socket = io(this.state.endpoint);
-    socket.on('chat message', (msg) => {
+    socket.on(`chat message ${this.state.chatId}`, (msg) => {
       this.setState({
         messages: this.state.messages.concat({ name: 'Username', message: msg})
       });
