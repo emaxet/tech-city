@@ -35,7 +35,7 @@ export default class Home extends React.Component {
         <FlashMessageList />
         <Jumbotron id="home-header">
 
-          <video id="header-video" autoplay loop>
+          <video id="header-video" autoplay='1' and loop='1'>
             <source src={webm} type="video/webm"/>
             <source src={mp4} type="video/mp4"/>
             <source src={ogv} type="video/ogv"/>
