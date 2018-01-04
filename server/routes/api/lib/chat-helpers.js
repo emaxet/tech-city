@@ -18,7 +18,7 @@ module.exports = {
 	findChatsByCity: (knex, cityName, cb) => {
 		knex('forums')
 		.join('cities', 'cities.id', 'forums.city_id')
-		.select('forums.id', 'forums.name', 'forums.subject')
+		.select('forums.id', 'forums.name', 'forums.subject', 'forums.user_id', 'forums.city_id')
 		.where({'cities.name': cityName})
 		.then(cb);
 	},

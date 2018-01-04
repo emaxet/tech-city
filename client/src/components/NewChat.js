@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class NewChat extends Component {
 	constructor(props) {
@@ -16,7 +17,7 @@ class NewChat extends Component {
 
 	submitForm() {
 		axios.post(`http://localhost:3000/api/v1/${this.props.cityName}/chats`, {
-			'userId': 1,
+			'userId': this.props.userId.sub || null,
 			'name': this.state.name,
 			'subject': this.state.subject
 		}).then(() => {
@@ -63,4 +64,10 @@ class NewChat extends Component {
 	}
 }
 
-export default NewChat;
+function mapStateToProps(state) {
+  return {
+    userId: state.authentication.user
+  };
+}
+
+export default connect(mapStateToProps)(NewChat);
