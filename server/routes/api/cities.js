@@ -9,13 +9,13 @@ module.exports = (knex) => {
 	    cityHelpers.findAllCities(knex, (cities) => {
 	    	const cityData = [];
 
-	    	function sleep(period){
-  				return new Promise(resolve => setTimeout(() => resolve(), period));
+	    	function pause(time){
+  				return new Promise(resolve => setTimeout(() => resolve(), time));
 			}
 
-			async function run() {
+			async function fetchCities() {
 				for (let i = 0; i < cities.length; i++) {
-					await sleep(50);
+					await pause(75);
 		    		cityHelpers.findCityData(knex, cities[i], (data) => {
 				    	cityData.push(data);
 				    	if (i === cities.length - 1) {
@@ -25,7 +25,7 @@ module.exports = (knex) => {
 	    		}
 			}
 
-			run();
+			fetchCities();
 	    });
   	});
 
