@@ -35,10 +35,6 @@ class CityNav extends Component {
               <NavItem>
                 <NavLink exact to={`/city/${this.props.city_name}/chat`} activeClassName="active">Chat</NavLink>
               </NavItem>
-              <InputGroup>
-                  <Input type="location" name="location" placeholder="search location" />
-                  <InputGroupButton type="submit"><Button>Search</Button></InputGroupButton>
-              </InputGroup>
             </Nav>
           </Collapse>
         </Navbar>

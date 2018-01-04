@@ -37,9 +37,7 @@ export default class Home extends React.Component {
           </Container>
         </Jumbotron>
         <Container>
-          <div className="row row-eq-height">
             {cities}
-          </div>
         </Container>
       </div>
     );

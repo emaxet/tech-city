@@ -6,62 +6,38 @@
   background-color: lightblue; }
 
 .city-box {
-  margin: 0 0 30px;
-  text-align: center; }
+  overflow: hidden;
+  display: inline-block;
+  width: 350px;
+  height: 250px;
+  margin: 10px;
+  text-align: left;
+  cursor: pointer;
+  position: relative; }
+  .city-box img {
+    width: 350px;
+    height: 250px;
+    border: 3px solid #fff;
+    border-radius: 3px;
+    object-fit: cover;
+    position: absolute; }
+  .city-box .city-text {
+    background-color: black;
+    color: white;
+    opacity: 0.75;
+    width: 344px;
+    margin-left: 3px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    transform: translate(0, 32%);
+    transition: all ease 0.5s; }
+  .city-box .city-info span {
+    margin: 0 10px; }
 
-.city-link {
-  background-color: #ffffff;
-  position: relative;
-  display: block;
-  max-width: 400px;
-  margin: 0 auto;
-  cursor: pointer; }
-
-.city-link img {
-  height: 150px;
-  margin: auto;
-  display: block; }
-
-.city-hover {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: all ease 0.5s;
-  opacity: 0;
-  background: rgba(20, 23, 25, 0.9); }
-
-.city-link .city-hover:hover {
-  opacity: 1; }
-
-.city-link .city-hover .city-hover-content {
-  font-size: 20px;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  height: 20px;
-  margin-top: -12px;
-  text-align: center;
-  color: white; }
-
-.city-link .city-hover .city-hover-content i {
-  margin-top: -12px; }
-
-.city-caption {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 25px;
-  text-align: center;
-  background-color: #fff;
-  text-decoration: none; }
-
-.city-caption h4 {
-  margin: 0;
-  text-transform: none; }
-
-.city-caption p {
-  font-size: 16px;
-  font-style: italic;
-  margin: 0; }
+.city-box:hover .city-text {
+  transform: translate(0); }
 
 .cityPage {
   overflow: hidden; }
