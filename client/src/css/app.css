@@ -2,14 +2,20 @@
 a, a:hover {
   text-decoration: none !important; }
 
-.navbar {
-  background: lightgrey;
+.active {
+  color: #37a4e7 !important; }
+
+.main-nav {
+  padding: 0 40px;
+  font-size: 1.1em;
+  background: #d0d0d0;
   height: 70px; }
-  .navbar .nav-item {
+  .main-nav .nav-item a {
+    color: black;
     margin: 10px; }
-  .navbar .active {
-    background-color: lightblue; }
-  .navbar .dropdown-item, .navbar .dropdown-item a {
+  .main-nav .nav-item a:hover {
+    color: #37a4e7; }
+  .main-nav .dropdown-item, .main-nav .dropdown-item a {
     color: black; }
 
 #home-header {
@@ -18,7 +24,6 @@ a, a:hover {
   padding: 0;
   position: relative;
   overflow: hidden;
-  margin-top: 70px;
   border-radius: 0; }
   #home-header video {
     position: absolute;

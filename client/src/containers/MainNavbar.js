@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Collapse, Navbar, Nav, NavItem, NavbarToggler, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authenticationActions'
-import Logo from '../images/logo.png';
+import Logo from '../images/techcityLogo.png';
 
 class MainNavbar extends React.Component {
   constructor(props) {
@@ -65,8 +65,8 @@ class MainNavbar extends React.Component {
 
     return (
       <div>
-        <Navbar className="fixed-top" light expand="md">
-          <Link to="/"><img src={Logo} alt="Logo" style={{'height': '70px'}}/></Link>
+        <Navbar className="main-nav" light expand="md">
+          <Link to="/"><img src={Logo} alt="Logo" style={{'height': '40px'}}/></Link>
           <NavbarToggler onClick={this.mobileToggle} />
           <Collapse isOpen={this.state.mobileDropdownOpen} navbar>
               { isAuthenticated ? loggedInLinks : loggedOutLinks }

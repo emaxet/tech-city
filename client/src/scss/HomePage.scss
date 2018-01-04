@@ -2,15 +2,22 @@ a, a:hover {
   text-decoration: none!important
 }
 
-// NAVBAR
-.navbar {
-  background: lightgrey;
+.active {
+  color: #37a4e7!important;
+}
+
+// MAIN NAVBAR
+.main-nav {
+  padding: 0 40px;
+  font-size: 1.1em;
+  background: #d0d0d0;
   height: 70px;
-  .nav-item {
+  .nav-item a {
+    color: black;
     margin: 10px;
   }
-  .active {
-    background-color: lightblue;
+  .nav-item a:hover {
+    color: #37a4e7;
   }
   .dropdown-item, .dropdown-item a {
     color: black;
@@ -23,7 +30,6 @@ a, a:hover {
   padding: 0;
   position: relative;
   overflow: hidden;
-  margin-top: 70px;
   border-radius: 0;
   video {
     position: absolute;
