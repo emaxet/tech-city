@@ -1,23 +1,55 @@
-.nav-item {
-  margin: 10px; }
+a, a:hover {
+  text-decoration: none !important; }
 
-.active {
-  background-color: lightblue; }
+.navbar {
+  background: lightgrey;
+  height: 70px; }
+  .navbar .nav-item {
+    margin: 10px; }
+  .navbar .active {
+    background-color: lightblue; }
+  .navbar .dropdown-item, .navbar .dropdown-item a {
+    color: black; }
+
+#home-header {
+  z-index: 1;
+  height: 70vh;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  margin-top: 70px; }
+  #home-header video {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    object-fit: cover; }
+  #home-header .header-text {
+    font-family: 'Share Tech', sans-serif;
+    z-index: 2;
+    margin-top: 25vh; }
+    #home-header .header-text #header-title {
+      font-size: 10em;
+      color: white; }
+    #home-header .header-text #header-tagline {
+      font-size: 1.2em;
+      color: #ffb8b8; }
 
 .city-box {
-  overflow: hidden;
   display: inline-block;
   width: 350px;
   height: 250px;
   margin: 10px;
   text-align: left;
   cursor: pointer;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
   .city-box img {
     width: 350px;
     height: 250px;
-    border: 3px solid #fff;
-    border-radius: 3px;
     object-fit: cover;
     position: absolute; }
   .city-box .city-text {

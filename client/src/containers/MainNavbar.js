@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Collapse, Navbar, Nav, NavItem, NavbarToggler } from 'reactstrap';
+import { Collapse, Navbar, Nav, NavItem, NavbarToggler, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authenticationActions'
 import Logo from '../images/logo.png';
@@ -8,15 +8,23 @@ import Logo from '../images/logo.png';
 class MainNavbar extends React.Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
+    this.loggedInToggle = this.loggedInToggle.bind(this);
+    this.mobileToggle = this.mobileToggle.bind(this);
     this.state = {
-      isOpen: false
+      dropdownOpen: false,
+      mobileDropdownOpen: false
     };
   }
 
-  toggle() {
+  loggedInToggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
+  mobileToggle() {
+    this.setState({
+      mobileDropdownOpen: !this.state.isOpen
     });
   }
 
@@ -27,12 +35,20 @@ class MainNavbar extends React.Component {
 
   render(){
     const { isAuthenticated } = this.props.authentication;
+    console.log(this.props.user);
 
     const loggedInLinks = (
       <Nav className="ml-auto" navbar>
-        <NavItem>
-          <a href="/" onClick={this.logout.bind(this)}>Logout</a>
-        </NavItem>
+        <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.loggedInToggle}>
+          <DropdownToggle nav caret>
+            USERNAME
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem>Profile</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem><a href="/" onClick={this.logout.bind(this)}>Logout</a></DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </Nav>
     )
 
@@ -49,10 +65,10 @@ class MainNavbar extends React.Component {
 
     return (
       <div>
-        <Navbar color="faded" light expand="md">
+        <Navbar className="fixed-top" light expand="md">
           <Link to="/"><img src={Logo} alt="Logo" style={{'height': '70px'}}/></Link>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <NavbarToggler onClick={this.mobileToggle} />
+          <Collapse isOpen={this.state.mobileDropdownOpen} navbar>
               { isAuthenticated ? loggedInLinks : loggedOutLinks }
           </Collapse>
         </Navbar>
@@ -63,7 +79,8 @@ class MainNavbar extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    authentication: state.authentication
+    authentication: state.authentication,
+    user: state.user
   };
 }
 

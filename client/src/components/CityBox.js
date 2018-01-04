@@ -5,7 +5,7 @@ export const CityBox = (props) => {
   return (
     <div className="city-box">
       <Link to={`/city/${props.name.replace(' ', '_')}`} className="city-link">
-        <img src={props.image} alt="City Picture"/>
+        <img src={props.image} alt="City"/>
         <div className="city-text">
           <h4>{props.name}</h4>
           <p>{props.tagline}</p>
