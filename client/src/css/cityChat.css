@@ -4,3 +4,29 @@
 @media screen and (min-width: 560px) {
   .cityChat .inputBar {
     padding: 0 5em; } }
+
+.chatNav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px; }
+  .chatNav button {
+    margin: 0 3px; }
+  .chatNav .chatSearchIcon {
+    margin: 0 5px;
+    font-size: 35px;
+    color: lightblue; }
+
+.chatSearchBox {
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 5px; }
+  .chatSearchBox .chatSearch {
+    height: 40px; }
+
+.chatList {
+  text-align: center;
+  width: 80%;
+  border: black solid 10px;
+  margin: 20px auto 0 auto;
+  padding: 20px; }
