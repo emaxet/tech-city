@@ -46,11 +46,12 @@ module.exports = (knex, passport) => {
               authHelpers.registerNewUser(req, (user) => {
                 const payload = {
                 sub: user[0].id,
-                username: user[0].name,
+                username: user[0].username,
                 image: user[0].image,
                 bio: user[0].bio,
                 firstName: user[0].first_name,
-                lastName: user[0].last_name
+                lastName: user[0].last_name,
+                email: email
 
               };
               const token = jwt.sign(payload, config.jwtSecret);
@@ -97,11 +98,12 @@ module.exports = (knex, passport) => {
         }
         const payload = {
           sub: user[0].id,
-          username: user[0].name,
+          username: user[0].username,
           image: user[0].image,
           bio: user[0].bio,
           firstName: user[0].first_name,
-          lastName: user[0].last_name
+          lastName: user[0].last_name,
+          email: email
 
         };
         const token = jwt.sign(payload, config.jwtSecret);
