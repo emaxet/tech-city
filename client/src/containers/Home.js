@@ -48,7 +48,7 @@ export default class Home extends React.Component {
 
         </Jumbotron>
 
-        <Container>
+        <Container id="cities-list">
           {cities}
         </Container>
       </div>

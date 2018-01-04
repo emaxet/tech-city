@@ -17,7 +17,8 @@ a, a:hover {
   padding: 0;
   position: relative;
   overflow: hidden;
-  margin-top: 70px; }
+  margin-top: 70px;
+  border-radius: 0; }
   #home-header video {
     position: absolute;
     top: 0;
@@ -38,12 +39,14 @@ a, a:hover {
       font-size: 1.2em;
       color: #ffb8b8; }
 
+#cities-list {
+  max-width: 1200px; }
+
 .city-box {
   display: inline-block;
   width: 350px;
   height: 250px;
-  margin: 10px;
-  text-align: left;
+  margin: 20px;
   cursor: pointer;
   position: relative;
   overflow: hidden; }
