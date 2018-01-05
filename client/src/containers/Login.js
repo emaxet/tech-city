@@ -62,9 +62,9 @@ class Login extends React.Component {
     return (
       <div>
         <MainNavbar />
-        <h2 className="registerTitle text-center">Login</h2>
-        <Container>
-          <Form className="loginForm" onSubmit={this.handleSubmit}>
+        <h2 className="form-title text-center">Login</h2>
+        <Container className="loginForm">
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup row>
               <Label for="loginEmail" sm={2}>Email</Label>
               <Col sm={10}>

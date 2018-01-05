@@ -76,8 +76,7 @@ a, a:hover {
     background-color: black;
     color: white;
     opacity: 0.75;
-    width: 344px;
-    margin-left: 3px;
+    width: 350px;
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -1243,29 +1242,18 @@ a, a:hover {
   .cityChat .inputBar {
     padding: 0 5em; } }
 
-.registerTitle, .loginTitle {
-  margin: 2%;
-  font-size: 2.5em; }
+h2.form-title {
+  margin-top: 40px;
+  color: black; }
 
-.registerForm {
+.registerForm, .loginForm {
   max-width: 900px;
-  border: 2px solid black;
-  padding: 30px 20px 0 20px; }
-  .registerForm .form-text {
+  border-radius: 4px;
+  padding: 30px 20px 0 20px;
+  margin-bottom: 40px; }
+  .registerForm .form-text, .loginForm .form-text {
     color: red; }
-  .registerForm .btn {
-    width: 150px;
-    height: 40px;
-    margin-top: 10px; }
-
-.loginForm {
-  margin: auto;
-  max-width: 550px;
-  border: 2px solid black;
-  padding: 30px 20px 0 20px; }
-  .loginForm .form-text {
-    color: red; }
-  .loginForm .btn {
+  .registerForm .btn, .loginForm .btn {
     width: 150px;
     height: 40px;
     margin-top: 10px; }

@@ -79,7 +79,7 @@ class Register extends React.Component {
     return (
       <div>
         <MainNavbar />
-        <h2 className="registerTitle text-center">Register</h2>
+        <h2 className="form-title text-center">Register</h2>
         <Container className="registerForm">
           <Form onSubmit={this.handleSubmit}>
             <FormGroup row>
@@ -88,7 +88,7 @@ class Register extends React.Component {
                 <Input type="text" name="username" id="registerUsername" placeholder="Username" onChange={this.onChange} />
                 {errors.username && <span className="form-text">{errors.username}</span>}
                 {
-                  serverError? 
+                  serverError?
                   serverError.username && <span className="form-text">{serverError.username}</span>
                   : null
                 }
