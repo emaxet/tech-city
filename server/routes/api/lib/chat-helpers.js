@@ -18,14 +18,16 @@ module.exports = {
 	findChatsByCity: (knex, cityName, cb) => {
 		knex('forums')
 		.join('cities', 'cities.id', 'forums.city_id')
-		.select('forums.id', 'forums.name', 'forums.subject')
+		.select('forums.id', 'forums.name', 'forums.subject', 'forums.user_id', 'forums.city_id')
 		.where({'cities.name': cityName})
 		.then(cb);
 	},
 
 	findChatPostsById: (knex, req, cb) => {
 		knex('posts')
+		.fullOuterJoin('users', 'posts.name', 'users.username')
 		.where({forum_id: req.params.chat_id})
+		.select('posts.message', 'posts.name', 'users.image')
 		.then(cb);
 	},
 
@@ -33,7 +35,7 @@ module.exports = {
 		knex('posts')
 		.insert({
 			forum_id: data.chatId,
-			name: 'Username',
+			name: data.username,
 			message: data.message
 		})
 		.then(cb);

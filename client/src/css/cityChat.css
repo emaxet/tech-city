@@ -1,6 +1,31 @@
-.cityChat .inputBar {
-  width: 100%; }
+.chatNav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px; }
+  .chatNav button {
+    margin: 0 3px; }
+  .chatNav .chatSearchIcon {
+    margin: 0 5px;
+    font-size: 35px;
+    color: lightblue; }
+  .chatNav .chatSearchIcon:hover {
+    cursor: pointer; }
 
-@media screen and (min-width: 560px) {
-  .cityChat .inputBar {
-    padding: 0 5em; } }
+.chatSearchBox {
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 5px; }
+  .chatSearchBox .chatSearch {
+    height: 40px; }
+
+.chatList {
+  text-align: center;
+  width: 80%;
+  margin: 20px auto 0 auto;
+  padding: 20px; }
+  .chatList .chatItem {
+    margin: 5px 0; }
+    .chatList .chatItem .chatDesc {
+      color: lightgrey;
+      font-size: 0.75em; }

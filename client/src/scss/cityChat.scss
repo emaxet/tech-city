@@ -1,13 +1,40 @@
-.cityChat {
-  .inputBar {
-    width: 100%;
+.chatNav {
+	display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  button {
+  	margin: 0 3px;
+  }
+  .chatSearchIcon {
+    margin: 0 5px;  
+    font-size: 35px;
+    color: lightblue;
+  }
+  .chatSearchIcon:hover {
+    cursor: pointer;
   }
 }
 
-@media screen and (min-width: 560px) {
-  .cityChat {
-    .inputBar {
-      padding: 0 5em;
+.chatSearchBox {
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 5px;
+  .chatSearch {
+    height: 40px;
+  }
+}
+
+.chatList {
+	text-align: center;
+	width: 80%;
+	margin: 20px auto 0 auto;
+	padding: 20px;
+  .chatItem {
+    margin: 5px 0;
+    .chatDesc {
+      color: lightgrey;
+      font-size: 0.75em;
     }
   }
 }

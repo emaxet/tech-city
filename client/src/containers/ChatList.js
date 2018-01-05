@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Chat from '../components/Chat';
 import NewChat from '../components/NewChat';
+import { connect } from 'react-redux';
+import { Collapse } from 'reactstrap';
 
 class ChatList extends Component {
 	constructor(props) {
@@ -12,11 +12,13 @@ class ChatList extends Component {
 		const cityName = this.props.location.pathname.split('/')[2];
 		this.toggleNewChat = this.toggleNewChat.bind(this);
 		this.fetchApiChats = this.fetchApiChats.bind(this);
+		this.toggleSearchBar = this.toggleSearchBar.bind(this);
 
 		this.state = {
 			'chats': [],
 			'cityName': cityName,
-			'newChatCollapse': false
+			'newChatCollapse': false,
+			'searchCollapse': false
 		}
 	}
 
@@ -39,23 +41,65 @@ class ChatList extends Component {
 	    });
   	}
 
+  	listMyChats() {
+  		alert('To Do!')
+  	}
+
+  	toggleSearchBar() {
+  		this.setState({
+  			'searchCollapse': !this.state.searchCollapse
+  		});
+  	}
+
 	componentDidMount() {
 		this.fetchApiChats();
 	}
 
 	render() {
+		let loggedInChatNav;
+		if (this.props.userId.sub) {
+			loggedInChatNav = (
+				<div>
+					<button type="button" className="btn btn-primary navbar-btn chat-nav" onClick={this.toggleNewChat}>
+		              	<i className="glyphicon glyphicon-align-left"></i>
+		              	New Chat
+		            </button>
+		            <button type="button" className="btn btn-primary navbar-btn chat-nav" onClick={this.listMyChats}>
+		            <i className="glyphicon glyphicon-align-left"></i>
+		              	My Chats
+		            </button>
+	            </div>
+			)
+		}
+
+		let searchBar;
+		if (this.state.searchCollapse) {
+			searchBar = (
+				<div className="input-group chatSearchBox">
+					<input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Chats..." aria-describedby="basic-addon1" />
+				</div>
+			)
+		}
 
 		const chats = this.state.chats;
 
 		return (
 			<div>
-				<button type="button" className="btn btn-primary navbar-btn chat-nav" onClick={this.toggleNewChat}>
-              		<i className="glyphicon glyphicon-align-left"></i>
-              		New Chat
-            	</button> 
+				<div className="chatNav">
+					{ loggedInChatNav }
+					<i className="fa fa-search chatSearchIcon" aria-hidden="true" onClick={this.toggleSearchBar}></i>
+            	</div>
+            	<Collapse isOpen={this.state.searchCollapse}>
+          			{ searchBar }
+          		</Collapse>
 				<div className='chatList'>
 					{chats.map(chat => {
-						return <div className="chatLink"><Link to={`chat/${chat.id}`}>{`${chat.name}`} </Link></div>
+						return ( 
+							<div className="chatItem">
+								<div className="chatTitle"><Link to={`chat/${chat.id}`}>{`${chat.name}`} </Link></div>
+								<p className="chatSubject">{`${chat.subject}`}</p>
+							</div>
+						)
 					})}
 				</div>
 				<NewChat newChatCollapse={this.state.newChatCollapse} toggleNewChat={this.toggleNewChat} cityName={this.state.cityName} fetchApiChats={this.fetchApiChats} />
@@ -64,4 +108,10 @@ class ChatList extends Component {
 	}
 }
 
-export default ChatList;
+function mapStateToProps(state) {
+  return {
+    userId: state.authentication.user
+  };
+}
+
+export default connect(mapStateToProps)(ChatList);
