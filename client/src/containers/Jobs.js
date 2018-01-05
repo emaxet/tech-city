@@ -13,10 +13,10 @@ class Jobs extends Component {
       'addJob' : false,
       'cityName': this.props.location.pathname.split('/')[2]
     };
-    this.toogleAddJob = this.toogleAddJob.bind(this);
+    this.toggleAddJob = this.toggleAddJob.bind(this);
     this.updateJobsFromAPI = this.updateJobsFromAPI.bind(this);
   }
-  
+
   componentDidMount(){
     this.updateJobsFromAPI();
   }
@@ -33,7 +33,7 @@ class Jobs extends Component {
       });
   }
 
-  toogleAddJob(e){
+  toggleAddJob(e){
     this.setState({
       'addJob' : !this.state.addJob
     });
@@ -56,17 +56,17 @@ class Jobs extends Component {
           {
             this.props.auth &&
             <div className="col-sm-12" style={buttonStyle}>
-              <Button color="primary" 
-              onClick={this.toogleAddJob}>
+              <Button color="primary"
+              onClick={this.toggleAddJob}>
               Add Job</Button>
             </div>
-          }  
+          }
           <div className="col-sm-12">
             <div className="row row-eq-height">
               {jobs}
             </div>
 
-            <NewJob {...this.state} updateJobsFromAPI={this.updateJobsFromAPI} toogleAddJob={this.toogleAddJob}/>
+            <NewJob {...this.state} updateJobsFromAPI={this.updateJobsFromAPI} toggleAddJob={this.toggleAddJob}/>
           </div>
         </div>
       </div>
