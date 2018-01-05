@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Input, InputGroup, InputGroupButton, Button } from 'reactstrap';
 import ChatMessages from '../components/ChatMessages';
+import ChatConnections from '../components/ChatConnections';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -10,10 +11,11 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      chatId: this.props.location.pathname.split('/')[4],
+      socket: io('http://localhost:8080', {query: `chatId=${this.props.location.pathname.split('/')[4]}&username=${this.props.username}&userImage=${this.props.userImage}`}),
+      connections: [],
       messages: [],
       newMessage: '',
-      endpoint: 'http://localhost:8080',
-      chatId: this.props.location.pathname.split('/')[4],
       initialLoad: false,
       submittedMessage: false
     };
@@ -33,9 +35,9 @@ class Chat extends Component {
     this.setState({
       'submittedMessage': true
     })
-    const socket = io(this.state.endpoint);
+    // const socket = io(this.state.endpoint);
     const data = {message: this.state.newMessage, chatId: this.state.chatId, username: this.props.username, userImage: this.props.userImage};
-    socket.emit('chat message', data);
+    this.state.socket.emit('chat message', data);
   }
 
   inputBarEnter(e) {
@@ -65,8 +67,7 @@ class Chat extends Component {
     if (!this.state.initialLoad) {
       this.fetchApiMessages();
     }
-    const socket = io(this.state.endpoint);
-    socket.on(`chat message ${this.state.chatId}`, (data) => {
+    this.state.socket.on(`chat message`, (data) => {
       this.setState({
         messages: this.state.messages.concat({ name: data.username, message: data.message, image: data.userImage})
       });
@@ -77,6 +78,16 @@ class Chat extends Component {
         'submittedMessage': false
       })
     });
+    this.state.socket.on('connection event', (data) => {
+      console.log(data);
+      this.setState({
+        connections: data
+      })
+    });
+  }
+
+  componentWillUnmount(){
+    this.state.socket.disconnect();
   }
 
   render() {
@@ -84,10 +95,15 @@ class Chat extends Component {
       return <ChatMessages {...e} key={index}/>
     })
 
+    const connections = this.state.connections.map((e, index) => {
+      return <ChatConnections {...e} key={index}/>
+    })
+
     return (
       <div className="cityChatContainer">
         <div className="chatSidebar">
         <h3>Connected Users</h3>
+        { connections }
         </div>
         <div className="cityChat">
           <div className="chatMessage">
