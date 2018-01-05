@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import axios from 'axios';
-import { connect } from 'react-redux';
+import { eventValidation } from '../actions/formValidations';
 
 class NewEvent extends Component{
   constructor(props) {
@@ -21,7 +22,8 @@ class NewEvent extends Component{
       'timeEnd': moment().format('hh:mm'),
       'imageUrl': '',
       'keyword': '',
-      'cityName': this.props.cityName
+      'cityName': this.props.cityName,
+      'errors': {}
     }
 
     this.setDateStart = this.setDateStart.bind(this);
@@ -29,29 +31,40 @@ class NewEvent extends Component{
     this.setLocation = this.setLocation.bind(this);
     this.settimeStart = this.settimeStart.bind(this);
     this.settimeEnd = this.settimeEnd.bind(this);
+    this.isValid = this.isValid.bind(this);
     this.submitForm = this.submitForm.bind(this);
   }
 
+  isValid(){
+    const { errors, isValid } = this.props.eventValidation(this.state);
+    if (!isValid) {
+      this.setState({errors});
+    }
+    return isValid;
+  }
+
   submitForm(){
-    axios.post(`http://localhost:3000/api/v1/${this.state.cityName}/events`, {
-      'creator_id' : this.state.creatorId,
-      'type_id'    : this.state.typeId,
-      'city_id'    : this.props.cityId,
-      'title'      : this.state.title,
-      'description': this.state.description,
-      'image'      : this.state.imageUrl,
-      'keyword'    : this.state.keyword,
-      'start_date' : this.state.dateStart.format('YYYY-MM-DD'),
-      'end_date'   : this.state.dateEnd.format('YYYY-MM-DD'),
-      'start_time' : this.state.timeStart,
-      'end_time'   : this.state.timeEnd,
-      'location'   : this.state.location,
-      'cityName'   : this.state.cityName
-    })
-    .then(() => {
-      this.props.toggleNewEvent();
-      this.props.updateApiEvents();
-    });
+    if(this.isValid()){
+      axios.post(`http://localhost:3000/api/v1/${this.state.cityName}/events`, {
+        'creator_id' : this.state.creatorId,
+        'type_id'    : this.state.typeId,
+        'city_id'    : this.props.cityId,
+        'title'      : this.state.title,
+        'description': this.state.description,
+        'image'      : this.state.imageUrl,
+        'keyword'   : this.state.keyword,
+        'start_date' : this.state.dateStart.format('YYYY-MM-DD'),
+        'end_date'   : this.state.dateEnd.format('YYYY-MM-DD'),
+        'start_time' : this.state.timeStart,
+        'end_time'   : this.state.timeEnd,
+        'location'   : this.state.location,
+        'cityName'   : this.state.cityName
+      })
+      .then(() => {
+        this.props.toggleNewEvent();
+        this.props.updateApiEvents();
+      });
+    }
   }
 
   setDateStart(event){
@@ -85,7 +98,7 @@ class NewEvent extends Component{
   }
 
   render() {
-
+    const {errors} = this.state;
     return (
       <Modal isOpen={this.props.newEventCollapse} toggle={this.props.toggleNewEvent} className={this.props.className}>
       <ModalHeader toggle={this.props.toggleNewEvent}>New Event</ModalHeader>
@@ -100,11 +113,12 @@ class NewEvent extends Component{
               })
             }}
             />
+            {errors.title && <span className="form-error">{errors.title}</span>}
           </FormGroup>
 
           <FormGroup>
-            <Label for="eventKey">Key</Label>
-            <Input type="text" maxLength={50} name="eventKey" id="eventKey" placeholder="Key"
+            <Label for="eventKey">Category</Label>
+            <Input type="text" maxLength={50} name="eventKey" id="eventKey" placeholder="Category"
             onChange={(e) => {
               this.setState({
                 'keyword': e.target.value
@@ -133,6 +147,7 @@ class NewEvent extends Component{
               })
             }}
             />
+            {errors.description && <span className="form-error">{errors.description}</span>}
           </FormGroup>
 
           <FormGroup>
@@ -158,6 +173,7 @@ class NewEvent extends Component{
           <FormGroup>
             <Label for="eventLocation">Location</Label>
             <Input type="text" maxLength="200" name="eventLocation" id="eventLocation" placeholder="Location" onChange={this.setLocation}/>
+            {errors.location && <span className="form-error">{errors.location}</span>}
           </FormGroup>
         </Form>
       </ModalBody>
@@ -176,4 +192,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(NewEvent);
+export default connect(mapStateToProps, { eventValidation })(NewEvent);

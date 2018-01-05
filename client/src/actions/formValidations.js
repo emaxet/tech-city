@@ -62,3 +62,49 @@ export function loginValidation(data) {
     }
   }
 }
+
+export function jobValidation(data) {
+  return dispatch => {
+    let errors = {};
+
+    if(Validator.isEmpty(data.company)) {
+      errors.company = 'Please provide the company\'s name';
+    }
+
+    if(Validator.isEmpty(data.title)) {
+      errors.title = 'Please provide a job title';
+    }
+
+    if(Validator.isEmpty(data.description)) {
+      errors.description = 'Please provide a description';
+    }
+
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    }
+  }
+}
+
+export function eventValidation(data) {
+  return dispatch => {
+    let errors = {};
+
+    if(Validator.isEmpty(data.title)) {
+      errors.title = 'Please provide a name';
+    }
+
+    if(Validator.isEmpty(data.description)) {
+      errors.description = 'Please provide a decription';
+    }
+
+    if(Validator.isEmpty(data.location)) {
+      errors.location = 'Please provide a location';
+    }
+
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    }
+  }
+}
