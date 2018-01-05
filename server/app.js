@@ -28,7 +28,7 @@ io.on('connection', function(socket){
 
   socket.on('chat message', (data) => {
     chatHelpers.addNewPost(knex, data, () => {
-      io.emit(`chat message ${data.chatId}`, data.message);
+      io.emit(`chat message ${data.chatId}`, data);
     })
   });
   socket.on('disconnect', function(){

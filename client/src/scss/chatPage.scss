@@ -1,18 +1,50 @@
-  .cityChat {
-  	.chatMessage {
-  		display: flex;
-  		flex-direction: column;
-  		margin-bottom: 75px;
-  	}
-    .inputBar {
-      padding: 5px;
-      background: lightblue;
-	  border-top: 1px solid black;
-	  bottom: 0;
-	  display: flex;
-	  left: 0;
-	  position: fixed;
-	  right: 0;
+  .cityChatContainer {
+    display: flex;
+    .chatSidebar {
+      width: 25%;
+      border-right: solid black 1px;
+      text-align: center;
+    }
+    .cityChat {
+      .chatMessage {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 25px;
+      }
+      .inputBar {
+        padding: 5px;
+        background: lightblue;
+      border-top: 1px solid black;
+      bottom: 0;
+      display: flex;
+      position: fixed;
+      width: 100%;
+      right: 0;
+      }
     }
   }
+
+  .chatMessageContainer {
+    display: flex;
+    margin: 5px 0;
+    .chatUserImage {
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 5px;
+      }
+      height: 50px;
+      width: 50px;
+      margin-right: 5px;
+    }
+    .messageContent {
+      .username {
+        font-weight: 700;
+        color: black;
+      }
+    }
+  }
+
+  
 

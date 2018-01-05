@@ -25,11 +25,14 @@ module.exports = {
   registerNewUser: (req, cb, err) => {
     const hash = bcrypt.hashSync(req.body.password, 10);
     knex('users').insert({
-      first_name: req.body.firstName,
-      last_name: req.body.lastName,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       email: req.body.email,
       password: hash,
-      username: req.body.username
+      username: req.body.username,
+      image: req.body.pic,
+      bio: req.body.bio,
+      role_id: req.body.role_id
     })
     .returning('*')
     .then(cb)

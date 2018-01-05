@@ -1,14 +1,35 @@
-.cityChat .chatMessage {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 75px; }
+.cityChatContainer {
+  display: flex; }
+  .cityChatContainer .chatSidebar {
+    width: 25%;
+    border-right: solid black 1px;
+    text-align: center; }
+  .cityChatContainer .cityChat .chatMessage {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px; }
+  .cityChatContainer .cityChat .inputBar {
+    padding: 5px;
+    background: lightblue;
+    border-top: 1px solid black;
+    bottom: 0;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    right: 0; }
 
-.cityChat .inputBar {
-  padding: 5px;
-  background: lightblue;
-  border-top: 1px solid black;
-  bottom: 0;
+.chatMessageContainer {
   display: flex;
-  left: 0;
-  position: fixed;
-  right: 0; }
+  margin: 5px 0; }
+  .chatMessageContainer .chatUserImage {
+    height: 50px;
+    width: 50px;
+    margin-right: 5px; }
+    .chatMessageContainer .chatUserImage img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 5px; }
+  .chatMessageContainer .messageContent .username {
+    font-weight: 700;
+    color: black; }

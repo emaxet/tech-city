@@ -25,7 +25,9 @@ module.exports = {
 
 	findChatPostsById: (knex, req, cb) => {
 		knex('posts')
+		.fullOuterJoin('users', 'posts.name', 'users.username')
 		.where({forum_id: req.params.chat_id})
+		.select('posts.message', 'posts.name', 'users.image')
 		.then(cb);
 	},
 
@@ -33,7 +35,7 @@ module.exports = {
 		knex('posts')
 		.insert({
 			forum_id: data.chatId,
-			name: 'Username',
+			name: data.username,
 			message: data.message
 		})
 		.then(cb);

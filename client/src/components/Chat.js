@@ -3,6 +3,7 @@ import { Input, InputGroup, InputGroupButton, Button } from 'reactstrap';
 import ChatMessages from '../components/ChatMessages';
 import io from 'socket.io-client';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 
 class Chat extends Component {
@@ -28,11 +29,12 @@ class Chat extends Component {
   }
 
   submitMessage(e) {
+    e.target.value = '';
     this.setState({
       'submittedMessage': true
     })
     const socket = io(this.state.endpoint);
-    const data = {message: this.state.newMessage, chatId: this.state.chatId};
+    const data = {message: this.state.newMessage, chatId: this.state.chatId, username: this.props.username, userImage: this.props.userImage};
     socket.emit('chat message', data);
   }
 
@@ -64,9 +66,9 @@ class Chat extends Component {
       this.fetchApiMessages();
     }
     const socket = io(this.state.endpoint);
-    socket.on(`chat message ${this.state.chatId}`, (msg) => {
+    socket.on(`chat message ${this.state.chatId}`, (data) => {
       this.setState({
-        messages: this.state.messages.concat({ name: 'Username', message: msg})
+        messages: this.state.messages.concat({ name: data.username, message: data.message, image: data.userImage})
       });
       if (this.state.submittedMessage) {
         this.scrollToBottom();
@@ -83,20 +85,32 @@ class Chat extends Component {
     })
 
     return (
-      <div className="cityChat">
-        <div className="chatMessage">
-          {chatMessages}
+      <div className="cityChatContainer">
+        <div className="chatSidebar">
+        <h3>Connected Users</h3>
         </div>
-        <div className="inputBar">
-          <InputGroup className="cityChat">
-            <Input type="text" id="chatBar" name="chatBar" placeholder="Leave Your Message" onChange={this.newMessage} onKeyPress={this.inputBarEnter}></Input>
-            <InputGroupButton type="submit"><Button onClick={this.submitMessage}>Submit</Button></InputGroupButton>
-          </InputGroup>
+        <div className="cityChat">
+          <div className="chatMessage">
+            {chatMessages}
+          </div>
+          <div className="inputBar">
+            <InputGroup className="cityChat">
+              <Input type="text" id="chatBar" name="chatBar" placeholder="Leave Your Message" onChange={this.newMessage} onKeyPress={this.inputBarEnter}></Input>
+              <InputGroupButton type="submit"><Button onClick={this.submitMessage}>Submit</Button></InputGroupButton>
+            </InputGroup>
+          </div>
+          <div ref={(el) => { this.messagesEnd = el; }}></div>
         </div>
-        <div ref={(el) => { this.messagesEnd = el; }}></div>
       </div>
     )
   }
 }
 
-export default Chat;
+function mapStateToProps(state) {
+  return {
+    username: state.authentication.user.username,
+    userImage: state.authentication.user.image
+  };
+}
+
+export default connect(mapStateToProps)(Chat);
