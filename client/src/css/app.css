@@ -1228,13 +1228,6 @@ a, a:hover {
 .slideOutUp {
   animation-name: slideOutUp; }
 
-.cityChat .inputBar {
-  width: 100%; }
-
-@media screen and (min-width: 560px) {
-  .cityChat .inputBar {
-    padding: 0 5em; } }
-
 .chatNav {
   display: flex;
   justify-content: center;
@@ -1246,6 +1239,8 @@ a, a:hover {
     margin: 0 5px;
     font-size: 35px;
     color: lightblue; }
+  .chatNav .chatSearchIcon:hover {
+    cursor: pointer; }
 
 .chatSearchBox {
   width: 50%;
@@ -1291,3 +1286,18 @@ a, a:hover {
     width: 150px;
     height: 40px;
     margin-top: 10px; }
+
+.cityChat .chatMessage {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 75px; }
+
+.cityChat .inputBar {
+  padding: 5px;
+  background: lightblue;
+  border-top: 1px solid black;
+  bottom: 0;
+  display: flex;
+  left: 0;
+  position: fixed;
+  right: 0; }

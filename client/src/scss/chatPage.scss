@@ -1,0 +1,18 @@
+  .cityChat {
+  	.chatMessage {
+  		display: flex;
+  		flex-direction: column;
+  		margin-bottom: 75px;
+  	}
+    .inputBar {
+      padding: 5px;
+      background: lightblue;
+	  border-top: 1px solid black;
+	  bottom: 0;
+	  display: flex;
+	  left: 0;
+	  position: fixed;
+	  right: 0;
+    }
+  }
+

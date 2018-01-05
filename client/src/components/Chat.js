@@ -13,7 +13,8 @@ class Chat extends Component {
       newMessage: '',
       endpoint: 'http://localhost:8080',
       chatId: this.props.location.pathname.split('/')[4],
-      initialLoad: false
+      initialLoad: false,
+      submittedMessage: false
     };
     this.newMessage = this.newMessage.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
@@ -27,6 +28,9 @@ class Chat extends Component {
   }
 
   submitMessage(e) {
+    this.setState({
+      'submittedMessage': true
+    })
     const socket = io(this.state.endpoint);
     const data = {message: this.state.newMessage, chatId: this.state.chatId};
     socket.emit('chat message', data);
@@ -51,6 +55,10 @@ class Chat extends Component {
     });
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
   componentDidMount() {
     if (!this.state.initialLoad) {
       this.fetchApiMessages();
@@ -60,6 +68,12 @@ class Chat extends Component {
       this.setState({
         messages: this.state.messages.concat({ name: 'Username', message: msg})
       });
+      if (this.state.submittedMessage) {
+        this.scrollToBottom();
+      }
+      this.setState({
+        'submittedMessage': false
+      })
     });
   }
 
@@ -70,16 +84,16 @@ class Chat extends Component {
 
     return (
       <div className="cityChat">
+        <div className="chatMessage">
+          {chatMessages}
+        </div>
         <div className="inputBar">
           <InputGroup className="cityChat">
             <Input type="text" id="chatBar" name="chatBar" placeholder="Leave Your Message" onChange={this.newMessage} onKeyPress={this.inputBarEnter}></Input>
             <InputGroupButton type="submit"><Button onClick={this.submitMessage}>Submit</Button></InputGroupButton>
           </InputGroup>
         </div>
-
-        <div className="chatMessage">
-          {chatMessages}
-        </div>
+        <div ref={(el) => { this.messagesEnd = el; }}></div>
       </div>
     )
   }

@@ -1,17 +1,3 @@
-.cityChat {
-  .inputBar {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 560px) {
-  .cityChat {
-    .inputBar {
-      padding: 0 5em;
-    }
-  }
-}
-
 .chatNav {
 	display: flex;
   justify-content: center;
@@ -24,6 +10,9 @@
     margin: 0 5px;  
     font-size: 35px;
     color: lightblue;
+  }
+  .chatSearchIcon:hover {
+    cursor: pointer;
   }
 }
 
