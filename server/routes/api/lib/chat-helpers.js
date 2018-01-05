@@ -39,5 +39,15 @@ module.exports = {
 			message: data.message
 		})
 		.then(cb);
+	},
+
+	updateConnectedUsers: (io, connections, socketData) => {
+		const chatUsers = [];
+  		connections.forEach((connection) => {
+	    	if (connection.roomId === socketData.roomId) {
+	      		chatUsers.push(connection);
+	    	}
+  		});
+  		io.to(`chat${socketData.roomId}`).emit('connection event', chatUsers);
 	}
 }
