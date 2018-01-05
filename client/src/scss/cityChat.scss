@@ -39,7 +39,13 @@
 .chatList {
 	text-align: center;
 	width: 80%;
-	border: black solid 10px;
 	margin: 20px auto 0 auto;
 	padding: 20px;
+  .chatItem {
+    margin: 5px 0;
+    .chatDesc {
+      color: lightgrey;
+      font-size: 0.75em;
+    }
+  }
 }

@@ -94,7 +94,12 @@ class ChatList extends Component {
           		</Collapse>
 				<div className='chatList'>
 					{chats.map(chat => {
-						return <div className="chatLink"><Link to={`chat/${chat.id}`}>{`${chat.name}`} </Link></div>
+						return ( 
+							<div className="chatItem">
+								<div className="chatTitle"><Link to={`chat/${chat.id}`}>{`${chat.name}`} </Link></div>
+								<p className="chatSubject">{`${chat.subject}`}</p>
+							</div>
+						)
 					})}
 				</div>
 				<NewChat newChatCollapse={this.state.newChatCollapse} toggleNewChat={this.toggleNewChat} cityName={this.state.cityName} fetchApiChats={this.fetchApiChats} />
