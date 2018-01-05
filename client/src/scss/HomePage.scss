@@ -1,5 +1,10 @@
+// SITE WIDE CSS
 a, a:hover {
   text-decoration: none!important
+}
+
+.form-error {
+  color: red;
 }
 
 // MAIN NAVBAR
@@ -83,11 +88,13 @@ a, a:hover {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  border-radius: 5px;
   img {
     width: 350px;
     height: 250px;
     object-fit: cover;
     position: absolute;
+    border-radius: 5px;
   }
   .city-text {
     background-color: black;
@@ -100,6 +107,7 @@ a, a:hover {
     padding: 10px;
     transform: translate(0, 32%);
     transition: all ease 0.5s;
+    border-radius: 5px;
   }
   .city-info span {
     margin: 0 10px;

@@ -7,8 +7,6 @@ h2.form-title {
   border-radius: 4px;
   padding: 30px 20px 0 20px;
   margin-bottom: 40px; }
-  .registerForm .form-text, .loginForm .form-text {
-    color: red; }
   .registerForm .btn, .loginForm .btn {
     width: 150px;
     height: 40px;

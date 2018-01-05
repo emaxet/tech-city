@@ -2,6 +2,9 @@
 a, a:hover {
   text-decoration: none !important; }
 
+.form-error {
+  color: red; }
+
 .main-nav {
   padding: 0 40px;
   font-size: 1.1em;
@@ -66,12 +69,14 @@ a, a:hover {
   margin: 20px;
   cursor: pointer;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  border-radius: 5px; }
   .city-box img {
     width: 350px;
     height: 250px;
     object-fit: cover;
-    position: absolute; }
+    position: absolute;
+    border-radius: 5px; }
   .city-box .city-text {
     background-color: black;
     color: white;
@@ -82,7 +87,8 @@ a, a:hover {
     bottom: 0;
     padding: 10px;
     transform: translate(0, 32%);
-    transition: all ease 0.5s; }
+    transition: all ease 0.5s;
+    border-radius: 5px; }
   .city-box .city-info span {
     margin: 0 10px; }
 
@@ -1251,8 +1257,6 @@ h2.form-title {
   border-radius: 4px;
   padding: 30px 20px 0 20px;
   margin-bottom: 40px; }
-  .registerForm .form-text, .loginForm .form-text {
-    color: red; }
   .registerForm .btn, .loginForm .btn {
     width: 150px;
     height: 40px;

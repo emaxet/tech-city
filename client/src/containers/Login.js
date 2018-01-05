@@ -69,15 +69,15 @@ class Login extends React.Component {
               <Label for="loginEmail" sm={2}>Email</Label>
               <Col sm={10}>
                 <Input type="email" name="email" id="loginEmail" placeholder="Email" onChange={this.onChange} />
-                {errors.email && <span className="form-text">{errors.email}</span>}
+                {errors.email && <span className="form-error">{errors.email}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="loginPassword" sm={2}>Password</Label>
               <Col sm={10}>
                 <Input type="password" name="password" id="loginPassword" placeholder="Password" onChange={this.onChange} />
-                {errors.password && <span className="form-text">{errors.password}</span>}
-                {serverError.length > 0 && <span className="form-text">{serverError}</span>}
+                {errors.password && <span className="form-error">{errors.password}</span>}
+                {serverError.length > 0 && <span className="form-error">{serverError}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>

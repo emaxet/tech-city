@@ -86,10 +86,10 @@ class Register extends React.Component {
               <Label for="registerUsername" sm={2}>Username*</Label>
               <Col sm={10}>
                 <Input type="text" name="username" id="registerUsername" placeholder="Username" onChange={this.onChange} />
-                {errors.username && <span className="form-text">{errors.username}</span>}
+                {errors.username && <span className="form-error">{errors.username}</span>}
                 {
                   serverError?
-                  serverError.username && <span className="form-text">{serverError.username}</span>
+                  serverError.username && <span className="form-error">{serverError.username}</span>
                   : null
                 }
               </Col>
@@ -108,10 +108,10 @@ class Register extends React.Component {
               <Label for="registerEmail" sm={2}>Email*</Label>
               <Col sm={10}>
                 <Input type="email" name="email" id="registerEmail" placeholder="Email" onChange={this.onChange} />
-                {errors.email && <span className="form-text">{errors.email}</span>}
+                {errors.email && <span className="form-error">{errors.email}</span>}
                 {
                   serverError?
-                  serverError.email && <span className="form-text">{serverError.email}</span>
+                  serverError.email && <span className="form-error">{serverError.email}</span>
                   :null
                 }
               </Col>
@@ -120,14 +120,14 @@ class Register extends React.Component {
               <Label for="registerPassword" sm={2}>Password*</Label>
               <Col sm={10}>
                 <Input type="password" name="password" id="registerPassword" placeholder="Password" onChange={this.onChange} />
-                {errors.password && <span className="form-text">{errors.password}</span>}
+                {errors.password && <span className="form-error">{errors.password}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
               <Label for="registerConfirmPassword" sm={2}>Confirm Password*</Label>
               <Col sm={10}>
                 <Input type="password" name="confirmPassword" id="registerConfirmPassword" placeholder="Password" onChange={this.onChange} />
-                {errors.confirmPassword && <span className="form-text">{errors.confirmPassword}</span>}
+                {errors.confirmPassword && <span className="form-error">{errors.confirmPassword}</span>}
               </Col>
             </FormGroup>
             <FormGroup row>
