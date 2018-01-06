@@ -1290,7 +1290,7 @@ h2.form-title {
 .cityChatContainer {
   display: flex; }
   .cityChatContainer .sidebarWrapper {
-    border-top: 1px solid black;
+    border-top: 1px solid lightgrey;
     position: absolute;
     top: 309px;
     left: 0;
@@ -1300,7 +1300,7 @@ h2.form-title {
     margin: 0; }
     .cityChatContainer .sidebarWrapper .chatSidebar {
       overflow-y: scroll;
-      border-right: solid black 1px;
+      border-right: solid lightgrey 1px;
       display: flex;
       position: fixed;
       align-items: center;
@@ -1308,7 +1308,8 @@ h2.form-title {
       height: calc(100% - 309px - 49px);
       width: 25%; }
       .cityChatContainer .sidebarWrapper .chatSidebar h4 {
-        margin-bottom: 30px; }
+        margin-top: 20px;
+        margin-bottom: 20px; }
       .cityChatContainer .sidebarWrapper .chatSidebar .chatConnectionsContainer {
         margin-bottom: 5px; }
         .cityChatContainer .sidebarWrapper .chatSidebar .chatConnectionsContainer .connectionImage {
@@ -1321,9 +1322,10 @@ h2.form-title {
         .cityChatContainer .sidebarWrapper .chatSidebar .chatConnectionsContainer .connectionName {
           margin: 2px 0;
           font-weight: 700;
-          color: black; }
+          color: black;
+          text-align: center; }
   .cityChatContainer .cityChatWrapper {
-    border-top: 1px solid black;
+    border-top: 1px solid lightgrey;
     position: absolute;
     top: 309px;
     right: 0;
