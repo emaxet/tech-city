@@ -23,10 +23,9 @@ export default class Home extends React.Component {
     });
   }
 
-
   render() {
     const cities = this.state.cities.map((city, index) => {
-      return <CityBox key={index} name={city.name} image={city.image} tagline={city.tagline} />
+      return <CityBox key={index} name={city.name} image={city.image} tagline={city.tagline} users={city.users} events={city.events} jobs={city.jobs}/>
     })
 
     return (
