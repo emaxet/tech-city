@@ -18,7 +18,7 @@ class Register extends React.Component {
       password: '',
       confirmPassword: '',
       city: 'Vancouver',
-      pic: '',
+      pic: 'http://top3friends.com/fb_soulmate/images/user.png',
       bio: '',
       errors: {},
       serverError: ''

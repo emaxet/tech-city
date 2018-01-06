@@ -35,18 +35,19 @@ class MainNavbar extends React.Component {
 
   render(){
     const { isAuthenticated } = this.props.authentication;
-    console.log(this.props.user);
+    const { username, image } = this.props.user;
 
     const loggedInLinks = (
       <Nav className="ml-auto" navbar>
+        <img className="nav-pic" src={image} alt="profile"/>
         <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.loggedInToggle}>
-          <DropdownToggle nav caret>
-            USERNAME
+          <DropdownToggle nav caret className="navbar-word">
+            {username}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem>Profile</DropdownItem>
+            <DropdownItem><NavLink exact to="/profile" className="dropdown-word" activeClassName="active">Profile</NavLink></DropdownItem>
             <DropdownItem divider />
-            <DropdownItem><a href="/" onClick={this.logout.bind(this)}>Logout</a></DropdownItem>
+            <DropdownItem><a href="/" className="dropdown-word" onClick={this.logout.bind(this)}>Logout</a></DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Nav>
@@ -55,17 +56,17 @@ class MainNavbar extends React.Component {
     const loggedOutLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
-          <NavLink exact to="/login" activeClassName="active">Login</NavLink>
+          <NavLink exact to="/login" className="navbar-word" activeClassName="active">Login</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink exact to="/register" activeClassName="active">Register</NavLink>
+          <NavLink exact to="/register" className="navbar-word" activeClassName="active">Register</NavLink>
         </NavItem>
       </Nav>
     )
 
     return (
       <div>
-        <Navbar className="main-nav" light expand="md">
+        <Navbar className="main-nav" expand="md">
           <Link to="/"><img src={Logo} alt="Logo" style={{'height': '40px'}}/></Link>
           <NavbarToggler onClick={this.mobileToggle} />
           <Collapse isOpen={this.state.mobileDropdownOpen} navbar>
@@ -80,7 +81,7 @@ class MainNavbar extends React.Component {
 function mapStateToProps(state) {
   return {
     authentication: state.authentication,
-    user: state.user
+    user: state.authentication.user
   };
 }
 

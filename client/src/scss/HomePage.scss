@@ -13,9 +13,9 @@ a, a:hover {
   font-size: 1.1em;
   background: white;
   height: 55px;
-  .nav-item a {
+  a.navbar-word {
     padding: 8px 14px 8px;
-    margin:0 2px;
+    margin:5px 2px;
     font-size: 16px;
     color: black;
     position: relative;
@@ -23,10 +23,14 @@ a, a:hover {
     border-radius: 3px;
   }
 
-  .nav-item a:hover {
-    background: #37a4e7;
-    color:#fff;
+  a.navbar-word:hover {
+    background-color: #37a4e7;
+    color:#fff!important;
     text-decoration: none;
+  }
+
+  .dropdown-item a {
+    color: black;
   }
 
   .active {
@@ -34,9 +38,10 @@ a, a:hover {
     color: #fff!important;
     text-decoration: none;
   }
-
-  .dropdown-item, .dropdown-item a {
-    color: black;
+  .nav-pic {
+    height: 40px;
+    border-radius: 100%;
+    margin: 5px 5px;
   }
 }
 
