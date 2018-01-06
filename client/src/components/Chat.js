@@ -5,6 +5,7 @@ import ChatConnections from '../components/ChatConnections';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import OverflowScrolling from 'react-overflow-scrolling';
 
 
 class Chat extends Component {
@@ -101,21 +102,25 @@ class Chat extends Component {
 
     return (
       <div className="cityChatContainer">
-        <div className="chatSidebar">
-        <h3>Connected Users</h3>
-        { connections }
+        <div className="sidebarWrapper">
+          <OverflowScrolling className="chatSidebar">
+            <h4>Online</h4>
+            { connections }
+          </OverflowScrolling>
         </div>
-        <div className="cityChat">
-          <div className="chatMessage">
-            {chatMessages}
+        <div className="cityChatWrapper">
+          <div className="cityChat">
+            <div className="chatMessage">
+              {chatMessages}
+            </div>
+            <div ref={(el) => { this.messagesEnd = el; }}></div>
           </div>
-          <div className="inputBar">
-            <InputGroup className="cityChat">
-              <Input type="text" id="chatBar" name="chatBar" placeholder="Leave Your Message" onChange={this.newMessage} onKeyPress={this.inputBarEnter}></Input>
-              <InputGroupButton type="submit"><Button onClick={this.submitMessage}>Submit</Button></InputGroupButton>
-            </InputGroup>
-          </div>
-          <div ref={(el) => { this.messagesEnd = el; }}></div>
+        </div>
+        <div className="inputBar">
+          <InputGroup className="chatInput">
+            <Input type="text" id="chatBar" name="chatBar" placeholder="Leave Your Message" onChange={this.newMessage} onKeyPress={this.inputBarEnter}></Input>
+            <InputGroupButton type="submit"><Button onClick={this.submitMessage}>Submit</Button></InputGroupButton>
+          </InputGroup>
         </div>
       </div>
     )
