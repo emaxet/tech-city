@@ -25,7 +25,6 @@ class ChatList extends Component {
 	fetchApiChats() {
 		axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/chats`)
 		.then((res) => {
-			console.log(res.data);
 			this.setState ({
 				'chats': res.data
 			});
@@ -42,7 +41,10 @@ class ChatList extends Component {
   	}
 
   	listMyChats() {
-  		alert('To Do!')
+  		axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/chats/${this.props.userId.sub}`)
+  		.then((res) => {
+
+  		});
   	}
 
   	toggleSearchBar() {

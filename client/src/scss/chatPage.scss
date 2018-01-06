@@ -1,7 +1,7 @@
   .cityChatContainer {
     display: flex;
     .sidebarWrapper {
-      border-top: 1px solid black;
+      border-top: 1px solid lightgrey;
       position: absolute;
       top: 309px;
       left: 0;
@@ -12,7 +12,8 @@
       .chatSidebar {
         overflow-y: scroll;
         h4 {
-          margin-bottom: 30px;
+          margin-top: 20px;
+          margin-bottom: 20px;
         }
       .chatConnectionsContainer {
         margin-bottom: 5px;
@@ -29,9 +30,10 @@
           margin: 2px 0;
           font-weight: 700;
           color: black;
+          text-align: center;
         }
       }
-        border-right: solid black 1px;
+        border-right: solid lightgrey 1px;
         display: flex;
         position:fixed;
         align-items: center;
@@ -41,7 +43,7 @@
       }
     }
     .cityChatWrapper {
-      border-top: 1px solid black;
+      border-top: 1px solid lightgrey;
       position: absolute;
       top: 309px;
       right: 0;
