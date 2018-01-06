@@ -1,13 +1,20 @@
   .cityChatContainer {
     display: flex;
-    .chatSidebar {
-      h3 {
-        margin-bottom: 25px;
-      }
+    .sidebarWrapper {
+      border-top: 1px solid black;
+      position: absolute;
+      top: 309px;
+      left: 0;
+      bottom: 49px;
+      width: 25%;
+      padding: 0;
+      margin: 0;
+      .chatSidebar {
+        overflow-y: scroll;
+        h4 {
+          margin-bottom: 30px;
+        }
       .chatConnectionsContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         margin-bottom: 5px;
         .connectionImage {
           height: 50px;
@@ -24,33 +31,41 @@
           color: black;
         }
       }
-      width: 25%;
-      border-right: solid black 1px;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-    }
-    .cityChat {
-      .chatMessage {
-        margin-left: 10px;
+        border-right: solid black 1px;
         display: flex;
+        position:fixed;
+        align-items: center;
         flex-direction: column;
-        margin-bottom: 25px;
+        height: calc(100% - 309px - 49px);
+        width: 25%;
       }
-      .inputBar {
-        padding: 5px;
-        background: lightblue;
+    }
+    .cityChatWrapper {
       border-top: 1px solid black;
-      bottom: 0;
-      display: flex;
-      position: fixed;
-      width: 100%;
+      position: absolute;
+      top: 309px;
       right: 0;
+      bottom: 49px;
+      width: 75%;
+      padding: 0;
+      margin: 0;
+      .cityChat {
+        position: fixed;
+        height: calc(100% - 309px - 49px);
+        width: 75%;
+        overflow-y: scroll;
+        .chatMessage {
+          margin-left: 10px;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 5px;
+        }
       }
     }
   }
 
   .chatMessageContainer {
+    overflow-y: scroll;
     display: flex;
     margin: 5px 0;
     .chatUserImage {
@@ -71,5 +86,15 @@
     }
   }
 
+  .inputBar {
+    padding: 5px;
+    background: lightblue;
+    border-top: 1px solid black;
+    bottom: 0;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    right: 0;
+  }
   
 
