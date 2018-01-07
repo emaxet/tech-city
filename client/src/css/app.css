@@ -167,43 +167,13 @@ a, a:hover {
       border: 1px solid #ddd;
       padding: 8px; }
   .event .eventItem {
-    margin: 2em 0;
-    border: 5px solid lightblue;
-    border-radius: 10px;
-    overflow: hidden; }
-    .event .eventItem .panel-header img {
-      padding: 10px;
-      border-radius: 15px;
-      height: 50%; }
-    .event .eventItem .panel-body {
-      border-top: 5px solid lightblue;
-      border-bottom: 5px solid lightblue;
-      text-align: left;
-      align-content: center;
-      overflow: hidden;
-      padding: 10px; }
-      .event .eventItem .panel-body .container p {
-        margin: 0; }
-    .event .eventItem .panel-footer {
-      text-align: right; }
-      .event .eventItem .panel-footer i {
-        padding: 10px; }
+    padding: 2em; }
 
 @media screen and (min-width: 560px) {
   .event {
     padding: 0 5em; }
-    .event .eventItem .panel-header {
-      text-align: center;
-      overflow: hidden; }
-      .event .eventItem .panel-header img {
-        padding: 10px;
-        height: 100px; }
-      .event .eventItem .panel-header h2 {
-        padding: 10px; }
-    .event .eventItem .panel-body {
-      margin-top: 1em;
-      text-align: left;
-      align-content: center; } }
+    .event .eventItem {
+      float: left; } }
 
 /*!
  * animate.css -http://daneden.me/animate

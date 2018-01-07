@@ -52,10 +52,10 @@ class Jobs extends Component {
 
     return (
       <div>
-        <div className="row">
+        <div className="event">
           {
             this.props.auth &&
-            <div className="col-sm-12" style={buttonStyle}>
+            <div className="buttonGroup" style={buttonStyle}>
               <Button color="primary"
               onClick={this.toggleAddJob}>
               Add Job</Button>

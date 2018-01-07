@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem, InputGroupButton, InputGroup, Input, Button } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
 
 class CityNav extends Component {
 

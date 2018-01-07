@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Card, Button, CardHeader, CardBody, CardText, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
+import { Fade, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class JobBox extends Component{
   constructor(props) {
@@ -11,6 +14,8 @@ class JobBox extends Component{
     };
     this.setmodal = this.setmodal.bind(this);
     this.trashClick = this.trashClick.bind(this);
+    this.enforce_line_breaks = this.enforce_line_breaks.bind(this);
+    this.shorten = this.shorten.bind(this);
   }
 
   setmodal(e){
@@ -22,9 +27,6 @@ class JobBox extends Component{
   trashClick(){
     axios.delete(`http://localhost:3000/api/v1/${this.props.name}/jobs/${this.props.id}`)
     .then(() => {
-      this.setState({
-        modal : !this.state.modal
-      });
       this.props.updateJobsFromAPI();
     })
     .catch((error) => {
@@ -32,27 +34,43 @@ class JobBox extends Component{
     });
   }
 
-  render(){
-    function enforce_line_breaks(text){
-      var many_strings = text.split('\n');
-      return many_strings.map((s, index) => (<p key={index}>{s}</p>));
-    }
-    
-    function shorten(text) {
-      return text.length > 100 ? text.substring(0, 100) + "..." : text;
-    }
+  enforce_line_breaks(text){
+    var many_strings = text.split('\n');
+    return many_strings.map((s, index) => (<p key={index}>{s}</p>));
+  }
 
+  shorten(text) {
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  render(){
     return (
-      <Col sm="6" md="6" xl="4">
-        <Card className="job-box" body>
-          <CardHeader tag="h3" className="text-center">{this.props.company}</CardHeader>
-          <CardBody className="job-body">
-            <h5 className="job-title">{this.props.title}</h5>
-            <CardText>
-              {shorten(this.props.description)}
-            </CardText>
-            <Button onClick={this.setmodal}>More Info</Button>
-          </CardBody>
+      <Fade in={true} className="eventItem">
+        <Card style={{width: 245}}>
+        <div onClick={this.setmodal}>
+        <CardContent style={{height: 145}}>
+          <Typography type="headline" component="h2">
+          {this.props.title}
+          </Typography>
+          <Typography component="p">
+          {this.shorten(this.props.description)} 
+          </Typography>
+        </CardContent>
+        </div>
+
+        <CardActions>
+          <Button dense color="primary">
+          <i className="fa fa-share" aria-hidden="true"></i>
+          </Button>
+
+          <Button dense color="primary">
+          <i className="fa fa-heart" aria-hidden="true"></i>
+          </Button>
+
+          {this.props.user.sub === this.props.userId && <Button dense color="primary" onClick={this.trashClick}>
+          <i className="fa fa-trash" aria-hidden="true"></i>
+          </Button>}
+        </CardActions>
         </Card>
 
         <Modal isOpen={this.state.modal} toggle={this.setmodal} style={{'maxWidth': '70%'}}>
@@ -60,17 +78,16 @@ class JobBox extends Component{
           <ModalBody>
             <h3>Title: {this.props.title}</h3><br/>
             <h5>Description:</h5> <br/>
-            {enforce_line_breaks(this.props.description)}
+            {this.enforce_line_breaks(this.props.description)}
             <br/>
             <br/>
             <h5>Link: <br/><a target='_blank' href={'http://' + this.props.url}>{this.props.url}</a></h5>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={this.setmodal}>Close</Button>
-            { this.props.user.sub === this.props.userId && <i className="fa fa-trash-o" aria-hidden="true" onClick={this.trashClick}></i>}
+            <Button color="primary" onClick={this.setmodal}>Close</Button>
           </ModalFooter>
         </Modal>
-      </Col>
+      </Fade>
     );
   }
   

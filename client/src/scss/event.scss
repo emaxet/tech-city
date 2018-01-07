@@ -40,36 +40,7 @@
     }
   }
   .eventItem {
-    margin: 2em 0;
-    border: 5px solid lightblue;
-    border-radius: 10px;
-    overflow: hidden;
-    .panel-header{
-      img {
-        padding: 10px;
-        border-radius: 15px;
-        height: 50%;
-      }
-    }
-    .panel-body {
-      border-top: 5px solid lightblue;
-      border-bottom: 5px solid lightblue;
-      text-align: left;
-      align-content: center;
-      overflow: hidden;
-      padding: 10px;
-      .container{
-        p {
-          margin: 0
-        }
-      }
-    }
-    .panel-footer {
-      text-align: right;
-      i {
-        padding: 10px;
-      }
-    }
+    padding: 2em;
   }
 }
 
@@ -77,22 +48,7 @@
   .event {
     padding: 0 5em;
     .eventItem {
-      .panel-header {
-        text-align: center;
-        overflow: hidden;
-        img {
-          padding: 10px;
-          height: 100px;
-        }
-        h2 {
-          padding: 10px;
-        }
-      }
-      .panel-body {
-        margin-top: 1em;
-        text-align: left;
-        align-content: center;
-      }
+      float: left;
     }
   }
 }
