@@ -14,7 +14,7 @@ class ChatList extends Component {
 		this.fetchApiChats = this.fetchApiChats.bind(this);
 		this.toggleSearchBar = this.toggleSearchBar.bind(this);
 		this.listMyChats = this.listMyChats.bind(this);
-		this.inputBarEnter = this.inputBarEnter.bind(this);
+		this.inputQuery = this.inputQuery.bind(this);
 		this.submitQuery = this.submitQuery.bind(this);
 
 		this.state = {
@@ -50,7 +50,8 @@ class ChatList extends Component {
   		.then((res) => {
   			this.setState ({
   				'chats': res.data,
-  				'showMyChats': !this.state.showMyChats
+  				'showMyChats': !this.state.showMyChats,
+  				'searchCollapse': false
   			});
   			if (!this.state.showMyChats) {
   				this.fetchApiChats();
@@ -82,9 +83,13 @@ class ChatList extends Component {
   		})
   	}
 
-  	inputBarEnter(e) {
-	    this.submitQuery(e);
-  }	
+  	inputQuery(e) {
+  		if (e.target.value === "") {
+  			this.fetchApiChats();
+  		} else {
+  			this.submitQuery(e);
+  		}
+  	}	
 
 	componentDidMount() {
 		this.fetchApiChats();
@@ -119,7 +124,7 @@ class ChatList extends Component {
 		if (this.state.searchCollapse) {
 			searchBar = (
 				<div className="input-group chatSearchBox">
-					<input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Chats..." aria-describedby="basic-addon1" onKeyPress={this.submitQuery}/>
+					<input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Chats..." aria-describedby="basic-addon1" onKeyUp={this.inputQuery}/>
 				</div>
 			)
 		}

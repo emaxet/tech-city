@@ -10,9 +10,7 @@ module.exports = (knex) => {
   });
 
   users.get('/:user_id/chats/:city_name', (req, res) => {
-      console.log(req.params);
   		userHelper.findChatsByUserId(knex, req.params, (chats) => {
-  			console.log(chats);
   			res.json(chats);
   		});
   	});
