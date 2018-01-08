@@ -50,4 +50,12 @@ module.exports = {
   		});
   		io.to(`chat${socketData.roomId}`).emit('connection event', chatUsers);
 	},
+
+	findChatsFromSearchQuery: (knex, req, cb) => {
+		const query = req.params.query; 
+		knex('forums')
+		.where('name', 'like', `%${query}%`)
+		.orWhere('subject', 'like', `%${query}%`)
+		.then(cb);
+	}
 }

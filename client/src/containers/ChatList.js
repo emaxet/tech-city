@@ -14,13 +14,16 @@ class ChatList extends Component {
 		this.fetchApiChats = this.fetchApiChats.bind(this);
 		this.toggleSearchBar = this.toggleSearchBar.bind(this);
 		this.listMyChats = this.listMyChats.bind(this);
+		this.inputBarEnter = this.inputBarEnter.bind(this);
+		this.submitQuery = this.submitQuery.bind(this);
 
 		this.state = {
 			'chats': [],
 			'cityName': cityName,
 			'newChatCollapse': false,
 			'searchCollapse': false,
-			'showMyChats': false
+			'showMyChats': false,
+			'showSearchResults': false
 		}
 	}
 
@@ -64,6 +67,25 @@ class ChatList extends Component {
   		});
   	}
 
+  	submitQuery(e) {
+  		let query = e.target.value;
+  		axios.get(`http://localhost:3000/api/v1/Vancouver/chats/search/${query}`)
+  		.then((res) => {
+  			this.setState ({
+  				'chats': res.data,
+  				'showMyChats': true,
+  				'showSearchResults': true
+  			})
+  			if (!this.state.showMyChats) {
+  				this.fetchApiChats();
+  			}
+  		})
+  	}
+
+  	inputBarEnter(e) {
+	    this.submitQuery(e);
+  }	
+
 	componentDidMount() {
 		this.fetchApiChats();
 	}
@@ -97,7 +119,7 @@ class ChatList extends Component {
 		if (this.state.searchCollapse) {
 			searchBar = (
 				<div className="input-group chatSearchBox">
-					<input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Chats..." aria-describedby="basic-addon1" />
+					<input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Chats..." aria-describedby="basic-addon1" onKeyPress={this.submitQuery}/>
 				</div>
 			)
 		}
