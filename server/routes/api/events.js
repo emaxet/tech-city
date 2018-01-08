@@ -48,6 +48,15 @@ module.exports = (knex) => {
     });
   });
 
+  events.put('/:city_name/events/:event_id/like', (req, res) => {
+    knex('events')
+      .where({id: req.params.event_id})
+      .update({like: req.body.like})
+      .then(() => {
+        res.send(200);
+      });
+  });
+
   events.delete('/:city_name/events/:event_id', (req, res) => {
     eventHelpers.deleteEvent(knex, req.params.event_id, () => {
       res.send(200);

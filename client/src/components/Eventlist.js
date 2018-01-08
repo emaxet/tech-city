@@ -12,11 +12,48 @@ class Eventlist extends Component {
     super(props);
     this.deleteEvent = this.deleteEvent.bind(this);
     this.state = {
-      modal: false
+      modal: false,
+      likeColor: [].concat(this.props.like).includes(this.props.user.sub.toString())? 'red': '',
+      like: [].concat(this.props.like),
+      attend: this.props.attend
     }
     this.enforce_line_breaks = this.enforce_line_breaks.bind(this);
     this.setmodal = this.setmodal.bind(this);
     this.shorten = this.shorten.bind(this);
+    this.eventLike = this.eventLike.bind(this);
+    this.putEventLike = this.putEventLike.bind(this);
+  }
+
+  eventLike(){
+    new Promise((resolve, reject) => {
+      let likeArr = this.state.like;
+      let buttonColor = this.state.likeColor;
+      if(this.state.likeColor === ''){
+        buttonColor = 'red';
+        likeArr = likeArr.includes(this.props.user.sub.toString())? likeArr : likeArr.concat([this.props.user.sub.toString()]);
+      } else{
+        buttonColor = '';
+        likeArr = likeArr.splice(likeArr.indexOf(this.props.user.sub.toString()), 0);
+      }
+      resolve({buttonColor, likeArr})
+    }).then((data) => {
+      this.setState({
+        likeColor: data.buttonColor,
+        like: data.likeArr
+      });
+    }).then(() => {
+      this.putEventLike();
+    });
+  }
+
+  putEventLike(){
+    axios.put(`/api/v1/${this.props.name}/events/${this.props.eventId}/like`, {'like': this.state.like})
+      .then(() => {
+        this.props.updateApiEvents();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   
   deleteEvent() {
@@ -63,17 +100,26 @@ class Eventlist extends Component {
         </CardContent>
         </div>
         <CardActions>
-          <Button dense color="primary">
-          <i className="fa fa-share" aria-hidden="true"></i>
-          </Button>
+          {
+            this.props.auth &&
+            <Button dense color="primary">
+            <i className="fa fa-share" aria-hidden="true"></i>
+            </Button>
+          }
 
-          <Button dense color="primary">
-          <i className="fa fa-heart" aria-hidden="true"></i>
-          </Button>
+          {
+            this.props.auth &&
+            <Button dense color="primary" style={{color: this.state.likeColor}} onClick={this.eventLike}>
+            <i className="fa fa-heart" aria-hidden="true"></i>
+            </Button>
+          }
 
-          {this.props.user.sub === this.props.userId && <Button dense color="primary" onClick={this.deleteEvent}>
-          <i className="fa fa-trash" aria-hidden="true"></i>
-          </Button>}
+          {
+            this.props.user.sub === this.props.userId && 
+            <Button dense color="primary" onClick={this.deleteEvent}>
+            <i className="fa fa-trash" aria-hidden="true"></i>
+            </Button>
+          }
         </CardActions>
       </Card>
 
@@ -123,6 +169,7 @@ class Eventlist extends Component {
 
 function mapStateToProps(state) {
   return {
+    auth: state.authentication.isAuthenticated,
     user: state.authentication.user
   };
 }
