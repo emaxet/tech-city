@@ -9,6 +9,14 @@ module.exports = (knex) => {
     userHelper.findAllUsers(knex, (users) => res.json(users));
   });
 
+  users.get('/:user_id/chats/:city_name', (req, res) => {
+      console.log(req.params);
+  		userHelper.findChatsByUserId(knex, req.params, (chats) => {
+  			console.log(chats);
+  			res.json(chats);
+  		});
+  	});
+
   return users;
 };
 

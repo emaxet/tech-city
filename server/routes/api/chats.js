@@ -19,6 +19,7 @@ module.exports = (knex) => {
   	});
 
   	chats.get('/:city_name/chats/:chat_id', (req, res) => {
+      console.log(req.params);
   		chatHelpers.findChatPostsById(knex, req, (posts) => {
   			res.json(posts);
   		});

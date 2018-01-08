@@ -49,5 +49,5 @@ module.exports = {
 	    	}
   		});
   		io.to(`chat${socketData.roomId}`).emit('connection event', chatUsers);
-	}
+	},
 }
