@@ -54,6 +54,7 @@ class Chat extends Component {
         'messages': res.data,
         'initialLoad': true
       });
+      this.messagesEnd.scrollIntoView({ behavior: "instant" });
     })
     .catch((error) => {
       console.log(error);
