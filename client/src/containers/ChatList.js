@@ -13,12 +13,17 @@ class ChatList extends Component {
 		this.toggleNewChat = this.toggleNewChat.bind(this);
 		this.fetchApiChats = this.fetchApiChats.bind(this);
 		this.toggleSearchBar = this.toggleSearchBar.bind(this);
+		this.listMyChats = this.listMyChats.bind(this);
+		this.inputQuery = this.inputQuery.bind(this);
+		this.submitQuery = this.submitQuery.bind(this);
 
 		this.state = {
 			'chats': [],
 			'cityName': cityName,
 			'newChatCollapse': false,
-			'searchCollapse': false
+			'searchCollapse': false,
+			'showMyChats': false,
+			'showSearchResults': false
 		}
 	}
 
@@ -36,14 +41,24 @@ class ChatList extends Component {
 
 	toggleNewChat() {
 	    this.setState({
-	      'newChatCollapse': !this.state.newChatCollapse
+	    	'newChatCollapse': !this.state.newChatCollapse
 	    });
   	}
 
   	listMyChats() {
-  		axios.get(`http://localhost:3000/api/v1/${this.state.cityName}/chats/${this.props.userId.sub}`)
+  		axios.get(`http://localhost:3000/api/v1/users/${this.props.userId.sub}/chats/${this.state.cityName}`)
   		.then((res) => {
-
+  			this.setState ({
+  				'chats': res.data,
+  				'showMyChats': !this.state.showMyChats,
+  				'searchCollapse': false
+  			});
+  			if (!this.state.showMyChats) {
+  				this.fetchApiChats();
+  			}
+  		})
+  		.catch((error) => {
+  			console.log(error);
   		});
   	}
 
@@ -53,11 +68,42 @@ class ChatList extends Component {
   		});
   	}
 
+  	submitQuery(e) {
+  		let query = e.target.value;
+  		axios.get(`http://localhost:3000/api/v1/Vancouver/chats/search/${query}`)
+  		.then((res) => {
+  			this.setState ({
+  				'chats': res.data,
+  				'showMyChats': true,
+  				'showSearchResults': true
+  			})
+  			if (!this.state.showMyChats) {
+  				this.fetchApiChats();
+  			}
+  		})
+  	}
+
+  	inputQuery(e) {
+  		if (e.target.value === "") {
+  			this.fetchApiChats();
+  		} else {
+  			this.submitQuery(e);
+  		}
+  	}	
+
 	componentDidMount() {
 		this.fetchApiChats();
 	}
 
 	render() {
+
+		let filterButton;
+		if (this.state.showMyChats) {
+			filterButton = 'All Chats';
+		} else {
+			filterButton = 'My Chats';
+		}
+
 		let loggedInChatNav;
 		if (this.props.userId.sub) {
 			loggedInChatNav = (
@@ -68,7 +114,7 @@ class ChatList extends Component {
 		            </button>
 		            <button type="button" className="btn btn-primary navbar-btn chat-nav" onClick={this.listMyChats}>
 		            <i className="glyphicon glyphicon-align-left"></i>
-		              	My Chats
+		              	{ filterButton }
 		            </button>
 	            </div>
 			)
@@ -78,7 +124,7 @@ class ChatList extends Component {
 		if (this.state.searchCollapse) {
 			searchBar = (
 				<div className="input-group chatSearchBox">
-					<input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Chats..." aria-describedby="basic-addon1" />
+					<input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Chats..." aria-describedby="basic-addon1" onKeyUp={this.inputQuery}/>
 				</div>
 			)
 		}
@@ -112,7 +158,8 @@ class ChatList extends Component {
 
 function mapStateToProps(state) {
   return {
-    userId: state.authentication.user
+    userId: state.authentication.user,
+    username: state.authentication.user.username
   };
 }
 

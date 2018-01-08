@@ -49,5 +49,17 @@ module.exports = {
 	    	}
   		});
   		io.to(`chat${socketData.roomId}`).emit('connection event', chatUsers);
+	},
+
+	findChatsFromSearchQuery: (knex, req, cb) => {
+		const query = req.params.query; 
+		knex('forums')
+		.join('cities', 'forums.city_id', 'cities.id')
+		.where(function() {
+			this.where('forums.name','ilike', `%${query}%`).orWhere('forums.subject', 'ilike', `%${query}%`)
+		})
+		.andWhere({'cities.name': req.params.city_name})
+		.select('forums.name', 'forums.subject')
+		.then(cb);
 	}
 }
