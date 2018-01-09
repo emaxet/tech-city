@@ -1281,7 +1281,7 @@ h2.form-title {
   .cityChatContainer .sidebarWrapper {
     border-top: 1px solid lightgrey;
     position: absolute;
-    top: 309px;
+    top: 272px;
     left: 0;
     bottom: 49px;
     width: 25%;
@@ -1294,7 +1294,7 @@ h2.form-title {
       position: fixed;
       align-items: center;
       flex-direction: column;
-      height: calc(100% - 309px - 49px);
+      height: calc(100% - 272px - 49px);
       width: 25%; }
       .cityChatContainer .sidebarWrapper .chatSidebar h4 {
         margin-top: 20px;
@@ -1319,7 +1319,7 @@ h2.form-title {
   .cityChatContainer .cityChatWrapper {
     border-top: 1px solid lightgrey;
     position: absolute;
-    top: 309px;
+    top: 272px;
     right: 0;
     bottom: 49px;
     width: 75%;
@@ -1327,7 +1327,7 @@ h2.form-title {
     margin: 0; }
     .cityChatContainer .cityChatWrapper .cityChat {
       position: fixed;
-      height: calc(100% - 309px - 49px);
+      height: calc(100% - 272px - 49px);
       width: 75%;
       overflow-y: scroll; }
       .cityChatContainer .cityChatWrapper .cityChat .chatMessage {
