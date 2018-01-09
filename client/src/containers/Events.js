@@ -13,6 +13,9 @@ class Events extends Component {
     this.togglefilter = this.togglefilter.bind(this);
     this.toggleNewEvent = this.toggleNewEvent.bind(this);
     this.updateApiEvents = this.updateApiEvents.bind(this);
+    this.toggleSearchBar = this.toggleSearchBar.bind(this);
+    this.inputQuery = this.inputQuery.bind(this);
+    this.submitQuery = this.submitQuery.bind(this);
 
     const cityName = (this.props.location.pathname.split('/')[2]);
 
@@ -21,7 +24,8 @@ class Events extends Component {
       'eventsCollapse': true,
       'newEventCollapse': false,
       'eventlist': [],
-      'cityName': cityName
+      'cityName': cityName,
+      'searchCollapse': false
     };
   }
 
@@ -36,6 +40,35 @@ class Events extends Component {
     this.setState({
       'newEventCollapse': !this.state.newEventCollapse
     });
+  }
+
+  toggleSearchBar() {
+    this.setState({
+      'searchCollapse': !this.state.searchCollapse
+    });
+  }
+
+  submitQuery(e) {
+    let query = e.target.value;
+      axios.get(`http://localhost:3000/api/v1/Vancouver/events/search/${query}`)
+      .then((res) => {
+        this.setState ({
+          'eventlist': res.data
+          // 'showMyChats': true,
+          // 'showSearchResults': true
+        })
+        // if (!this.state.showMyChats) {
+        //   this.fetchApiChats();
+        // }
+      })
+  }
+
+  inputQuery(e) {
+    if (e.target.value === "") {
+        this.updateApiEvents();
+      } else {
+        this.submitQuery(e);
+      }
   }
 
   componentDidMount() {
@@ -64,15 +97,19 @@ class Events extends Component {
       })
       .reverse();
 
+      let searchBar;
+      if (this.state.searchCollapse) {
+        searchBar = (
+          <div className="input-group chatSearchBox">
+            <input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Events..." aria-describedby="basic-addon1" onKeyUp={this.inputQuery}/>
+          </div>
+        )
+      }
+
     return (
       <div className="event">
 
         <div className = "buttonGroup">
-          <button type="button" className="btn btn-primary navbar-btn" onClick={this.togglefilter}>
-            <i className="glyphicon glyphicon-align-left"></i>
-            Filter
-          </button>
-
           {
             this.props.auth &&
             <button type="button" className="btn btn-primary navbar-btn" onClick={this.toggleNewEvent}>
@@ -80,6 +117,11 @@ class Events extends Component {
               New
             </button> 
           } 
+          <i className="fa fa-search chatSearchIcon" aria-hidden="true" onClick={this.toggleSearchBar}></i>
+
+          <Collapse isOpen={this.state.searchCollapse}>
+            { searchBar }
+          </Collapse>
         </div>        
         
         <Collapse isOpen={this.state.filterCollapse}>
@@ -89,7 +131,9 @@ class Events extends Component {
         </Collapse>
 
         <Collapse isOpen={this.state.eventsCollapse}>
+          <div className="eventList">
             {eventlist}
+          </div>
         </Collapse>
 
         <NewEvent newEventCollapse={this.state.newEventCollapse} toggleNewEvent={this.toggleNewEvent} cityName={this.state.cityName} updateApiEvents={this.updateApiEvents}/>
