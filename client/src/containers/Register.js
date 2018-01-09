@@ -151,7 +151,7 @@ class Register extends React.Component {
             </FormGroup>
             <FormGroup>
               <Label for="exampleText">Bio</Label>
-              <Input type="textarea" name="text" id="exampleText" placeholder="Tell the community about yourself." onChange={this.onChange} />
+              <Input type="textarea" name="bio" id="exampleText" placeholder="Tell the community about yourself." onChange={this.onChange} />
             </FormGroup>
             <FormGroup row>
               <Col className="text-center">
