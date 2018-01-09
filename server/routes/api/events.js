@@ -1,4 +1,4 @@
-  const express = require('express');
+const express = require('express');
 const events = express.Router();
 const eventHelpers = require('./lib/event-helpers');
 const jwt = require('jsonwebtoken');

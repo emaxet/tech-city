@@ -37,8 +37,14 @@ module.exports = (knex) => {
   });
 
   jobs.delete('/:city_name/jobs/:job_id', (req, res) => {
-    jobHelpers.deleteEvent(knex, req.params.job_id, () => {
+    jobHelpers.deleteJob(knex, req.params.job_id, () => {
       res.send(200);
+    });
+  });
+
+  jobs.get('/:city_name/jobs/search/:query', (req, res) => {
+    jobHelpers.findJobsFromSearchQuery(knex, req, (jobs) => {
+      res.json(jobs);
     });
   });
 
