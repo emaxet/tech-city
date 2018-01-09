@@ -108,6 +108,7 @@ a, a:hover {
 .cityPage {
   overflow: hidden; }
   .cityPage .main .cityHeader {
+    font-family: 'Share Tech', sans-serif;
     margin: 2em;
     overflow: hidden;
     display: flex;
@@ -116,16 +117,24 @@ a, a:hover {
     text-align: center;
     justify-content: center; }
     .cityPage .main .cityHeader .headerTitle {
+      font-size: 5em;
       width: 80%;
-      padding-top: 40px;
-      padding-left: 20px;
-      font-family: fantasy; }
+      padding-left: 20px; }
   .cityPage .main .cityNav {
-    margin: 2em;
+    background-color: #2b2b2b;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-around; }
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px; }
+    .cityPage .main .cityNav .navbar {
+      margin: auto; }
+    .cityPage .main .cityNav .nav-item {
+      margin: 0 50px;
+      font-size: 1.4em; }
+      .cityPage .main .cityNav .nav-item a {
+        color: white; }
   .cityPage .main .cityContent {
     margin: 2em; }
 
