@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 class ChatMessages extends Component{
   
   render() {
+    console.log(this.props.image);
     return (
       <div className="chatMessageContainer">
           <div className="chatUserImage">
