@@ -13,7 +13,7 @@ class Eventlist extends Component {
     this.deleteEvent = this.deleteEvent.bind(this);
     this.state = {
       modal: false,
-      likeColor: [].concat(this.props.like).includes(this.props.user.sub.toString())? 'red': '',
+      likeColor: [].concat(this.props.like).includes(this.props.user.sub) ? 'red': '',
       like: [].concat(this.props.like),
       attend: this.props.attend
     }
@@ -90,7 +90,7 @@ class Eventlist extends Component {
           style={{height: 200}}
           image={this.props.image}
         />
-        <CardContent style={{height: 100}}>
+        <CardContent style={{height: 150}}>
           <Typography type="headline" component="h2">
           {this.props.title}
           </Typography>
