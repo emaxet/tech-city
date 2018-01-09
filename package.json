@@ -6,7 +6,8 @@
     "knex": "./node_modules/.bin/knex",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node server/app.js",
-    "client": "cd client && npm start"
+    "client": "cd client && npm start",
+    "heroku-postbuild": "cd client && yarn --production=false && yarn run build"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",

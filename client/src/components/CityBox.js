@@ -10,9 +10,9 @@ export const CityBox = (props) => {
           <h4>{props.name}</h4>
           <p>{props.tagline}</p>
           <div className="city-info">
-            <span><i class="fa fa-users" aria-hidden="true"></i> {props.users}</span>
-            <span><i class="fa fa-calendar" aria-hidden="true"></i> {props.events}</span>
-            <span><i class="fa fa-briefcase" aria-hidden="true"></i> {props.jobs}</span>
+            <span><i className="fa fa-users" aria-hidden="true"></i> {props.users}</span>
+            <span><i className="fa fa-calendar" aria-hidden="true"></i> {props.events}</span>
+            <span><i className="fa fa-briefcase" aria-hidden="true"></i> {props.jobs}</span>
           </div>
         </div>
       </Link>

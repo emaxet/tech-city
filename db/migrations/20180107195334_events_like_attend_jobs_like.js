@@ -1,6 +1,9 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.table('events', (table) => {
+      table.dropColumn('like');
+    }),
+    knex.schema.table('events', (table) => {
       table.specificType('like', 'text[]');
       table.specificType('attend', 'text[]');
     }),
