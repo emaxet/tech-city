@@ -114,7 +114,7 @@ class Events extends Component {
             this.props.auth &&
             <button type="button" className="btn btn-primary navbar-btn" onClick={this.toggleNewEvent}>
               <i className="glyphicon glyphicon-align-left"></i>
-              New
+              Add Event
             </button> 
           } 
           <i className="fa fa-search chatSearchIcon" aria-hidden="true" onClick={this.toggleSearchBar}></i>

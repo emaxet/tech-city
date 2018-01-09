@@ -71,8 +71,7 @@
       max-height: 100%;
       border-radius: 5px; }
   .chatMessageContainer .messageContent .username {
-    font-weight: 700;
-    color: black; }
+    font-weight: 700; }
 
 .inputBar {
   padding: 5px;

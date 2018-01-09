@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ChatConnections extends Component{
   
@@ -7,10 +8,14 @@ class ChatConnections extends Component{
     return (
       <div className="chatConnectionsContainer">
           <div className="connectionImage">
-            <img src={ this.props.userImage || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png' } alt="user avatar" />
+            <Link to={`/profile/${this.props.name}`}>
+              <img src={ this.props.userImage || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png' } alt="user avatar" />
+            </Link>
           </div>
           <div className="connectionName">
-            {this.props.username}
+            <Link to={`/profile/${this.props.name}`} style={{color: 'black'}}>
+              {this.props.username}
+            </Link>
           </div>
       </div>
     )

@@ -81,7 +81,7 @@ class JobBox extends Component{
             {this.enforce_line_breaks(this.props.description)}
             <br/>
             <br/>
-            <h5>Link: <br/><a target='_blank' href={'http://' + this.props.url}>{this.props.url}</a></h5>
+            <h5>Link: <br/><a target='_blank' href={this.props.url}>{this.props.url}</a></h5>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.setmodal}>Close</Button>
