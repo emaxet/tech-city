@@ -28,6 +28,7 @@ module.exports = {
 		.fullOuterJoin('users', 'posts.name', 'users.username')
 		.where({forum_id: req.params.chat_id})
 		.select('posts.message', 'posts.name', 'users.image')
+		.
 		.then(cb);
 	},
 

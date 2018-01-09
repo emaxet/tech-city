@@ -15,6 +15,12 @@ module.exports = (knex) => {
   		});
   	});
 
+  users.get('/:username', (req, res) => {
+  	userHelper.getProfileData(knex, req.params, (data) => {
+  		res.json(data);
+  	})
+  })
+
   return users;
 };
 
