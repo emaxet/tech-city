@@ -122,3 +122,13 @@ a, a:hover {
 .city-box:hover .city-text {
   transform: translate(0);
 }
+
+// Mobile CSS
+@media (max-width: 809px) {
+  #cities-list{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
