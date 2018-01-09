@@ -12,7 +12,10 @@ module.exports = {
 
 	getProfileData: (knex, params, cb) => {
 		knex('users')
-		.where({'username': params.username})
+		.join('users_cities', 'users.id', 'users_cities.user_id')
+		.join('cities', 'users_cities.city_id', 'cities.id')
+		.where({'users.username': params.username})
+		.select('users.username', 'users.first_name', 'users.last_name', 'users.email', 'cities.name', 'users.bio', 'users.image' )
 		.then(cb);
 	}
 

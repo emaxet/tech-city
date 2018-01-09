@@ -47,7 +47,7 @@ class Profile extends Component {
 			            </tr>
 			            <tr>
 			              <td className="bio-label">City:</td>
-			              <td>{this.state.user.city}</td>
+			              <td>{this.state.user.name}</td>
 			            </tr>
 			            <tr>
 			              <td className="bio-label">Bio:</td>

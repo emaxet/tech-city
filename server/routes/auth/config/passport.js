@@ -44,21 +44,24 @@ module.exports = (knex, passport) => {
               return done(error, false);
             } else {
               authHelpers.registerNewUser(req, (user) => {
+                console.log(user);
                 const payload = {
-                sub: user[0].id,
-                username: user[0].username,
-                image: user[0].image,
-                bio: user[0].bio,
-                firstName: user[0].first_name,
-                lastName: user[0].last_name,
-                email: email
-
-              };
-              const token = jwt.sign(payload, config.jwtSecret);
-              const data = {
-                name: user[0].username
-              }
-              return done(null, token, data);
+                  sub: user[0].id,
+                  username: user[0].username,
+                  image: user[0].image,
+                  bio: user[0].bio,
+                  firstName: user[0].first_name,
+                  lastName: user[0].last_name,
+                  email: email,
+                  city: req.body.city
+                };
+                authHelpers.addNewUserCity(req, user, () => {
+                  const token = jwt.sign(payload, config.jwtSecret);
+                  const data = {
+                    name: user[0].username
+                  }
+                  return done(null, token, data);
+                });
               }, (err) => {
                 done(err, null);
               });
@@ -86,6 +89,7 @@ module.exports = (knex, passport) => {
     (req, email, password, done) => {
 
       authHelpers.findUserByEmail(email, (user) => {
+        console.log(user);
         if (!user.length) {
           const error = new Error('Incorrect email or password');
           error.name = 'IncorrectCredentialsError';
@@ -103,7 +107,8 @@ module.exports = (knex, passport) => {
           bio: user[0].bio,
           firstName: user[0].first_name,
           lastName: user[0].last_name,
-          email: email
+          email: email,
+          city: user[0].name
 
         };
         const token = jwt.sign(payload, config.jwtSecret);
