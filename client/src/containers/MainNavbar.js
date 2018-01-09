@@ -45,7 +45,7 @@ class MainNavbar extends React.Component {
             {username}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem><NavLink exact to="/profile" className="dropdown-word" activeClassName="active">Profile</NavLink></DropdownItem>
+            <DropdownItem><NavLink exact to={`/profile/${username}`} className="dropdown-word" activeClassName="active">Profile</NavLink></DropdownItem>
             <DropdownItem divider />
             <DropdownItem><a href="/" className="dropdown-word" onClick={this.logout.bind(this)}>Logout</a></DropdownItem>
           </DropdownMenu>

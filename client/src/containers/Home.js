@@ -21,9 +21,6 @@ export default class Home extends React.Component {
     axios.get('http://localhost:3000/api/v1/cities').then(function (response) {
       self.setState({cities: response.data});
     });
-    axios.get('http://localhost:3000/api/v1/users/emaxet').then(function (response) {
-      console.log(response)
-    })
   }
 
   render() {

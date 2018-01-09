@@ -1,0 +1,9 @@
+.profile-div {
+  margin-top: 100px; }
+  .profile-div .col-md-3 {
+    overflow: hidden; }
+    .profile-div .col-md-3 img {
+      height: 200px;
+      margin: 10px 0; }
+  .profile-div .bio-label {
+    width: 150px; }
