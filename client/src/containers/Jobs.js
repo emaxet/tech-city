@@ -61,11 +61,8 @@ class Jobs extends Component {
               Add Job</Button>
             </div>
           }
-          <div className="col-sm-12">
-            <div className="row row-eq-height">
+          <div className="jobList">
               {jobs}
-            </div>
-
             <NewJob {...this.state} updateJobsFromAPI={this.updateJobsFromAPI} toggleAddJob={this.toggleAddJob}/>
           </div>
         </div>

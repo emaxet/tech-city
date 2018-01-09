@@ -149,6 +149,19 @@ a, a:hover {
     margin: 0; }
 
 .event {
+  display: flex;
+  flex-direction: column; }
+  .event .buttonGroup {
+    margin-bottom: 25px; }
+  .event .jobList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; }
+    .event .jobList .eventItem {
+      margin: 10px; }
+
+.event {
   text-align: center;
   width: 100%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

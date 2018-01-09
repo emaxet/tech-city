@@ -7,3 +7,16 @@
     margin: 10px auto; }
   .job-box .job-body p {
     margin: 0; }
+
+.event {
+  display: flex;
+  flex-direction: column; }
+  .event .buttonGroup {
+    margin-bottom: 25px; }
+  .event .jobList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; }
+    .event .jobList .eventItem {
+      margin: 10px; }
