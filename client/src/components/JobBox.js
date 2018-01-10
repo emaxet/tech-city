@@ -5,6 +5,7 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import { Fade, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { ShareButtons, generateShareIcon } from 'react-share';
 
 class JobBox extends Component{
   constructor(props) {
@@ -75,6 +76,9 @@ class JobBox extends Component{
   }
 
   render(){
+    const EmailIcon = generateShareIcon('email');
+    const { EmailShareButton } = ShareButtons;
+    
     return (
       <Fade in={true} className="eventItem">
         <Card style={{width: 245}}>
@@ -92,9 +96,14 @@ class JobBox extends Component{
         <CardActions>
           {
             this.props.auth &&
-            <Button dense color="primary">
-            <i className="fa fa-share" aria-hidden="true"></i>
-            </Button>
+            <div style={{padding: '0 1em'}}>
+            <EmailShareButton
+                url={window.location.href}
+                subject={this.props.user.username + ' send you a job info'}
+                body={`Hi, \n\n Check this out: ${this.props.url}\n\n ${this.props.title} \n\n ${this.props.description} \n\nBest Regards,\n${this.props.user.username}`}>
+            <EmailIcon size={30} round/>
+            </EmailShareButton>
+            </div>
           }
 
           {
