@@ -29,6 +29,32 @@ module.exports = (knex) => {
     });
   });
 
+  jobs.put('/:city_name/jobs/:job_id/like', (req, res) => {
+    new Promise((resolve, reject) => {
+      resolve(knex('jobs')
+        .select('like')
+        .where('id', req.params.job_id));
+    })
+      .then((data) => {
+        if(data[0].like === null){
+          data[0].like = [];
+        }
+        if(data[0].like.includes(req.body.like.toString())){
+          data[0].like.splice(data[0].like.indexOf(req.body.like.toString()), 1);
+          return knex('jobs')
+            .where({id: req.params.job_id})
+            .update({like: data[0].like});
+        } else{
+          return knex('jobs')
+            .where({id: req.params.job_id})
+            .update({like: data[0].like.concat(req.body.like.toString())});
+        }
+      })
+      .then(() => {
+        res.send(200);
+      });
+  });
+
   jobs.delete('/:city_name/jobs/:job_id', (req, res) => {
     jobHelpers.deleteJob(knex, req.params.job_id, () => {
       res.send(200);

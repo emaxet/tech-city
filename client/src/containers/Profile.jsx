@@ -15,20 +15,20 @@ class Profile extends Component {
 	 componentDidMount() {
     var self = this;
     axios.get(`http://localhost:3000/api/v1/users/${this.props.match.params.username}`).then(function (response) {
-    	self.setState({user: response.data[0]})
+			self.setState({user: response.data[0]});
     })
   }
 
 	render () {
-		console.log(this.state);
 		return (
 			<div>
 			<MainNavbar />
 			<div className="container profile-div">
 				<div className="row">
 		      <div className="col col-md-3 text-center">
-		        <img src={this.state.user.image} alt="image" className="center-block"/>
-		        <h3>{this.state.user.username}</h3>
+					{console.log(this.state.user)}
+		        <img src={this.state.user? this.state.user.image : 'https://cdn3.iconfinder.com/data/icons/faticons/32/user-01-256.png'} alt="profileImage" className="center-block"/>
+		        <h3>{this.state.user? this.state.user.username : ''}</h3>
 		      </div>
 		      <div className="col col-md-9">
 		      	<div className="table-responsive">
@@ -36,23 +36,23 @@ class Profile extends Component {
 		          	<tbody>
 			            <tr>
 			              <td className="bio-label">First Name:</td>
-			              <td>{this.state.user.first_name}</td>
+			              <td>{this.state.user? this.state.user.first_name : ''}</td>
 			            </tr>
 			            <tr>
 			              <td className="bio-label">Last Name:</td>
-			              <td>{this.state.user.last_name}</td>
+			              <td>{this.state.user? this.state.user.last_name : ''}</td>
 			            </tr>
 			            <tr>
 			              <td className="bio-label">E-mail:</td>
-			              <td>{this.state.user.email}</td>
+			              <td>{this.state.user? this.state.user.email: ''}</td>
 			            </tr>
 			            <tr>
 			              <td className="bio-label">City:</td>
-			              <td>{this.state.user.name}</td>
+			              <td>{this.state.user? this.state.user.name: ''}</td>
 			            </tr>
 			            <tr>
 			              <td className="bio-label">Bio:</td>
-			              <td>{this.state.user.bio}</td>
+			              <td>{this.state.user? this.state.user.bio: ''}</td>
 			            </tr>
 			          </tbody>
 		          </table>

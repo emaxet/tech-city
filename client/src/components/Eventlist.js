@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 
 class Eventlist extends Component {
   constructor(props) {
@@ -13,33 +13,38 @@ class Eventlist extends Component {
     this.deleteEvent = this.deleteEvent.bind(this);
     this.state = {
       modal: false,
-      likeColor: [].concat(this.props.like).includes(this.props.user.sub) ? 'red': '',
-      like: [].concat(this.props.like),
-      attend: this.props.attend
+      attendPopover: false,
+      likeColor: [].concat(this.props.like).includes(this.props.user.sub.toString()) ? 'red': '',
+      attendColor: [].concat(this.props.attend).includes(this.props.user.username) ? 'red': ''
     }
     this.enforce_line_breaks = this.enforce_line_breaks.bind(this);
     this.setmodal = this.setmodal.bind(this);
     this.shorten = this.shorten.bind(this);
     this.eventLike = this.eventLike.bind(this);
     this.putEventLike = this.putEventLike.bind(this);
+    this.eventAttend = this.eventAttend.bind(this);
+    this.putEventAttend = this.putEventAttend.bind(this);
+    this.popoverToggle = this.popoverToggle.bind(this);
+  }
+
+  popoverToggle(){
+    this.setState({
+      attendPopover: !this.state.attendPopover,
+    });
   }
 
   eventLike(){
     new Promise((resolve, reject) => {
-      let likeArr = this.state.like;
       let buttonColor = this.state.likeColor;
       if(this.state.likeColor === ''){
         buttonColor = 'red';
-        likeArr = likeArr.includes(this.props.user.sub.toString())? likeArr : likeArr.concat([this.props.user.sub.toString()]);
       } else{
         buttonColor = '';
-        likeArr = likeArr.splice(likeArr.indexOf(this.props.user.sub.toString()), 0);
       }
-      resolve({buttonColor, likeArr})
+      resolve({buttonColor})
     }).then((data) => {
       this.setState({
-        likeColor: data.buttonColor,
-        like: data.likeArr
+        likeColor: data.buttonColor
       });
     }).then(() => {
       this.putEventLike();
@@ -47,7 +52,35 @@ class Eventlist extends Component {
   }
 
   putEventLike(){
-    axios.put(`/api/v1/${this.props.name}/events/${this.props.eventId}/like`, {'like': this.state.like})
+    axios.put(`/api/v1/${this.props.name}/events/${this.props.eventId}/like`, {'like': this.props.user.sub})
+      .then(() => {
+        this.props.updateApiEvents();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  eventAttend(){
+    new Promise((resolve, reject) => {
+      let buttonColor = this.state.attendColor;
+      if(this.state.attendColor === ''){
+        buttonColor = 'red';
+      } else{
+        buttonColor = '';
+      }
+      resolve({buttonColor})
+    }).then((data) => {
+      this.setState({
+        attendColor: data.buttonColor
+      });
+    }).then(() => {
+      this.putEventAttend();
+    });
+  }
+
+  putEventAttend(){
+    axios.put(`/api/v1/${this.props.name}/events/${this.props.eventId}/attend`, {'attend': this.props.user.username})
       .then(() => {
         this.props.updateApiEvents();
       })
@@ -112,6 +145,28 @@ class Eventlist extends Component {
             <Button dense color="primary" style={{color: this.state.likeColor}} onClick={this.eventLike}>
             <i className="fa fa-heart" aria-hidden="true"></i>
             </Button>
+          }
+
+          {
+            this.props.auth &&
+            <div>
+              <Button dense color="primary" style={{color: this.state.attendColor}} 
+              onClick={this.eventAttend} 
+              onMouseOver={this.popoverToggle}
+              onMouseOut={this.popoverToggle}
+              id={'Popover' + this.props.id}>
+              <i className="fa fa-sign-in" aria-hidden="true"></i>
+              </Button>
+
+              <Popover placement="bottom" isOpen={this.state.attendPopover} target={'Popover' + this.props.id} toggle={this.popoverToggle}>
+                <PopoverHeader>Attending</PopoverHeader>
+                <PopoverBody>
+                  {this.props.attend.map((ele, index) => {
+                    return <p key={index}>{ele}</p>;
+                  })}
+                </PopoverBody>
+              </Popover>
+            </div>
           }
 
           {

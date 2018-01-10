@@ -141,9 +141,9 @@ class ChatList extends Component {
           			{ searchBar }
           		</Collapse>
 				<div className='chatList'>
-					{chats.map(chat => {
+					{chats.map((chat, index) => {
 						return ( 
-							<div className="chatItem">
+							<div className="chatItem" key={index}>
 								<div className="chatTitle"><Link to={`chat/${chat.id}`}>{`${chat.name}`} </Link></div>
 								<p className="chatSubject">{`${chat.subject}`}</p>
 							</div>

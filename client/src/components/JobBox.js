@@ -10,12 +10,43 @@ class JobBox extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      likeColor: [].concat(this.props.like).includes(this.props.user.sub.toString()) ? 'red': ''
     };
     this.setmodal = this.setmodal.bind(this);
     this.trashClick = this.trashClick.bind(this);
     this.enforce_line_breaks = this.enforce_line_breaks.bind(this);
     this.shorten = this.shorten.bind(this);
+    this.jobLike = this.jobLike.bind(this);
+    this.putJobLike = this.putJobLike.bind(this);
+  }
+
+  jobLike(){
+    new Promise((resolve, reject) => {
+      let buttonColor = this.state.likeColor;
+      if(this.state.likeColor === ''){
+        buttonColor = 'red';
+      } else{
+        buttonColor = '';
+      }
+      resolve({buttonColor})
+    }).then((data) => {
+      this.setState({
+        likeColor: data.buttonColor
+      });
+    }).then(() => {
+      this.putJobLike();
+    });
+  }
+
+  putJobLike(){
+    axios.put(`/api/v1/${this.props.name}/jobs/${this.props.id}/like`, {'like': this.props.user.sub})
+      .then(() => {
+        this.props.updateJobsFromAPI();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   setmodal(e){
@@ -59,13 +90,19 @@ class JobBox extends Component{
         </div>
 
         <CardActions>
-          <Button dense color="primary">
-          <i className="fa fa-share" aria-hidden="true"></i>
-          </Button>
+          {
+            this.props.auth &&
+            <Button dense color="primary">
+            <i className="fa fa-share" aria-hidden="true"></i>
+            </Button>
+          }
 
-          <Button dense color="primary">
-          <i className="fa fa-heart" aria-hidden="true"></i>
-          </Button>
+          {
+            this.props.auth &&
+            <Button dense color="primary" style={{color: this.state.likeColor}} onClick={this.jobLike}>
+            <i className="fa fa-heart" aria-hidden="true"></i>
+            </Button>
+          }
 
           {this.props.user.sub === this.props.userId && <Button dense color="primary" onClick={this.trashClick}>
           <i className="fa fa-trash" aria-hidden="true"></i>
@@ -95,6 +132,7 @@ class JobBox extends Component{
 
 function mapStateToProps(state) {
   return {
+    auth: state.authentication.isAuthenticated,
     user: state.authentication.user
   };
 }

@@ -4,7 +4,7 @@ const jobHelpers = require('./lib/job-helpers');
 
 module.exports = (knex) => {
 
-	jobs.get('/:city_name/jobs', (req, res) => {
+  jobs.get('/:city_name/jobs', (req, res) => {
 	    const cityName = req.params.city_name;
 	    jobHelpers.findJobsInCity(knex, cityName, (jobs) => {
 	      res.json(jobs);
@@ -18,6 +18,6 @@ module.exports = (knex) => {
   	});
 
 
-	return jobs;
+  return jobs;
 
-}
+};
