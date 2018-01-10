@@ -6,13 +6,6 @@ const config = require('../auth/config/config');
 
 module.exports = (knex) => {
 
-  jobs.get('/:city_name/jobs', (req, res) => {
-    const cityName = req.params.city_name;
-    jobHelpers.findJobsInCity(knex, cityName, (jobs) => {
-      res.json(jobs);
-    });
-  });
-
   jobs.post('/:city_name/jobs', (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token, config.jwtSecret, (err, decoded) => {
@@ -39,12 +32,6 @@ module.exports = (knex) => {
   jobs.delete('/:city_name/jobs/:job_id', (req, res) => {
     jobHelpers.deleteJob(knex, req.params.job_id, () => {
       res.send(200);
-    });
-  });
-
-  jobs.get('/:city_name/jobs/search/:query', (req, res) => {
-    jobHelpers.findJobsFromSearchQuery(knex, req, (jobs) => {
-      res.json(jobs);
     });
   });
 

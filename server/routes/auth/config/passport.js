@@ -28,7 +28,6 @@ module.exports = (knex, passport) => {
     },
 
     (req, email, password, done) => {
-      console.log(req.body);
       process.nextTick(() => {
 
         authHelpers.findUserByUsername(req.body.username, (user) => {
@@ -44,7 +43,6 @@ module.exports = (knex, passport) => {
               return done(error, false);
             } else {
               authHelpers.registerNewUser(req, (user) => {
-                console.log(user);
                 const payload = {
                   sub: user[0].id,
                   username: user[0].username,
@@ -89,7 +87,6 @@ module.exports = (knex, passport) => {
     (req, email, password, done) => {
 
       authHelpers.findUserByEmail(email, (user) => {
-        console.log(user);
         if (!user.length) {
           const error = new Error('Incorrect email or password');
           error.name = 'IncorrectCredentialsError';

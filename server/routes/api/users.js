@@ -5,21 +5,17 @@ const userHelper = require('./lib/user-helpers');
 
 module.exports = (knex) => {
 
-  users.get('/', (req, res) => {
-    userHelper.findAllUsers(knex, (users) => res.json(users));
-  });
-
-  users.get('/:user_id/chats/:city_name', (req, res) => {
+  users.get('/users/:user_id/chats/:city_name', (req, res) => {
   		userHelper.findChatsByUserId(knex, req.params, (chats) => {
   			res.json(chats);
   		});
   	});
 
-  users.get('/:username', (req, res) => {
+  users.get('/users/:username', (req, res) => {
   	userHelper.getProfileData(knex, req.params, (data) => {
   		res.json(data);
-  	})
-  })
+  	});
+  });
 
   return users;
 };

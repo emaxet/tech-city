@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import MainNavbar from './MainNavbar';
 import CityHeader from '../components/CityHeader';
 import CityNav from '../components/CityNav';
@@ -7,10 +7,16 @@ import Events from './Events';
 import Jobs from './Jobs';
 import ChatList from './ChatList';
 import ChatFeed from '../components/Chat';
+import { connect } from 'react-redux';
 
 
 class CityPage extends Component{
+  constructor(props) {
+    super(props);
+  }
+
   render(){
+    console.log(this.props);
     return(
       <div>
         <MainNavbar />
@@ -25,7 +31,7 @@ class CityPage extends Component{
                 <Route exact path={`/city/${this.props.match.params.city_name}/events`} render={props => <Events {...props} />} />
                 <Route exact path={`/city/${this.props.match.params.city_name}/jobs`} render={props => <Jobs {...props} />} />
                 <Route exact path={`/city/${this.props.match.params.city_name}/chat`} render={props => <ChatList {...props} />} />
-                <Route exact path={`/city/${this.props.match.params.city_name}/chat/:chatId`} render={props => <ChatFeed {...props} />} />
+                <Route exact path={`/city/${this.props.match.params.city_name}/chat/:chatId`} render={(props) => (this.props.auth) ? <ChatFeed {...props} /> : <Redirect to='/login' /> } />
               </Switch>
             </div>
           </div>
@@ -36,4 +42,10 @@ class CityPage extends Component{
   }
 }
 
-export default CityPage;
+function mapStateToProps(state) {
+  return {
+    auth: state.authentication.isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps)(CityPage);

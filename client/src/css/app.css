@@ -1304,6 +1304,11 @@ h2.form-title {
     height: 40px;
     margin-top: 10px; }
 
+.orRegister {
+  text-align: center;
+  color: red;
+  font-size: 15px; }
+
 .cityChatContainer {
   display: flex; }
   .cityChatContainer .sidebarWrapper {
@@ -1394,6 +1399,7 @@ h2.form-title {
   .profile-div .col-md-3 {
     overflow: hidden; }
     .profile-div .col-md-3 img {
+      border-radius: 50%;
       height: 200px;
       margin: 10px 0; }
   .profile-div .bio-label {
