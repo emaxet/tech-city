@@ -6,6 +6,7 @@ import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
+import { ShareButtons, generateShareIcon } from 'react-share';
 
 class Eventlist extends Component {
   constructor(props) {
@@ -115,6 +116,9 @@ class Eventlist extends Component {
   }
 
   render() { 
+    const EmailIcon = generateShareIcon('email');
+    const { EmailShareButton } = ShareButtons;
+
     return (
       <Fade in={true} className="eventItem">
       <Card style={{width: 245}}>
@@ -135,9 +139,14 @@ class Eventlist extends Component {
         <CardActions>
           {
             this.props.auth &&
-            <Button dense color="primary">
-            <i className="fa fa-share" aria-hidden="true"></i>
-            </Button>
+            <div style={{padding: '0 1em'}}>
+            <EmailShareButton
+                url={window.location.href}
+                subject={this.props.user.username + ' invite you to an event.'}
+                body={`Hi, \n\n Check this out: ${window.location.href}\n\n ${this.props.title} \n\n ${this.props.description} \n\n${this.props.user.username}`}>
+            <EmailIcon size={30} round/>
+            </EmailShareButton>
+            </div>
           }
 
           {
