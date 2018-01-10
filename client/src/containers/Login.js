@@ -5,6 +5,7 @@ import { login } from '../actions/authenticationActions';
 import MainNavbar from './MainNavbar';
 import { addFlashMessage } from '../actions/flashMessages';
 import { Container, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -86,6 +87,9 @@ class Login extends React.Component {
               </Col>
             </FormGroup>
           </Form>
+          <div className = "orRegister">
+            <Link to='/register'>Register</Link>
+          </div>
         </Container>
       </div>
     );

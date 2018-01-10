@@ -9,11 +9,24 @@ module.exports = {
       .then(cb);
   },
 
-  deleteEvent: (knex, jobId, cb) => {
+  deleteJob: (knex, jobId, cb) => {
     knex('jobs')
       .where({'jobs.id': jobId})
       .del()
       .then(cb);
-  }
+  },
 
+  findJobsFromSearchQuery: (knex, req, cb) => {
+    const query = req.params.query;
+    knex('jobs')
+    .join('cities', 'jobs.city_id', 'cities.id')
+    .where(function() {
+      this.where('jobs.title','ilike', `%${query}%`)
+      .orWhere('jobs.description', 'ilike', `%${query}%`)
+      .orWhere('jobs.company', 'ilike', `%${query}%`)
+    })
+    .andWhere({'cities.name': req.params.city_name})
+    .select('jobs.title', 'jobs.description', 'jobs.url', 'jobs.company')
+    .then(cb);
+  }
 };

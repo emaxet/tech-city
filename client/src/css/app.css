@@ -99,9 +99,16 @@ a, a:hover {
 .city-box:hover .city-text {
   transform: translate(0); }
 
+@media (max-width: 809px) {
+  #cities-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column; } }
+
 .cityPage {
   overflow: hidden; }
   .cityPage .main .cityHeader {
+    font-family: 'Share Tech', sans-serif;
     margin: 2em;
     overflow: hidden;
     display: flex;
@@ -110,16 +117,24 @@ a, a:hover {
     text-align: center;
     justify-content: center; }
     .cityPage .main .cityHeader .headerTitle {
+      font-size: 5em;
       width: 80%;
-      padding-top: 40px;
-      padding-left: 20px;
-      font-family: fantasy; }
+      padding-left: 20px; }
   .cityPage .main .cityNav {
-    margin: 2em;
+    background-color: #2b2b2b;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-around; }
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px; }
+    .cityPage .main .cityNav .navbar {
+      margin: auto; }
+    .cityPage .main .cityNav .nav-item {
+      margin: 0 50px;
+      font-size: 1.4em; }
+      .cityPage .main .cityNav .nav-item a {
+        color: white; }
   .cityPage .main .cityContent {
     margin: 2em; }
 
@@ -134,6 +149,19 @@ a, a:hover {
     margin: 0; }
 
 .event {
+  display: flex;
+  flex-direction: column; }
+  .event .buttonGroup {
+    margin-bottom: 25px; }
+  .event .jobList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; }
+    .event .jobList .eventItem {
+      margin: 10px; }
+
+.event {
   text-align: center;
   width: 100%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -142,6 +170,16 @@ a, a:hover {
   overflow: hidden; }
   .event .buttonGroup {
     padding: 10px; }
+    .event .buttonGroup .chatSearchIcon {
+      margin: 0 5px;
+      font-size: 35px;
+      color: lightblue;
+      position: relative;
+      top: 6px; }
+    .event .buttonGroup .chatSearchIcon:hover {
+      cursor: pointer; }
+    .event .buttonGroup .chatSearch {
+      margin-top: 10px; }
     .event .buttonGroup button {
       margin: 0 10px; }
   .event .eventNav {
@@ -166,14 +204,19 @@ a, a:hover {
     .event .eventNav td {
       border: 1px solid #ddd;
       padding: 8px; }
-  .event .eventItem {
-    padding: 2em; }
+  .event .eventList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; }
+    .event .eventList .eventItem {
+      padding: 2em; }
 
 @media screen and (min-width: 560px) {
   .event {
     padding: 0 5em; }
     .event .eventItem {
-      float: left; } }
+      display: block; } }
 
 /*!
  * animate.css -http://daneden.me/animate
@@ -1261,12 +1304,17 @@ h2.form-title {
     height: 40px;
     margin-top: 10px; }
 
+.orRegister {
+  text-align: center;
+  color: red;
+  font-size: 15px; }
+
 .cityChatContainer {
   display: flex; }
   .cityChatContainer .sidebarWrapper {
     border-top: 1px solid lightgrey;
     position: absolute;
-    top: 309px;
+    top: 272px;
     left: 0;
     bottom: 49px;
     width: 25%;
@@ -1279,12 +1327,15 @@ h2.form-title {
       position: fixed;
       align-items: center;
       flex-direction: column;
-      height: calc(100% - 309px - 49px);
+      height: calc(100% - 272px - 49px);
       width: 25%; }
       .cityChatContainer .sidebarWrapper .chatSidebar h4 {
         margin-top: 20px;
         margin-bottom: 20px; }
       .cityChatContainer .sidebarWrapper .chatSidebar .chatConnectionsContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         margin-bottom: 5px; }
         .cityChatContainer .sidebarWrapper .chatSidebar .chatConnectionsContainer .connectionImage {
           height: 50px;
@@ -1301,7 +1352,7 @@ h2.form-title {
   .cityChatContainer .cityChatWrapper {
     border-top: 1px solid lightgrey;
     position: absolute;
-    top: 309px;
+    top: 272px;
     right: 0;
     bottom: 49px;
     width: 75%;
@@ -1309,7 +1360,7 @@ h2.form-title {
     margin: 0; }
     .cityChatContainer .cityChatWrapper .cityChat {
       position: fixed;
-      height: calc(100% - 309px - 49px);
+      height: calc(100% - 272px - 49px);
       width: 75%;
       overflow-y: scroll; }
       .cityChatContainer .cityChatWrapper .cityChat .chatMessage {
@@ -1331,8 +1382,7 @@ h2.form-title {
       max-height: 100%;
       border-radius: 5px; }
   .chatMessageContainer .messageContent .username {
-    font-weight: 700;
-    color: black; }
+    font-weight: 700; }
 
 .inputBar {
   padding: 5px;
@@ -1343,3 +1393,14 @@ h2.form-title {
   position: fixed;
   width: 100%;
   right: 0; }
+
+.profile-div {
+  margin-top: 100px; }
+  .profile-div .col-md-3 {
+    overflow: hidden; }
+    .profile-div .col-md-3 img {
+      border-radius: 50%;
+      height: 200px;
+      margin: 10px 0; }
+  .profile-div .bio-label {
+    width: 150px; }

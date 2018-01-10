@@ -18,7 +18,7 @@ class App extends Component {
           <Route path={"/city/:city_name"} render={props => <CityPage {...props}/>} />
           <Route path={"/register"} render={props => <Register {...props} />} />
           <Route path={"/login"} render={props => <Login {...props} />} />
-          <Route path={"/profile"} render={props => <Profile {...props} />} />
+          <Route path={"/profile/:username"} render={props => <Profile {...props} />} />
         </Switch>
       </BrowserRouter>
     );

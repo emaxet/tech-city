@@ -11,55 +11,39 @@ const knex         = require('knex')(knexConfig[ENV]);
 const passport     = require('passport');
 const session      = require('express-session');
 const bodyParser   = require('body-parser');
-const chatHelpers  = require('./routes/api/lib/chat-helpers');
+const ioServer     = require('./io-server');
 
-app.use(express.static('../client/public'));
+// INITIALIZE SOCKET.IO SERVER ON PORT 8080
 
-// SETTING UP SOCKET.IO SERVER
+ioServer.ioInit(knex);
 
-const server = require('http').createServer(app);
-server.listen(8080, () => console.log('Chat server running on port 8080...'))
-const io = require('socket.io').listen(server);
-let connections = [];
+// DEFINE AUTH ROUTERS
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  const socketData = {
-    roomId: socket.handshake.query.chatId,
-    username: socket.handshake.query.username,
-    userImage: socket.handshake.query.userImage
-  }
-  socket.join(`chat${socketData.roomId}`);
-  connections.push(socketData);
-  chatHelpers.updateConnectedUsers(io, connections, socketData);
+const auth    = require('./routes/auth/routes');
+const apiAuth = require('./routes/auth/api-authentication');
 
-  socket.on('chat message', (data) => {
-    chatHelpers.addNewPost(knex, data, () => {
-      io.to(`chat${socketData.roomId}`).emit(`chat message`, data);
-    })
-  });
-  socket.on('disconnect', function(){
-    const connectionsIndex = connections.indexOf(socketData);
-    connections.splice(connectionsIndex, 1);
-    chatHelpers.updateConnectedUsers(io, connections, socketData);
-  });
-});
+// DEFINE API ROUTERS
 
 const index  = require('./routes/api/index');
 const users  = require('./routes/api/users');
-const auth   = require('./routes/auth/routes');
 const events = require('./routes/api/events');
+const eventsNoAuth = require('./routes/api/eventsNoAuth');
 const jobs   = require('./routes/api/jobs');
+const jobsNoAuth = require('./routes/api/jobsNoAuth');
 const cities = require('./routes/api/cities');
 const chats  = require('./routes/api/chats');
+const chatsNoAuth = require('./routes/api/chatsNoAuth');
+
+// SET API SERVER PORT
 
 app.set('port', (process.env.PORT || 5000));
 
-// view engine setup
+// SETUP VIEW ENGINE
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
+// MIDDLEWARE
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(cookieParser());
@@ -74,11 +58,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// mount routes
+// MOUNT API ROUTES (NO AUTH REQUIRED)
 
 app.use('/session', auth(knex, passport));
+app.use('/api/v1', cities(knex));
+app.use('/api/v1', users(knex));
+app.use('/api/v1', eventsNoAuth(knex));
+app.use('/api/v1', jobsNoAuth(knex));
+app.use('/api/v1', chatsNoAuth(knex));
+
+
+// API AUTHENTICATION MIDDLEWARE
+
+app.use('*', apiAuth());
+
+// MOUNT API ROUTES (AUTH REQUIRED)
+
 app.use('/', index);
-app.use('/api/v1/users', users(knex));
 app.use('/api/v1', events(knex));
 app.use('/api/v1', jobs(knex));
 app.use('/api/v1', cities(knex));

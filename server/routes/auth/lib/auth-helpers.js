@@ -10,7 +10,10 @@ module.exports = {
 
   findUserByEmail: (email, cb, err) => {
      knex('users')
-     .where({email: email})
+     .join('users_cities', 'users.id', 'users_cities.user_id')
+     .join('cities', 'users_cities.city_id', 'cities.id')
+     .where({'users.email': email})
+     .select('users.first_name', 'users.last_name', 'users.email', 'users.username', 'users.image', 'users.bio', 'users.id', 'users.password', 'cities.name')
      .then(cb)
      .catch(err)
   },
@@ -24,7 +27,8 @@ module.exports = {
 
   registerNewUser: (req, cb, err) => {
     const hash = bcrypt.hashSync(req.body.password, 10);
-    knex('users').insert({
+    knex('users')
+    .insert({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email: req.body.email,
@@ -36,7 +40,20 @@ module.exports = {
     })
     .returning('*')
     .then(cb)
-    .catch(err);
+  },
+
+  addNewUserCity: (req, user, cb) => {
+    knex('cities')
+    .where({'cities.name': req.body.city})
+    .then((city) => {
+      console.log(city[0].id, user[0].id)
+      knex('users_cities')
+      .insert({
+        user_id: user[0].id,
+        city_id: city[0].id
+      })
+      .then(cb)
+    })
   },
 
   validPassword: (user, password) => {

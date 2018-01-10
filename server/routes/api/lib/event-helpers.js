@@ -37,6 +37,19 @@ module.exports = {
       .where({'events.id': eventId})
       .del()
       .then(cb);
-  }
+  },
 
+  findEventsFromSearchQuery: (knex, req, cb) => {
+    const query = req.params.query;
+    knex('events')
+    .join('cities', 'events.city_id', 'cities.id')
+    .where(function() {
+      this.where('events.title','ilike', `%${query}%`)
+      .orWhere('events.description', 'ilike', `%${query}%`)
+      .orWhere('events.keyword', 'ilike', `%${query}%`)
+    })
+    .andWhere({'cities.name': req.params.city_name})
+    .select('events.type_id', 'events.city_id', 'events.title', 'events.description', 'events.image', 'events.keyword', 'events.start_date', 'events.end_date', 'events.start_time', 'events.end_time', 'events.location')
+    .then(cb);
+  }
 };

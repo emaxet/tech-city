@@ -6,13 +6,6 @@ const config = require('../auth/config/config');
 
 module.exports = (knex) => {
 
-  events.get('/:city_name/events', (req, res) => {
-    const cityName = req.params.city_name;
-    eventHelpers.findEventsInCity(knex, cityName, (events) => {
-      res.json(events);
-    });
-  });
-
   events.post('/:city_name/events', (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token, config.jwtSecret, (err, decoded) => {

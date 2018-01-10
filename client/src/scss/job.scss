@@ -18,3 +18,21 @@
 
 }
 
+.event {
+  display: flex;
+  flex-direction: column;
+  .buttonGroup {
+    margin-bottom: 25px;
+  }
+  .jobList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    .eventItem {
+      margin: 10px;
+    }
+  }
+}
+
+ 

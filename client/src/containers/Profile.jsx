@@ -1,67 +1,70 @@
 import React, {Component}from 'react';
-import { connect } from 'react-redux';
+import axios from 'axios';
+import MainNavbar from './MainNavbar';
 
 
 
 class Profile extends Component {
 	constructor(props) {
 		super(props);
-		const image = this.props.user.image ? this.props.user.image : "https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg";
 		this.state = {
-			img: image,
+			user: {}
 		}
 	}
 
+	 componentDidMount() {
+    var self = this;
+    axios.get(`http://localhost:3000/api/v1/users/${this.props.match.params.username}`).then(function (response) {
+    	self.setState({user: response.data[0]})
+    })
+  }
+
 	render () {
+		console.log(this.state);
 		return (
-			<div className="container">
-	      <div className="row header" >
-	        <img src={this.state.img} className="media-photo img-circle" alt=""/>
-	        <h3>@username</h3>
-	      </div>
-	      <div className="row">
-	        <div className="table-responsive">
-	          <table className="table table-hover">
-	          	<tbody>
-		            <tr>
-		              <td>First Name</td>
-		              <td>{this.props.user.firstName}</td>
-		            </tr>
-		            <tr>
-		              <td>Last Name</td>
-		              <td>{this.props.user.lastName}</td>
-		            </tr>
-		            <tr>
-		              <td>E-mail</td>
-		              <td>{this.props.user.email}</td>
-		            </tr>
-		            <tr>
-		              <td>City</td>
-		              <td>{this.props.user.city}</td>
-		            </tr>
-		          </tbody>
-	          </table>
-	        </div>
-	      </div>
-	      <div className="row">
-	        <div className="col-md-2">
-	          <h2>Bio</h2>
-	        </div>
-	        <div className="col-md-10">
-	          <h4>{this.props.user.bio}</h4>
-	        </div>
-	      </div>
+			<div>
+			<MainNavbar />
+			<div className="container profile-div">
+				<div className="row">
+		      <div className="col col-md-3 text-center">
+		        <img src={this.state.user.image} alt="image" className="center-block"/>
+		        <h3>{this.state.user.username}</h3>
+		      </div>
+		      <div className="col col-md-9">
+		      	<div className="table-responsive">
+		          <table className="table table-hover">
+		          	<tbody>
+			            <tr>
+			              <td className="bio-label">First Name:</td>
+			              <td>{this.state.user.first_name}</td>
+			            </tr>
+			            <tr>
+			              <td className="bio-label">Last Name:</td>
+			              <td>{this.state.user.last_name}</td>
+			            </tr>
+			            <tr>
+			              <td className="bio-label">E-mail:</td>
+			              <td>{this.state.user.email}</td>
+			            </tr>
+			            <tr>
+			              <td className="bio-label">City:</td>
+			              <td>{this.state.user.name}</td>
+			            </tr>
+			            <tr>
+			              <td className="bio-label">Bio:</td>
+			              <td>{this.state.user.bio}</td>
+			            </tr>
+			          </tbody>
+		          </table>
+	    	    </div>
+		      </div>
+	    	</div>
+	    </div>
 	    </div>
 		);
 	}
 }
 
-// export default Profile;
-function mapStateToProps(state) {
-  return {
-    user: state.authentication.user
-  };
-}
 
 
-export default connect(mapStateToProps, {})(Profile);
+export default Profile;

@@ -1,17 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ChatConnections extends Component{
   
   render() {
-    console.log(this.props)
-    const userImage = !this.props.userImage || this.props.userImage === "null" || this.props.userImage === "undefined" ? 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png': this.props.userImage;
+    console.log(this.props);
     return (
       <div className="chatConnectionsContainer">
           <div className="connectionImage">
-            <img src={ userImage } alt="user avatar" />
+            <Link to={`/profile/${this.props.name}`}>
+              <img src={ this.props.userImage || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png' } alt="user avatar" />
+            </Link>
           </div>
           <div className="connectionName">
-            {this.props.username}
+            <Link to={`/profile/${this.props.name}`} style={{color: 'black'}}>
+              {this.props.username}
+            </Link>
           </div>
       </div>
     )

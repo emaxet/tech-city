@@ -6,6 +6,19 @@
   height: 100%;
   overflow: hidden;
   .buttonGroup{
+    .chatSearchIcon {
+      margin: 0 5px;  
+      font-size: 35px;
+      color: lightblue;
+      position: relative;
+      top: 6px;
+    }
+    .chatSearchIcon:hover {
+      cursor: pointer;
+    }
+    .chatSearch {
+      margin-top: 10px;
+    }
     padding: 10px;
     button{
       margin: 0 10px; 
@@ -39,8 +52,14 @@
       padding: 8px;
     }
   }
-  .eventItem {
-    padding: 2em;
+  .eventList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    .eventItem {
+      padding: 2em;
+    }
   }
 }
 
@@ -48,7 +67,7 @@
   .event {
     padding: 0 5em;
     .eventItem {
-      float: left;
+      display: block;
     }
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Collapse } from 'reactstrap';
 import JobBox from '../components/JobBox';
 import axios from 'axios';
 import NewJob from '../components/NewJob';
@@ -11,10 +11,14 @@ class Jobs extends Component {
     this.state={
       'jobs' : [],
       'addJob' : false,
-      'cityName': this.props.location.pathname.split('/')[2]
+      'cityName': this.props.location.pathname.split('/')[2],
+      'searchCollapse': false
     };
     this.toggleAddJob = this.toggleAddJob.bind(this);
     this.updateJobsFromAPI = this.updateJobsFromAPI.bind(this);
+    this.toggleSearchBar = this.toggleSearchBar.bind(this);
+    this.inputQuery = this.inputQuery.bind(this);
+    this.submitQuery = this.submitQuery.bind(this);
   }
 
   componentDidMount(){
@@ -39,6 +43,35 @@ class Jobs extends Component {
     });
   }
 
+  toggleSearchBar() {
+    this.setState({
+      'searchCollapse': !this.state.searchCollapse
+    });
+  }
+
+  inputQuery(e) {
+    if (e.target.value === "") {
+        this.updateJobsFromAPI();
+      } else {
+        this.submitQuery(e);
+      }
+  }
+
+  submitQuery(e) {
+    let query = e.target.value;
+      axios.get(`http://localhost:3000/api/v1/Vancouver/jobs/search/${query}`)
+      .then((res) => {
+        this.setState ({
+          'jobs': res.data
+          // 'showMyChats': true,
+          // 'showSearchResults': true
+        })
+        // if (!this.state.showMyChats) {
+        //   this.fetchApiChats();
+        // }
+      })
+  }
+
   render() {
     const buttonStyle = {
       'textAlign': 'center'
@@ -50,22 +83,33 @@ class Jobs extends Component {
       })
       .reverse();
 
+    let searchBar;
+      if (this.state.searchCollapse) {
+        searchBar = (
+          <div className="input-group chatSearchBox">
+            <input type="search" className="form-control chatSearch" name='chatQuery' placeholder="Search Jobs..." aria-describedby="basic-addon1" onKeyUp={this.inputQuery}/>
+          </div>
+        )
+      }
+
     return (
       <div>
         <div className="event">
-          {
-            this.props.auth &&
-            <div className="buttonGroup" style={buttonStyle}>
+          <div className="buttonGroup" style={buttonStyle}>
+            {
+              this.props.auth &&
               <Button color="primary"
               onClick={this.toggleAddJob}>
               Add Job</Button>
-            </div>
-          }
-          <div className="col-sm-12">
-            <div className="row row-eq-height">
-              {jobs}
-            </div>
+            }
+            <i className="fa fa-search chatSearchIcon" aria-hidden="true" onClick={this.toggleSearchBar}></i>
 
+            <Collapse isOpen={this.state.searchCollapse}>
+              { searchBar }
+            </Collapse>
+          </div>
+          <div className="jobList">
+              {jobs}
             <NewJob {...this.state} updateJobsFromAPI={this.updateJobsFromAPI} toggleAddJob={this.toggleAddJob}/>
           </div>
         </div>
