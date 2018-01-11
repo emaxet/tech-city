@@ -29,11 +29,15 @@
   display: inline-flex;
   flex-direction: column;
   .btn {
+    width: 200px;
     margin: 15px;
     border: none;
     .chatTitle {
       font-weight: 600;
       font-size: 1.6em;
+      margin: 0;
+    }
+    p {
       margin: 0;
     }
   }
