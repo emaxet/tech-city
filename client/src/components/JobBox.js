@@ -95,7 +95,7 @@ class JobBox extends Component{
         </CardContent>
         </div>
 
-        <CardActions>
+        <CardActions style={{'justify-content': 'space-around'}}>
           {
             this.props.auth &&
             <div style={{padding: '0 1em'}}>

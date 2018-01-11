@@ -137,7 +137,7 @@ class Eventlist extends Component {
           </Typography>
         </CardContent>
         </div>
-        <CardActions>
+        <CardActions style={{'justify-content': 'space-around'}}>
           {
             this.props.auth &&
             <div >
