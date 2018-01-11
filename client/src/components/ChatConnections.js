@@ -7,7 +7,7 @@ class ChatConnections extends Component{
     return (
       <div className="chatConnectionsContainer">
           <div className="connectionImage">
-            <Link to={`/profile/${this.props.name}`}>
+            <Link to={`/profile/${this.props.username}`}>
               <img src={ this.props.userImage || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png' } alt="user avatar" />
             </Link>
           </div>
