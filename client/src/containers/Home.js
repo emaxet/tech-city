@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Jumbotron, Container } from 'reactstrap';
 import MainNavbar from './MainNavbar';
 import { CityBox } from '../components/CityBox';
+import { Loader } from '../components/Loader';
 import FlashMessageList from './flash/FlashMessageList';
 import InfiniteScroll from 'react-infinite-scroller';
 import mp4 from '../images/videos/header.mp4';
@@ -57,7 +58,7 @@ getCities() {
             pageStart={0}
             loadMore={this.getCities} // IMPLEMENT LATER
             hasMore={true || false}
-            loader={<center className="loader">Loading ...</center>}
+            loader={<Loader />}
           >
             {cities}
           </InfiniteScroll>
