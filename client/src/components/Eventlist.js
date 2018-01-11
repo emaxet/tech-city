@@ -67,7 +67,7 @@ class Eventlist extends Component {
       let buttonColor = this.state.attendColor;
       if(this.state.attendColor === ''){
         buttonColor = 'red';
-      } else{
+      } else {
         buttonColor = '';
       }
       resolve({buttonColor})
@@ -170,9 +170,9 @@ class Eventlist extends Component {
               <Popover placement="bottom" isOpen={this.state.attendPopover} target={'Popover' + this.props.id} toggle={this.popoverToggle}>
                 <PopoverHeader>Attending</PopoverHeader>
                 <PopoverBody>
-                  {this.props.attend.map((ele, index) => {
+                  {/*{this.props.attend.map((ele, index) => {
                     return <p key={index}>{ele}</p>;
-                  })}
+                  })}*/}
                 </PopoverBody>
               </Popover>
             </div>

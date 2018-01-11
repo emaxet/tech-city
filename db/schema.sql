@@ -177,4 +177,3 @@ CREATE TABLE IF NOT EXISTS "city_schools" (
   "created_at" TIMESTAMP NOT NULL DEFAULT current_timestamp,
   "updated_at" TIMESTAMP NOT NULL DEFAULT current_timestamp
 );
-
