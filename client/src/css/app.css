@@ -1409,9 +1409,9 @@ a, a:hover {
 
 .chatList {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center; }
+  flex-direction: column;
+  justify-content: center;
+  text-align: center; }
   .chatList .btn {
     width: 200px;
     margin: 15px;
