@@ -7,6 +7,7 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import { ShareButtons, generateShareIcon } from 'react-share';
+import { Link } from 'react-router-dom';
 
 class Eventlist extends Component {
   constructor(props) {
@@ -221,9 +222,8 @@ class Eventlist extends Component {
           </div>
 
         </ModalBody>
-        <ModalFooter>
-          <Button dense color="primary" onClick={this.setmodal}>Close</Button>
-        </ModalFooter>
+        <p class="createdBy" style={{'textAlign': 'right', 'marginRight': '15px'}} muted>Created by: <Link to={`/profile/${this.props.username}`}>{this.props.username}</Link></p>
+        <Button dense color="primary" onClick={this.setmodal}>Close</Button>
       </Modal>
 
       </Fade>
