@@ -23,9 +23,12 @@
   display: inline-flex;
   flex-direction: column; }
   .chatList .btn {
+    width: 200px;
     margin: 15px;
     border: none; }
     .chatList .btn .chatTitle {
       font-weight: 600;
       font-size: 1.6em;
+      margin: 0; }
+    .chatList .btn p {
       margin: 0; }
