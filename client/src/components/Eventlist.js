@@ -170,11 +170,7 @@ class Eventlist extends Component {
               <Popover placement="bottom" isOpen={this.state.attendPopover} target={'Popover' + this.props.eventId} toggle={this.popoverToggle}>
                 <PopoverHeader>Attending</PopoverHeader>
                 <PopoverBody>
-<<<<<<< HEAD
-                  {/*{this.props.attend.map((ele, index) => {
-=======
                   {this.props.attend && this.props.attend.map((ele, index) => {
->>>>>>> 361035cdcc1cec43b80f450928237ec095481087
                     return <p key={index}>{ele}</p>;
                   })}*/}
                 </PopoverBody>
