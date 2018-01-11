@@ -136,22 +136,24 @@ class ChatList extends Component {
           	{ searchBar }
           </Collapse>
         </div>
-				<div className='chatList'>
-					{chats.map((chat, index) => {
-						return (
-              <div>
-                <Link to={`chat/${chat.id}`}>
-                  <button type="button" class="btn btn-outline-info" key={index}>
-                    <div style={{'margin': 'auto'}}>
-    								<p className="chatTitle">{`${chat.name}`}</p>
-    								<p muted>{`${chat.subject}`}</p>
-                    </div>
-                  </button>
-                </Link>
-              </div>
-						)
-					})}
-				</div>
+        <div className='chatListContainer'>
+  				<div className='chatList'>
+  					{chats.map((chat, index) => {
+  						return (
+                <div>
+                  <Link to={`chat/${chat.id}`}>
+                    <button type="button" class="btn btn-outline-info" key={index}>
+                      <div style={{'margin': 'auto'}}>
+      								<p className="chatTitle">{`${chat.name}`}</p>
+      								<p muted>{`${chat.subject}`}</p>
+                      </div>
+                    </button>
+                  </Link>
+                </div>
+  						)
+  					})}
+  				</div>
+        </div>
 				<NewChat newChatCollapse={this.state.newChatCollapse} toggleNewChat={this.toggleNewChat} cityName={this.state.cityName} fetchApiChats={this.fetchApiChats} />
 			</div>
 		);
