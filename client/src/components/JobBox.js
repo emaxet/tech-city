@@ -83,7 +83,7 @@ class JobBox extends Component{
 
     return (
       <Fade in={true} className="eventItem">
-        <Card style={{width: 245}}>
+        <Card style={{width: 325}}>
         <div onClick={this.setmodal}>
         <CardContent style={{height: 145}}>
           <Typography type="headline" component="h2">

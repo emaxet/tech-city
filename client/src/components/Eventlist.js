@@ -122,10 +122,10 @@ class Eventlist extends Component {
 
     return (
       <Fade in={true} className="eventItem">
-      <Card style={{width: 245}}>
+      <Card style={{width: '400px'}}>
         <div onClick={this.setmodal}>
         <CardMedia
-          style={{height: 200}}
+          style={{height: 180}}
           image={this.props.image}
         />
         <CardContent style={{height: 150}}>
