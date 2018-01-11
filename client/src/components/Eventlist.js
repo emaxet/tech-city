@@ -208,7 +208,7 @@ class Eventlist extends Component {
 
           <h5>Start Time:</h5>
           <div className="container">
-          {this.props.start_time}
+            {this.props.start_time}
           </div>
 
           <h5>End Time:</h5>
