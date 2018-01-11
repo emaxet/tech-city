@@ -2,7 +2,9 @@ module.exports = {
 
   findChatsByUserId: (knex, params, cb) => {
 		knex('forums')
-		.where({'user_id': params.user_id})
+		.join('cities', 'forums.city_id', 'cities.id')
+		.where({'user_id': params.user_id, 'cities.name': params.city_name})
+		.select('forums.name', 'forums.subject')
 		.then(cb);
 	},
 
