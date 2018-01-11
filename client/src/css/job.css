@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column; }
   .event .buttonGroup {
-    margin-bottom: 25px; }
+    margin-bottom: 15px; }
   .event .jobList {
     display: flex;
     align-items: center;
@@ -27,6 +27,8 @@
         height: 197px;
         background-color: #e6e6e8;
         border-radius: 10px; }
+      .event .jobList .eventItem .fa {
+        font-size: 1.5em; }
     .event .jobList .eventItem:hover .jobCard {
       opacity: 1;
       width: 332px;

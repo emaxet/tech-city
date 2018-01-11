@@ -19,7 +19,6 @@
     .chatSearch {
       margin-top: 10px;
     }
-    padding: 10px;
     button{
       margin: 0 10px;
     }
@@ -63,13 +62,16 @@
         transition: all 0.3s;
         opacity: 0.75;
         width: 380px;
-        height: 382px;
+        height: 355px;
       }
     }
     .eventItem:hover .eventCard {
         opacity: 1;
-        width: 405px;
-        height: 407px;
+        width: 400px;
+        height: 360px;
+    }
+    .fa {
+      font-size: 2em;
     }
   }
 }

@@ -20,12 +20,12 @@
     height: 40px; }
 
 .chatList {
-  text-align: center;
-  width: 80%;
-  margin: 20px auto 0 auto;
-  padding: 20px; }
-  .chatList .chatItem {
-    margin: 5px 0; }
-    .chatList .chatItem .chatDesc {
-      color: lightgrey;
-      font-size: 0.75em; }
+  display: inline-flex;
+  flex-direction: column; }
+  .chatList .btn {
+    margin: 15px;
+    border: none; }
+    .chatList .btn .chatTitle {
+      font-weight: 600;
+      font-size: 1.6em;
+      margin: 0; }
