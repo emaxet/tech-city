@@ -83,7 +83,7 @@ class Login extends React.Component {
             </FormGroup>
             <FormGroup row>
               <Col className="text-center">
-                <Button type="submit">Submit</Button>
+                <Button type="submit" style={{'color':'black'}}>Submit</Button>
               </Col>
             </FormGroup>
           </Form>
