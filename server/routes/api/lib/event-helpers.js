@@ -6,6 +6,7 @@ module.exports = {
       .join('users', 'events.creator_id', 'users.id')
       .select('users.username', 'events.title', 'events.description', 'events.image', 'events.keyword', 'events.start_date', 'events.end_date', 'events.start_time', 'events.end_time', 'events.location', 'cities.name', 'cities.id', 'events.id as eventId', 'users.id as userId', 'like', 'attend')
       .where({ 'cities.name': cityName})
+      .orderBy('events.created_at')
       .then(cb);
   },
 
@@ -42,14 +43,14 @@ module.exports = {
   findEventsFromSearchQuery: (knex, req, cb) => {
     const query = req.params.query;
     knex('events')
-    .join('cities', 'events.city_id', 'cities.id')
-    .where(function() {
-      this.where('events.title','ilike', `%${query}%`)
-      .orWhere('events.description', 'ilike', `%${query}%`)
-      .orWhere('events.keyword', 'ilike', `%${query}%`)
-    })
-    .andWhere({'cities.name': req.params.city_name})
-    .select('events.type_id', 'events.city_id', 'events.title', 'events.description', 'events.image', 'events.keyword', 'events.start_date', 'events.end_date', 'events.start_time', 'events.end_time', 'events.location')
-    .then(cb);
+      .join('cities', 'events.city_id', 'cities.id')
+      .where(function() {
+        this.where('events.title', 'ilike', `%${query}%`)
+          .orWhere('events.description', 'ilike', `%${query}%`)
+          .orWhere('events.keyword', 'ilike', `%${query}%`);
+      })
+      .andWhere({'cities.name': req.params.city_name})
+      .select('events.type_id', 'events.city_id', 'events.title', 'events.description', 'events.image', 'events.keyword', 'events.start_date', 'events.end_date', 'events.start_time', 'events.end_time', 'events.location')
+      .then(cb);
   }
 };
