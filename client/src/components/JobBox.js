@@ -13,7 +13,7 @@ class JobBox extends Component{
     super(props);
     this.state = {
       modal: false,
-      likeColor: [].concat(this.props.like).includes(this.props.user.sub) ? 'red': ''
+      likeColor: [].concat(this.props.like).includes(this.props.user.sub? this.props.user.sub.toString(): this.props.user.sub) ? 'red': ''
     };
     this.setmodal = this.setmodal.bind(this);
     this.trashClick = this.trashClick.bind(this);
