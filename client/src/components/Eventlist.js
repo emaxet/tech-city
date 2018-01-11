@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import { ShareButtons, generateShareIcon } from 'react-share';
 import { Link } from 'react-router-dom';
 
@@ -122,13 +122,13 @@ class Eventlist extends Component {
 
     return (
       <Fade in={true} className="eventItem">
-      <Card style={{width: '400px'}}>
+      <Card className="eventCard">
         <div onClick={this.setmodal}>
         <CardMedia
           style={{height: 180}}
           image={this.props.image}
         />
-        <CardContent style={{height: 150}}>
+        <CardContent style={{height: 120}}>
           <Typography type="headline" component="h2">
           {this.props.title}
           </Typography>
@@ -137,7 +137,7 @@ class Eventlist extends Component {
           </Typography>
         </CardContent>
         </div>
-        <CardActions style={{'justify-content': 'space-around'}}>
+        <CardActions style={{'justifyContent': 'space-around'}}>
           {
             this.props.auth &&
             <div >

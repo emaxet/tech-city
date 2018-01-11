@@ -48,6 +48,15 @@
     flex-wrap: wrap; }
     .event .eventList .eventItem {
       padding: 2em; }
+      .event .eventList .eventItem .eventCard {
+        transition: all 0.3s;
+        opacity: 0.75;
+        width: 380px;
+        height: 382px; }
+    .event .eventList .eventItem:hover .eventCard {
+      opacity: 1;
+      width: 405px;
+      height: 407px; }
 
 @media screen and (min-width: 560px) {
   .event {

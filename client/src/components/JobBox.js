@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import { Fade, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Fade, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { ShareButtons, generateShareIcon } from 'react-share';
 import { Link } from 'react-router-dom';
 
@@ -83,7 +83,7 @@ class JobBox extends Component{
 
     return (
       <Fade in={true} className="eventItem">
-        <Card style={{width: 325}}>
+        <Card className="jobCard">
         <div onClick={this.setmodal}>
         <CardContent style={{height: 145}}>
           <Typography type="headline" component="h2">
@@ -95,7 +95,7 @@ class JobBox extends Component{
         </CardContent>
         </div>
 
-        <CardActions style={{'justify-content': 'space-around'}}>
+        <CardActions style={{'justifyContent': 'space-around'}}>
           {
             this.props.auth &&
             <div style={{padding: '0 1em'}}>

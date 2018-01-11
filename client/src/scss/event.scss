@@ -59,6 +59,17 @@
     flex-wrap: wrap;
     .eventItem {
       padding: 2em;
+      .eventCard {
+        transition: all 0.3s;
+        opacity: 0.75;
+        width: 380px;
+        height: 382px;
+      }
+    }
+    .eventItem:hover .eventCard {
+        opacity: 1;
+        width: 405px;
+        height: 407px;
     }
   }
 }
@@ -71,6 +82,7 @@
     }
   }
 }
+
 
 .eventItem:hover {
   cursor: pointer;

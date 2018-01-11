@@ -20,3 +20,14 @@
     flex-wrap: wrap; }
     .event .jobList .eventItem {
       margin: 10px; }
+      .event .jobList .eventItem .jobCard {
+        transition: all 0.3s;
+        opacity: 0.75;
+        width: 325px;
+        height: 197px;
+        background-color: #e6e6e8;
+        border-radius: 10px; }
+    .event .jobList .eventItem:hover .jobCard {
+      opacity: 1;
+      width: 332px;
+      height: 204px; }

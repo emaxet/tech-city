@@ -89,7 +89,7 @@ class Events extends Component {
           event.image = 'https://picsum.photos/500/100/?random';
         }
         return <Eventlist updateApiEvents={this.updateApiEvents} {...event} key={event.eventId}/>;
-      });
+      }).reverse();
 
       let searchBar;
       if (this.state.searchCollapse) {
@@ -109,15 +109,15 @@ class Events extends Component {
             <button type="button" className="btn btn-primary navbar-btn" onClick={this.toggleNewEvent}>
               <i className="glyphicon glyphicon-align-left"></i>
               Add Event
-            </button> 
-          } 
+            </button>
+          }
           <i className="fa fa-search chatSearchIcon" aria-hidden="true" onClick={this.toggleSearchBar}></i>
 
           <Collapse isOpen={this.state.searchCollapse}>
             { searchBar }
           </Collapse>
-        </div>        
-        
+        </div>
+
         <Collapse isOpen={this.state.filterCollapse}>
           <div className="eventNav">
             <EventNav {...this.state} toggleSideNav={this.toggleSideNav} />

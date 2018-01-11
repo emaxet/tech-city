@@ -28,6 +28,8 @@
       font-size: 1.4em; }
       .cityPage .main .cityNav .nav-item a {
         color: white; }
+      .cityPage .main .cityNav .nav-item a:hover {
+        color: #ffa645; }
     .cityPage .main .cityNav .active {
       color: #ffa645 !important;
       text-decoration: none; }

@@ -135,6 +135,8 @@ a, a:hover {
       font-size: 1.4em; }
       .cityPage .main .cityNav .nav-item a {
         color: white; }
+      .cityPage .main .cityNav .nav-item a:hover {
+        color: #ffa645; }
     .cityPage .main .cityNav .active {
       color: #ffa645 !important;
       text-decoration: none; }
@@ -163,6 +165,17 @@ a, a:hover {
     flex-wrap: wrap; }
     .event .jobList .eventItem {
       margin: 10px; }
+      .event .jobList .eventItem .jobCard {
+        transition: all 0.3s;
+        opacity: 0.75;
+        width: 325px;
+        height: 197px;
+        background-color: #e6e6e8;
+        border-radius: 10px; }
+    .event .jobList .eventItem:hover .jobCard {
+      opacity: 1;
+      width: 332px;
+      height: 204px; }
 
 .event {
   text-align: center;
@@ -214,6 +227,15 @@ a, a:hover {
     flex-wrap: wrap; }
     .event .eventList .eventItem {
       padding: 2em; }
+      .event .eventList .eventItem .eventCard {
+        transition: all 0.3s;
+        opacity: 0.75;
+        width: 380px;
+        height: 382px; }
+    .event .eventList .eventItem:hover .eventCard {
+      opacity: 1;
+      width: 405px;
+      height: 407px; }
 
 @media screen and (min-width: 560px) {
   .event {
