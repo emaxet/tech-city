@@ -12,7 +12,7 @@ class ChatConnections extends Component{
             </Link>
           </div>
           <div className="connectionName">
-            <Link to={`/profile/${this.props.name}`} style={{color: 'black'}}>
+            <Link to={`/profile/${this.props.username}`} style={{color: 'black'}}>
               {this.props.username}
             </Link>
           </div>
