@@ -7,6 +7,7 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import { ShareButtons, generateShareIcon } from 'react-share';
+import { Link } from 'react-router-dom';
 
 class Eventlist extends Component {
   constructor(props) {
@@ -121,10 +122,10 @@ class Eventlist extends Component {
 
     return (
       <Fade in={true} className="eventItem">
-      <Card style={{width: 245}}>
+      <Card style={{width: '400px'}}>
         <div onClick={this.setmodal}>
         <CardMedia
-          style={{height: 200}}
+          style={{height: 180}}
           image={this.props.image}
         />
         <CardContent style={{height: 150}}>
@@ -136,7 +137,7 @@ class Eventlist extends Component {
           </Typography>
         </CardContent>
         </div>
-        <CardActions>
+        <CardActions style={{'justify-content': 'space-around'}}>
           {
             this.props.auth &&
             <div >
@@ -207,7 +208,7 @@ class Eventlist extends Component {
 
           <h5>Start Time:</h5>
           <div className="container">
-          {this.props.start_time}
+            {this.props.start_time}
           </div>
 
           <h5>End Time:</h5>
@@ -221,9 +222,8 @@ class Eventlist extends Component {
           </div>
 
         </ModalBody>
-        <ModalFooter>
-          <Button dense color="primary" onClick={this.setmodal}>Close</Button>
-        </ModalFooter>
+        <p class="createdBy" style={{'textAlign': 'right', 'marginRight': '15px'}} muted>Created by: <Link to={`/profile/${this.props.username}`}>{this.props.username}</Link></p>
+        <Button dense color="primary" onClick={this.setmodal}>Close</Button>
       </Modal>
 
       </Fade>

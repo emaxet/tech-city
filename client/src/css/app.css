@@ -135,6 +135,9 @@ a, a:hover {
       font-size: 1.4em; }
       .cityPage .main .cityNav .nav-item a {
         color: white; }
+    .cityPage .main .cityNav .active {
+      color: #ffa645 !important;
+      text-decoration: none; }
   .cityPage .main .cityContent {
     margin: 2em; }
 
