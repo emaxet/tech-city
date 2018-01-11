@@ -57,7 +57,7 @@ getCities() {
           <InfiniteScroll
             pageStart={0}
             loadMore={this.getCities} // IMPLEMENT LATER
-            hasMore={true || false}
+            hasMore={false} //
             loader={<Loader />}
           >
             {cities}
