@@ -139,7 +139,7 @@ class Eventlist extends Component {
         <CardActions>
           {
             this.props.auth &&
-            <div style={{padding: '0 1em'}}>
+            <div >
             <EmailShareButton
                 url={window.location.href}
                 subject={this.props.user.username + ' invite you to an event.'}
@@ -163,11 +163,11 @@ class Eventlist extends Component {
               onClick={this.eventAttend}
               onMouseOver={this.popoverToggle}
               onMouseOut={this.popoverToggle}
-              id={'Popover' + this.props.id}>
+              id={'Popover' + this.props.eventId}>
               <i className="fa fa-sign-in" aria-hidden="true"></i>
               </Button>
 
-              <Popover placement="bottom" isOpen={this.state.attendPopover} target={'Popover' + this.props.id} toggle={this.popoverToggle}>
+              <Popover placement="bottom" isOpen={this.state.attendPopover} target={'Popover' + this.props.eventId} toggle={this.popoverToggle}>
                 <PopoverHeader>Attending</PopoverHeader>
                 <PopoverBody>
                   {this.props.attend && this.props.attend.map((ele, index) => {
