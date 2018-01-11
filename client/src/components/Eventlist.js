@@ -173,7 +173,7 @@ class Eventlist extends Component {
                 <PopoverBody>
                   {this.props.attend && this.props.attend.map((ele, index) => {
                     return <p key={index}>{ele}</p>;
-                  })}*/}
+                  })}
                 </PopoverBody>
               </Popover>
             </div>

@@ -89,7 +89,7 @@ class Events extends Component {
           event.image = 'https://picsum.photos/500/100/?random';
         }
         return <Eventlist updateApiEvents={this.updateApiEvents} {...event} key={event.eventId}/>;
-      }).reverse();
+      });
 
       let searchBar;
       if (this.state.searchCollapse) {

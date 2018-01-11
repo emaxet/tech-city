@@ -6,7 +6,7 @@ module.exports = {
       .join('users', 'jobs.user_id', 'users.id')
       .select('users.username', 'jobs.title', 'jobs.description', 'jobs.url', 'jobs.company', 'jobs.id', 'users.id as userId', 'like')
       .where({ 'cities.name': cityName})
-      .orderBy('jobs.created_at')
+      .orderBy('jobs.created_at', 'desc')
       .then(cb);
   },
 
