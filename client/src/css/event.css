@@ -54,3 +54,6 @@
     padding: 0 5em; }
     .event .eventItem {
       display: block; } }
+
+.eventItem:hover {
+  cursor: pointer; }

@@ -73,8 +73,7 @@ class Register extends React.Component {
 
 
   render() {
-    const {errors} = this.state;
-    const {serverError} = this.state;
+    const {errors, serverError, pic} = this.state;
 
     return (
       <div>
@@ -135,10 +134,16 @@ class Register extends React.Component {
               <Col sm={10}>
                 <Input type="select" name="city" id="registerCity" onChange={this.onChange}>
                   <option>Vancouver</option>
+                  <option>Mountain View</option>
                   <option>Toronto</option>
                   <option>Seattle</option>
+                  <option>San Francisco</option>
+                  <option>New York</option>
                 </Input>
               </Col>
+            </FormGroup>
+            <FormGroup row>
+              <img src={pic} alt="profile" style={{'height': '80px', 'marginLeft': '24px'}}/>
             </FormGroup>
             <FormGroup row>
               <Label for="registerPic" sm={2}>Profile Image</Label>
