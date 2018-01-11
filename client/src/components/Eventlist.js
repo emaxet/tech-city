@@ -16,7 +16,7 @@ class Eventlist extends Component {
     this.state = {
       modal: false,
       attendPopover: false,
-      likeColor: [].concat(this.props.like).includes(this.props.user.sub) ? 'red': '',
+      likeColor: [].concat(this.props.like).includes(this.props.user.sub? this.props.user.sub.toString(): this.props.user.sub) ? 'red': '',
       attendColor: [].concat(this.props.attend).includes(this.props.user.username) ? 'red': ''
     }
     this.enforce_line_breaks = this.enforce_line_breaks.bind(this);
