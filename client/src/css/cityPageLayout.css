@@ -28,5 +28,8 @@
       font-size: 1.4em; }
       .cityPage .main .cityNav .nav-item a {
         color: white; }
+    .cityPage .main .cityNav .active {
+      color: #2870c2 !important;
+      text-decoration: none; }
   .cityPage .main .cityContent {
     margin: 2em; }

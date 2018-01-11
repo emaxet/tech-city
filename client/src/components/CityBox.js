@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const CityBox = (props) => {
   return (
     <div className="city-box">
-      <Link to={`/city/${props.name.replace(' ', '_')}`} className="city-link">
+      <Link to={`/city/${props.name.replace(' ', '_')}/events`} className="city-link">
         <img src={props.image} alt="City"/>
         <div className="city-text">
           <h4>{props.name}</h4>

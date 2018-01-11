@@ -63,12 +63,7 @@ class Jobs extends Component {
       .then((res) => {
         this.setState ({
           'jobs': res.data
-          // 'showMyChats': true,
-          // 'showSearchResults': true
         })
-        // if (!this.state.showMyChats) {
-        //   this.fetchApiChats();
-        // }
       })
   }
 
@@ -80,8 +75,7 @@ class Jobs extends Component {
     const jobs = this.state.jobs
       .map((job, index) => {
         return <JobBox updateJobsFromAPI={this.updateJobsFromAPI} {...job} key={index}/>
-      })
-      .reverse();
+      });
 
     let searchBar;
       if (this.state.searchCollapse) {
