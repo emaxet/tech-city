@@ -27,7 +27,17 @@ module.exports = (knex) => {
 
 			fetchCities();
 	    });
-  	});
+		});
+		
+		cities.get('/cities_name', (req, res) => {
+			knex('cities')
+				.distinct('name')
+				.select('name')
+				.orderBy('name')
+				.then((data) => {
+					return res.json(data);
+				});
+		})
 
   return cities;
 

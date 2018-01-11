@@ -5,6 +5,7 @@ import { registerValidation } from '../actions/formValidations';
 import { userRegistration } from '../actions/authenticationActions';
 import MainNavbar from './MainNavbar';
 import { addFlashMessage } from '../actions/flashMessages';
+import axios from 'axios';
 
 
 class Register extends React.Component {
@@ -21,11 +22,23 @@ class Register extends React.Component {
       pic: 'http://top3friends.com/fb_soulmate/images/user.png',
       bio: '',
       errors: {},
-      serverError: ''
+      serverError: '',
+      allCitiesName: []
     };
     this.onChange = this.onChange.bind(this);
     this.isValid = this.isValid.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    axios.get('/api/v1/cities_name')
+    .then((data) => {
+      this.setState({
+        allCitiesName: data.data.map((ele, index) => {
+          return <option key={index}>{ele.name.replace('_', ' ')}</option>
+        })
+      });
+    });
   }
 
   onChange(e) {
@@ -133,12 +146,7 @@ class Register extends React.Component {
               <Label for="registerCity" sm={2}>City</Label>
               <Col sm={10}>
                 <Input type="select" name="city" id="registerCity" onChange={this.onChange}>
-                  <option>Vancouver</option>
-                  <option>Mountain View</option>
-                  <option>Toronto</option>
-                  <option>Seattle</option>
-                  <option>San Francisco</option>
-                  <option>New York</option>
+                  {this.state.allCitiesName}
                 </Input>
               </Col>
             </FormGroup>

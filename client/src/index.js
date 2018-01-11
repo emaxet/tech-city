@@ -10,7 +10,7 @@ import setAuthorizationToken from './utils/setAuthorizationToken';
 import jwt from 'jsonwebtoken';
 import { setCurrentUser } from './actions/authenticationActions';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
     applyMiddleware(thunk)
   )
