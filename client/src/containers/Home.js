@@ -3,7 +3,9 @@ import axios from 'axios';
 import { Jumbotron, Container } from 'reactstrap';
 import MainNavbar from './MainNavbar';
 import { CityBox } from '../components/CityBox';
+import { Loader } from '../components/Loader';
 import FlashMessageList from './flash/FlashMessageList';
+import InfiniteScroll from 'react-infinite-scroller';
 import mp4 from '../images/videos/header.mp4';
 import webm from '../images/videos/header.webm';
 import ogv from '../images/videos/header.ogv';
@@ -14,13 +16,18 @@ export default class Home extends React.Component {
   this.state = {
     cities: []
   }
+  this.getCities = this.getCities.bind(this);
+}
+
+getCities() {
+  var self = this;
+  axios.get('/api/v1/cities').then(function (response) {
+    self.setState({cities: response.data});
+  });
 }
 
   componentDidMount() {
-    var self = this;
-    axios.get('/api/v1/cities').then(function (response) {
-      self.setState({cities: response.data});
-    });
+    this.getCities();
   }
 
   render() {
@@ -47,7 +54,14 @@ export default class Home extends React.Component {
 
         </Jumbotron>
         <Container id="cities-list">
-          {cities}
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={this.getCities} // IMPLEMENT LATER
+            hasMore={true || false}
+            loader={<Loader />}
+          >
+            {cities}
+          </InfiniteScroll>
         </Container>
       </div>
     );

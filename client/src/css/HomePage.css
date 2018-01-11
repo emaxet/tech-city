@@ -1,6 +1,10 @@
 a, a:hover {
   text-decoration: none !important; }
 
+.loader {
+  font-size: 1.5em;
+  margin: auto; }
+
 .form-error {
   color: red; }
 

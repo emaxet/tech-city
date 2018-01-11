@@ -139,14 +139,16 @@ class ChatList extends Component {
 				<div className='chatList'>
 					{chats.map((chat, index) => {
 						return (
-              <Link to={`chat/${chat.id}`}>
-                <button type="button" class="btn btn-outline-info" key={index}>
-                  <div style={{'margin': 'auto'}}>
-  								<p className="chatTitle">{`${chat.name}`}</p>
-  								<p muted>{`${chat.subject}`}</p>
-                  </div>
-                </button>
-              </Link>
+              <div>
+                <Link to={`chat/${chat.id}`}>
+                  <button type="button" class="btn btn-outline-info" key={index}>
+                    <div style={{'margin': 'auto'}}>
+    								<p className="chatTitle">{`${chat.name}`}</p>
+    								<p muted>{`${chat.subject}`}</p>
+                    </div>
+                  </button>
+                </Link>
+              </div>
 						)
 					})}
 				</div>
