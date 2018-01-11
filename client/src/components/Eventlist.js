@@ -15,7 +15,7 @@ class Eventlist extends Component {
     this.state = {
       modal: false,
       attendPopover: false,
-      likeColor: [].concat(this.props.like).includes(this.props.user.sub.toString()) ? 'red': '',
+      likeColor: [].concat(this.props.like).includes(this.props.user.sub) ? 'red': '',
       attendColor: [].concat(this.props.attend).includes(this.props.user.username) ? 'red': ''
     }
     this.enforce_line_breaks = this.enforce_line_breaks.bind(this);
@@ -89,7 +89,7 @@ class Eventlist extends Component {
         console.log(error);
       });
   }
-  
+
   deleteEvent() {
     axios.delete(`http://localhost:3000/api/v1/${this.props.name}/events/${this.props.eventId}`)
     .then(() => {
@@ -115,7 +115,7 @@ class Eventlist extends Component {
     return text.length > 20 ? text.substring(0, 20) + "..." : text;
   }
 
-  render() { 
+  render() {
     const EmailIcon = generateShareIcon('email');
     const { EmailShareButton } = ShareButtons;
 
@@ -132,14 +132,14 @@ class Eventlist extends Component {
           {this.props.title}
           </Typography>
           <Typography component="p">
-          {this.shorten(this.props.description)} 
+          {this.shorten(this.props.description)}
           </Typography>
         </CardContent>
         </div>
         <CardActions>
           {
             this.props.auth &&
-            <div style={{padding: '0 1em'}}>
+            <div >
             <EmailShareButton
                 url={window.location.href}
                 subject={this.props.user.username + ' invite you to an event.'}
@@ -159,18 +159,18 @@ class Eventlist extends Component {
           {
             this.props.auth &&
             <div>
-              <Button dense color="primary" style={{color: this.state.attendColor}} 
-              onClick={this.eventAttend} 
+              <Button dense color="primary" style={{color: this.state.attendColor}}
+              onClick={this.eventAttend}
               onMouseOver={this.popoverToggle}
               onMouseOut={this.popoverToggle}
-              id={'Popover' + this.props.id}>
+              id={'Popover' + this.props.eventId}>
               <i className="fa fa-sign-in" aria-hidden="true"></i>
               </Button>
 
-              <Popover placement="bottom" isOpen={this.state.attendPopover} target={'Popover' + this.props.id} toggle={this.popoverToggle}>
+              <Popover placement="bottom" isOpen={this.state.attendPopover} target={'Popover' + this.props.eventId} toggle={this.popoverToggle}>
                 <PopoverHeader>Attending</PopoverHeader>
                 <PopoverBody>
-                  {this.props.attend.map((ele, index) => {
+                  {this.props.attend && this.props.attend.map((ele, index) => {
                     return <p key={index}>{ele}</p>;
                   })}
                 </PopoverBody>
@@ -179,7 +179,7 @@ class Eventlist extends Component {
           }
 
           {
-            this.props.user.sub === this.props.userId && 
+            this.props.user.sub === this.props.userId &&
             <Button dense color="primary" onClick={this.deleteEvent}>
             <i className="fa fa-trash" aria-hidden="true"></i>
             </Button>

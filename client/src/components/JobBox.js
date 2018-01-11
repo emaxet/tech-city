@@ -78,7 +78,7 @@ class JobBox extends Component{
   render(){
     const EmailIcon = generateShareIcon('email');
     const { EmailShareButton } = ShareButtons;
-    
+
     return (
       <Fade in={true} className="eventItem">
         <Card style={{width: 245}}>
@@ -88,7 +88,7 @@ class JobBox extends Component{
           {this.props.title}
           </Typography>
           <Typography component="p">
-          {this.shorten(this.props.description)} 
+          {this.shorten(this.props.description)}
           </Typography>
         </CardContent>
         </div>
@@ -136,7 +136,7 @@ class JobBox extends Component{
       </Fade>
     );
   }
-  
+
 }
 
 function mapStateToProps(state) {
