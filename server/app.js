@@ -12,10 +12,11 @@ const passport     = require('passport');
 const session      = require('express-session');
 const bodyParser   = require('body-parser');
 const ioServer     = require('./io-server');
+const server       = require('http').Server(app);
 
 // INITIALIZE SOCKET.IO SERVER ON PORT 8080
 
-ioServer.ioInit(knex);
+ioServer.ioInit(knex, server);
 
 // DEFINE AUTH ROUTERS
 
@@ -24,15 +25,15 @@ const apiAuth = require('./routes/auth/api-authentication');
 
 // DEFINE API ROUTERS
 
-const index  = require('./routes/api/index');
-const users  = require('./routes/api/users');
-const events = require('./routes/api/events');
+const index        = require('./routes/api/index');
+const users        = require('./routes/api/users');
+const events       = require('./routes/api/events');
 const eventsNoAuth = require('./routes/api/eventsNoAuth');
-const jobs   = require('./routes/api/jobs');
-const jobsNoAuth = require('./routes/api/jobsNoAuth');
-const cities = require('./routes/api/cities');
-const chats  = require('./routes/api/chats');
-const chatsNoAuth = require('./routes/api/chatsNoAuth');
+const jobs         = require('./routes/api/jobs');
+const jobsNoAuth   = require('./routes/api/jobsNoAuth');
+const cities       = require('./routes/api/cities');
+const chats        = require('./routes/api/chats');
+const chatsNoAuth  = require('./routes/api/chatsNoAuth');
 
 // SET API SERVER PORT
 
@@ -44,7 +45,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // MIDDLEWARE
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(cookieParser());
 
@@ -57,6 +58,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(path.join(__dirname, '../client', 'build')));
 
 // MOUNT API ROUTES (NO AUTH REQUIRED)
 
@@ -67,19 +69,20 @@ app.use('/api/v1', eventsNoAuth(knex));
 app.use('/api/v1', jobsNoAuth(knex));
 app.use('/api/v1', chatsNoAuth(knex));
 
-
 // API AUTHENTICATION MIDDLEWARE
 
-app.use('*', apiAuth());
+// app.use('*', apiAuth());
 
 // MOUNT API ROUTES (AUTH REQUIRED)
 
-app.use('/', index);
 app.use('/api/v1', events(knex));
 app.use('/api/v1', jobs(knex));
 app.use('/api/v1', cities(knex));
 app.use('/api/v1', chats(knex));
 
+app.get('*', function (req, res) {
+   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -100,7 +103,8 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(app.get('port'), () => {
-  console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
+server.listen(app.get('port'), () => {
+  console.log(`Find the server at port ${app.get('port')}/`); // eslint-disable-line no-console
 });
+
 

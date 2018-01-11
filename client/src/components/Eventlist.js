@@ -92,7 +92,7 @@ class Eventlist extends Component {
   }
 
   deleteEvent() {
-    axios.delete(`http://localhost:3000/api/v1/${this.props.name}/events/${this.props.eventId}`)
+    axios.delete(`/api/v1/${this.props.name}/events/${this.props.eventId}`)
     .then(() => {
       this.props.updateApiEvents();
     })
@@ -125,7 +125,7 @@ class Eventlist extends Component {
       <Card className="eventCard">
         <div onClick={this.setmodal}>
         <CardMedia
-          style={{height: 180}}
+          style={{height: 180, backgroundSize: 'contain'}}
           image={this.props.image}
         />
         <CardContent style={{height: 120}}>

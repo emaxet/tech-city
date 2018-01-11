@@ -64,5 +64,8 @@
     .event .eventItem {
       display: block; } }
 
+.eventItem .jss244 {
+  background-size: cover; }
+
 .eventItem:hover {
   cursor: pointer; }
