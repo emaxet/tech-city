@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import { Fade, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Fade, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { ShareButtons, generateShareIcon } from 'react-share';
+import { Link } from 'react-router-dom';
 
 class JobBox extends Component{
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      likeColor: [].concat(this.props.like).includes(this.props.user.sub.toString()) ? 'red': ''
+      likeColor: [].concat(this.props.like).includes(this.props.user.sub) ? 'red': ''
     };
     this.setmodal = this.setmodal.bind(this);
     this.trashClick = this.trashClick.bind(this);
@@ -78,10 +79,11 @@ class JobBox extends Component{
   render(){
     const EmailIcon = generateShareIcon('email');
     const { EmailShareButton } = ShareButtons;
+    console.log(this.props)
 
     return (
       <Fade in={true} className="eventItem">
-        <Card style={{width: 245}}>
+        <Card className="jobCard">
         <div onClick={this.setmodal}>
         <CardContent style={{height: 145}}>
           <Typography type="headline" component="h2">
@@ -93,7 +95,7 @@ class JobBox extends Component{
         </CardContent>
         </div>
 
-        <CardActions>
+        <CardActions style={{'justifyContent': 'space-around'}}>
           {
             this.props.auth &&
             <div style={{padding: '0 1em'}}>
@@ -127,11 +129,10 @@ class JobBox extends Component{
             {this.enforce_line_breaks(this.props.description)}
             <br/>
             <br/>
-            <h5>Link: <br/><a target='_blank' href={this.props.url}>{this.props.url}</a></h5>
+            <a target='_blank' href={this.props.url}>{this.props.url}</a>
           </ModalBody>
-          <ModalFooter>
+            <p class="createdBy" style={{'textAlign': 'right', 'marginRight': '15px'}} muted>Created by: <Link to={`/profile/${this.props.username}`}>{this.props.username}</Link></p>
             <Button color="primary" onClick={this.setmodal}>Close</Button>
-          </ModalFooter>
         </Modal>
       </Fade>
     );

@@ -7,7 +7,7 @@
   	margin: 0 3px;
   }
   .chatSearchIcon {
-    margin: 0 5px;  
+    margin: 0 5px;
     font-size: 35px;
     color: lightblue;
   }
@@ -26,15 +26,15 @@
 }
 
 .chatList {
-	text-align: center;
-	width: 80%;
-	margin: 20px auto 0 auto;
-	padding: 20px;
-  .chatItem {
-    margin: 5px 0;
-    .chatDesc {
-      color: lightgrey;
-      font-size: 0.75em;
+  display: inline-flex;
+  flex-direction: column;
+  .btn {
+    margin: 15px;
+    border: none;
+    .chatTitle {
+      font-weight: 600;
+      font-size: 1.6em;
+      margin: 0;
     }
   }
 }

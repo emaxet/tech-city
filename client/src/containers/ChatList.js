@@ -89,7 +89,7 @@ class ChatList extends Component {
   		} else {
   			this.submitQuery(e);
   		}
-  	}	
+  	}
 
 	componentDidMount() {
 		this.fetchApiChats();
@@ -104,22 +104,6 @@ class ChatList extends Component {
 			filterButton = 'My Chats';
 		}
 
-		let loggedInChatNav;
-		if (this.props.userId.sub) {
-			loggedInChatNav = (
-				<div>
-					<button type="button" className="btn btn-primary navbar-btn chat-nav" onClick={this.toggleNewChat}>
-		              	<i className="glyphicon glyphicon-align-left"></i>
-		              	New Chat
-		            </button>
-		            <button type="button" className="btn btn-primary navbar-btn chat-nav" onClick={this.listMyChats}>
-		            <i className="glyphicon glyphicon-align-left"></i>
-		              	{ filterButton }
-		            </button>
-	            </div>
-			)
-		}
-
 		let searchBar;
 		if (this.state.searchCollapse) {
 			searchBar = (
@@ -132,21 +116,37 @@ class ChatList extends Component {
 		const chats = this.state.chats;
 
 		return (
-			<div>
-				<div className="chatNav">
-					{ loggedInChatNav }
+			<div className="event">
+				<div className="buttonGroup">
+          {
+            this.props.userId.sub &&
+            <span>
+              <button type="button" className="btn btn-primary navbar-btn chat-nav" onClick={this.toggleNewChat}>
+                <i className="glyphicon glyphicon-align-left"></i>
+                New Chat
+              </button>
+              <button type="button" className="btn btn-primary navbar-btn chat-nav" onClick={this.listMyChats}>
+                <i className="glyphicon glyphicon-align-left"></i>
+                { filterButton }
+              </button>
+            </span>
+          }
 					<i className="fa fa-search chatSearchIcon" aria-hidden="true" onClick={this.toggleSearchBar}></i>
-            	</div>
-            	<Collapse isOpen={this.state.searchCollapse}>
-          			{ searchBar }
-          		</Collapse>
+          <Collapse isOpen={this.state.searchCollapse}>
+          	{ searchBar }
+          </Collapse>
+        </div>
 				<div className='chatList'>
 					{chats.map((chat, index) => {
-						return ( 
-							<div className="chatItem" key={index}>
-								<div className="chatTitle"><Link to={`chat/${chat.id}`}>{`${chat.name}`} </Link></div>
-								<p className="chatSubject">{`${chat.subject}`}</p>
-							</div>
+						return (
+              <Link to={`chat/${chat.id}`}>
+                <button type="button" class="btn btn-outline-info" key={index}>
+                  <div style={{'margin': 'auto'}}>
+  								<p className="chatTitle">{`${chat.name}`}</p>
+  								<p muted>{`${chat.subject}`}</p>
+                  </div>
+                </button>
+              </Link>
 						)
 					})}
 				</div>

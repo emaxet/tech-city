@@ -1,4 +1,5 @@
 .job-box {
+
   margin: 2em;
   overflow: hidden;
 
@@ -22,7 +23,7 @@
   display: flex;
   flex-direction: column;
   .buttonGroup {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
   .jobList {
     display: flex;
@@ -31,8 +32,23 @@
     flex-wrap: wrap;
     .eventItem {
       margin: 10px;
+      .jobCard {
+        transition: all 0.3s;
+        opacity: 0.75;
+        width: 325px;
+        height: 197px;
+        background-color: #e6e6e8;
+        border-radius: 10px;
+      }
+      .fa {
+        font-size: 1.5em;
+      }
+    }
+    .eventItem:hover .jobCard {
+      opacity: 1;
+      width: 332px;
+      height: 204px;
     }
   }
 }
 
- 

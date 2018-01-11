@@ -127,6 +127,10 @@ class NewEvent extends Component{
             />
           </FormGroup>
 
+        {this.state.imageUrl && <FormGroup style={{'textAlign': 'center'}}>
+                  <img src={this.state.imageUrl} alt="event" style={{'height': '200px'}}/>
+                </FormGroup>
+        }
           <FormGroup>
             <Label for="eventImage">Image URL</Label>
             <Input type="text" maxLength={100} name="eventImage" id="eventImage" placeholder="Image Url"

@@ -8,7 +8,8 @@ import Jobs from './Jobs';
 import ChatList from './ChatList';
 import ChatFeed from '../components/Chat';
 import { connect } from 'react-redux';
-
+import {Animated} from "react-animated-css";
+import cityBackground from '../images/cityBackground.png';
 
 class CityPage extends Component{
   render(){
@@ -16,9 +17,11 @@ class CityPage extends Component{
       <div>
         <MainNavbar />
         <div className="cityPage">
-          <div className='header'></div>
           <div className='main'>
-            <CityHeader city_name={this.props.match.params.city_name}/>
+            <Animated animationIn="fadeInDown" isVisible={true} slow>
+              <CityHeader city_name={this.props.match.params.city_name}/>
+            </Animated>
+            <img src={cityBackground} alt="city" className="headerImg"/>
             <CityNav city_name={this.props.match.params.city_name}/>
             <div className="cityContent">
               <Switch>
@@ -30,7 +33,6 @@ class CityPage extends Component{
               </Switch>
             </div>
           </div>
-          <div className='footer'></div>
         </div>
       </div>
     )
