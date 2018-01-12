@@ -63,6 +63,22 @@ class NewEvent extends Component{
       .then(() => {
         this.props.toggleNewEvent();
         this.props.updateApiEvents();
+      }).then(() => {
+        this.setState({
+            'creatorId': this.props.userId.sub || null,
+            'typeId': 1,
+            'title': '',
+            'description': '',
+            'dateStart': moment(),
+            'dateEnd': moment(),
+            "location": '',
+            'timeStart': moment().format('hh:mm'),
+            'timeEnd': moment().format('hh:mm'),
+            'imageUrl': '',
+            'keyword': '',
+            'cityName': this.props.cityName,
+            'errors': {}
+        });
       });
     }
   }

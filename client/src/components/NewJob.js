@@ -39,6 +39,16 @@ class NewJob extends Component{
       .then(() => {
         this.props.toggleAddJob();
         this.props.updateJobsFromAPI();
+      })
+      .then(() => {
+        this.setState({
+          'company' : '',
+          'title': '',
+          'url': '',
+          'description': '',
+          'cityName': this.props.cityName,
+          'errors': {}
+        });
       });
     }
   }
