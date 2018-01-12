@@ -79,7 +79,6 @@ class JobBox extends Component{
   render(){
     const EmailIcon = generateShareIcon('email');
     const { EmailShareButton } = ShareButtons;
-    console.log(this.props)
 
     return (
       <Fade in={true} className="eventItem">
